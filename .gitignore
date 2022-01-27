@@ -4,4 +4,8 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 # especificos
+
+build
 bin
+assets
+android
