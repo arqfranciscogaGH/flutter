@@ -1,0 +1,27 @@
+// obtener ayuda entity
+get-help EntityFrameWorkCore
+
+// crear codigo a partir de la base de datos
+1. abrir consola de aministrador de paquetes en menu de herramientas y administracion de  paquetes nuget
+2 ejecutar elsiguiemye  cmando indicando la cadena  de conexio de  ña base de datos  donde  se tomaran todas la tablas
+
+scaffold-DbContext "server=FGADOS\SQLEXPRESS;initial catalog=ModeloAplicacion;integrated security=True"  Microsoft.EntityFrameWorkCore.SqlServer -OutputDir Models  -force
+
+scaffold-DbContext "server=apimenet.mssql.somee.com;initial catalog=apimenet; User Id=arqfranciscoga_SQLLogin_1; Password =1clpwe3ovy "  Microsoft.EntityFrameWorkCore.SqlServer -OutputDir Models  -force
+
+  "connectionStrings": { "CadenaModeloAplicacion": "server=apimenet.mssql.somee.com;initial catalog=apimenet; User Id=arqfranciscoga_SQLLogin_1; Password =1clpwe3ovy " },
+
+
+  url api:
+  
+http://www.apimenet.somee.com/api/scaneos
+
+
+servidor: apimenet.mssql.somee.com
+base de datos: apimenet
+usuario:arqfranciscoga_SQLLogin_1
+contraseña:1clpwe3ovy
+
+Ftp:ftp://apiMeNet.somee.com
+usuario:arqfranciscoga
+contraseña:Fga26021969

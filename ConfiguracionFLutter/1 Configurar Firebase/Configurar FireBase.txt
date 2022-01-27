@@ -1,0 +1,62 @@
+
+
+1. ubicar jdk java y cambiar de  cmd
+
+2. cambiar  de directorio. Ejemplo:  cd C:\Program Files\Java\jdk1.7.0_09\bin
+
+3. obtener  los datos  de SHA1, seguir  siguientes comandos
+
+3.1 ---  indicar  la  ruta donde se encuentra  el archivo debug.keystore
+
+3.2 --   ejecutar siguiente  comando :
+
+esto aplica para equipo dell
+keytool -exportcert -alias androiddebugkey -keystore "C:\Users\francisco.garcia\.android\debug.keystore" -list -v
+esto aplica para equipo hp
+keytool -exportcert -alias androiddebugkey -keystore "C:\Users\arqfr\.android\debug.keystore" -list -v
+
+3.3  capturar  contraseña  por defecto es: android
+3.4.   obtener  los datos  de SHA1: 
+
+este del equipo DELL:
+
+SHA1: 04:94:D1:F5:3B:A3:63:72:09:0F:88:41:81:F8:DC:54:16:AC:03:7C
+
+este del equipo HP:
+
+SHA1: 48:D2:56:35:67:A0:21:26:42:BE:9E:AF:B3:95:EF:C7:D6:8C:83:12
+
+3.5   copiar  en fireworks
+
+SHA1: 04:94:D1:F5:3B:A3:63:72:09:0F:88:41:81:F8:DC:54:16:AC:03:7C
+3.5  registrar  la  aplicaciónn en firework  seleccionando la  opción registrar
+3.6  descargar  archivo  google-services.json seleccionando la opión descargargoogle-services.json  en la  carpeta de la palicacion  en  la  ruta \android\app
+3.7  copiar classpath  que  proporciona firework  en la seccion de dependencias del archivo build.gradle que esta en android ,  no debe  editar el archivo dentro la carpeta app :  
+    classpath 'com.google.gms:google-services:4.3.2'
+3.8  copiar de linea  de firebase  y  pegar  en archivo  build.gradle  que  esta  dentro  de  la  la carpeta  android\app,  en la sección de  depenndencias 
+
+     Nota: copiar de linea  de firebase la siguiente  linea  y pegar en archivo build.gradle 
+
+     pegar  esta  linea : implementation 'com.google.firebase:firebase-analytics:17.2.0'
+     en duda esta linea: implementation 'com.google.firebase:firebase-core:16.1.0'
+
+
+3.9 copiar de linea  de firebase  y  pegar  en archivo  build.gradle  que  esta  dentro  de  la  la carpeta  android\app, al final de la seccción 
+
+     Nota: copiar de linea  de firebase la siguiente  linea  y pegar en archivo build.gradle 
+
+     capply plugin: 'com.google.gms.google-services'
+
+
+Será  al  asi:
+
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation 'com.google.firebase:firebase-analytics:17.2.0'
+}
+
+apply plugin: 'com.google.gms.google-services'

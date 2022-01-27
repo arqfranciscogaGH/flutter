@@ -1,0 +1,33 @@
+
+
+
+-- para habiltar soposrtea web
+
+ flutter channel beta
+ flutter upgrade
+ flutter config --enable-web
+
+
+--- agregar  soporte  web  a  aplicacion existente
+
+ flutter create
+
+ ---  crear   aplicacion web   nueva 
+ flutter create myapp
+ cd myapp
+
+ -- soprte a navegador  chrom
+
+ flutter run -d chrome
+
+
+--- compilar  y ver pagina 
+
+flutter build web
+
+---deshabilitar flutter web
+
+flutter channel stable
+Flutter channels:
+* stable
+ flutter config  enable-web: false

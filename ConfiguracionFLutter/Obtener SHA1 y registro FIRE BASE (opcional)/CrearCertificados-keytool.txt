@@ -1,0 +1,40 @@
+Ubicar  donde esta keytool ensdk java
+
+JAVA_HOME
+C:\Program Files (x86)\Java\jdk1.8.0_131\bin
+C:\Program Files\Java\jdk1.8.0_211\bin
+C:\Program Files\Java\jre1.8.0_211\bin
+
+--generar 
+
+keytool -genkey -alias ejem_firebase -keyalg RSA -keypass fga260269 -storepass fga260269 -keystore c:/CERTIFICADO_DIGITAL/ejem_firebase.jks
+
+keytool -genkey -v -keystore c:\CERTIFICADO_DIGITAL\key.jks -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -alias key
+
+
+---exportar
+keytool -export -alias ejem_fga -keystore e:/CERTIFICADO_DIGITAL/ejem_fga.jks -file E:/CERTIFICADO_DIGITAL/ejem_fga.cer
+
+--ver 
+keytool -v -list -alias androiddebugkey -keystore debug.keystore
+
+
+
+
+yc:/CERTIFICADO_DIGITAL/ejem_firebase_key 
+keytool -list -v -alias ejem_firebase_key -keystore c:/CERTIFICADO_DIGITAL/ejem_firebase_key 
+keytool -list -v -alias ejem_firebase_key -keystore C:\OS\Proyectos\Flutter\EjemploFirebase\ejem_firebase\android\app\src\debug/ejem_firebase_key 
+
+si genero archivo jks con exito
+
+keytool -genkey -alias ejem_firebase -keyalg RSA -keypass fga260269 -storepass fga260269 -keystore c:/CERTIFICADO_DIGITAL/ejem_firebase.jks
+
+keytool -genkey -alias ejemfga -keyalg RSA -keypass fga260269 -storepass fga260269 -keystore c:/CERTIFICADO_DIGITAL/ejemfga.jks 
+keytool -genkey -alias key -keyalg RSA -keypass fga260269 -storepass fga260269 -keystore c:/CERTIFICADO_DIGITAL/key.jks 
+keytool -genkey -alias key -keyalg RSA -keypass fga260269 -storepass fga260269 -keystore key.jks 
+
+
+name
+com.example.ejem_firebase
+
+keytool -genkey -alias ejem_fga -keyalg RSA -keypass fga260269 -storepass fga260269 -keystore c:/CERTIFICADO_DIGITAL/ejem_fga.jks

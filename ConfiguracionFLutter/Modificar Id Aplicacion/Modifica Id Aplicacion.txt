@@ -1,0 +1,40 @@
+﻿1. Modifica el nombre del paquete en su archivo MainActivity.kt 
+package com.ejemplo.app
+
+2. Modifique el directorio que contiene su archivo MainActivity.kt
+Modifique la estructura del directorio de:
+<nombre de proyecto>/android/app/src/main/kotlin/com/ejemplo/app
+a:
+<nombre de proyecto>/android/app/src/main/kotlin/tu/paquete/proyecto
+
+3. Modifique el nombre del paquete en su archivo principal AndroidManifest.xml en carpeta src\main
+Reemplace “com.ejemplo.app” con su nuevo nombre de paquete:
+<nombre de proyecto>/android/app/src/main
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.ejemplo.app">
+3.1   cambiar  la descripción o nombre  de la aplicación
+ android:label="Oficina Electronica"
+
+4. Modifique el nombre del paquete en su archivo  AndroidManifest.xml en carpeta debug
+Haz lo mismo aquí:
+<nombre de proyecto>/android/app/src/debug
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.ejemplo.app">
+
+5. Modifique el nombre del paquete en su archivo AndroidManifest.xml en carpeta profile
+Y aquí:
+<nombre de proyecto>/android/app/src/profile
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.ejemplo.app">
+
+6. Modifique el ID de la aplicación en su archivo app build.gradle
+Modifique el atributo applicationId para reflejar su nuevo nombre de paquete:
+<nombre de proyecto>/android/app/src/
+defaultConfig {
+// TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+applicationId "com.ejemplo.app"
+minSdkVersion 16
+targetSdkVersion 28
+versionCode flutterVersionCode.toInteger()
+versionName flutterVersionName
+multiDexEnabled true
+testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+}
+
