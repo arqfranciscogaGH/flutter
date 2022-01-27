@@ -1,0 +1,40 @@
+{
+    "nombreApp" : "original",
+    "rutas" : [
+        {
+            "Id" : "Inicio",
+            "Titulo" : "Inicio",
+            "Subitulo" : "Inicio",
+            "Ruta" : "/",
+            "Icon" : "add_alert"
+        },
+        {
+            "Id" : "Acceder",
+            "Titulo" : "Acceder",
+            "Subitulo" : "Acceder",
+            "Ruta" : "/",
+            "Icon" : "add_alert"
+        },        
+        {
+            "Id" : "Menú  Principal",
+            "Titulo" : "Menú  Principal",
+            "Subitulo" : "Menú  Principal",
+            "Ruta" : "MENUPRINCIPAL",
+            "Icon" : "accessibility"
+        },
+        {
+            "Id" : "Gastos",
+            "Titulo" : "Gastos",
+            "Subitulo" : "Gastos",
+            "Ruta" : "GASTOS",
+            "Icon" : "accessibility"
+        },
+        {
+            "Id" : "Escaneos",
+            "Titulo" : "Escaneos",
+            "Subitulo" : "Escaneos",
+            "Ruta" : "ESCANEOS",
+            "Icon" : "accessibility"
+        }                  
+    ]
+}

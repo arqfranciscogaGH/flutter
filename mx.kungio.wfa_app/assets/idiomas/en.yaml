@@ -1,0 +1,14 @@
+
+pagina_preferencias:
+      titulo: Preferencias
+      botGuardar : guardar   
+      borde :  Rectangular           
+      lisColoresTema : { tipo : ListaDespegableFija ,textoEtiqueta: Theme Color  , textoAyuda: Select theme please , marcaAguaTexto: Select theme ,icono: calendar_today, iconoInterno: calendar_today  }     
+      txtTelefono : { tipo : CajaTextoForma , textoEtiqueta: Phone , textoAyuda: Capture Person Phone  , marcaAguaTexto:  Person Phone  ,icono: telefono, iconoInterno: telefono  } 
+      etiqueta : label    
+      txtCuenta : account
+      lista :
+            - Masculino
+            - Femenino
+      txtCorreo : email
+      martin: {name: Martin D'vloper, job: Developer, skill: Elite}        
