@@ -151,7 +151,7 @@ class OpcionesMenus {
     elementos.add(elemento);
 
     elemento = ElementoLista();
-    elemento.titulo = "Socios";
+    elemento.titulo = "Franquicias";
     elemento.ruta = "pagina_Suscripcion_lista";
     elemento.subitulo = "";
     elemento.icono = "card_membership";

@@ -161,27 +161,27 @@ Directorio_Redes_captura:
       txtotraRedSocial : { tipo : CajaTextoForma , tipoEntrada : text,  textoEtiqueta: Otra Red Social , textoAyuda:  , marcaAguaTexto: Capture otra Red Social   ,icono: email, iconoInterno:   , textoCapitalizacion : none , protegerTextoEscrito : false  } 
 
 pagina_Suscripcion_lista:
-      titulo: Socios
+      titulo: Franquicias
       borde :  Lineal        
       colorBorde : rojo    
       textoContador : número de letras    
       botGuardar : guardar 
 
 pagina_Suscripcion_registro:
-      titulo: Socio
+      titulo: Franquicia
       borde :  Lineal        
       colorBorde : rojo    
       textoContador : número de letras    
       botGuardar : guardar   
 
 pagina_Suscripcion_captura:
-      titulo: Socio
+      titulo: Franquicia
       borde :  Lineal        
       colorBorde : rojo    
       textoContador : número de letras    
       botGuardar : guardar   
       txtnombre : { tipo : CajaTextoForma , tipoEntrada   : text,        textoEtiqueta: Captura Nombre , textoAyuda: , marcaAguaTexto:   ,icono: usuario, iconoInterno:   , textoCapitalizacion : words , protegerTextoEscrito : false  } 
-      txttipo : { tipo : ListaDespegable , tipoEntrada : text,           textoEtiqueta: Seleccione Nivel , textoAyuda: , marcaAguaTexto:  ,icono: nivel, iconoInterno:   , textoCapitalizacion : words , protegerTextoEscrito : false  } 
+      # txttipo : { tipo : ListaDespegable , tipoEntrada : text,           textoEtiqueta: Seleccione Nivel , textoAyuda: , marcaAguaTexto:  ,icono: nivel, iconoInterno:   , textoCapitalizacion : words , protegerTextoEscrito : false  } 
       # txtfechaInicio : { tipo : Etiqueta , tipoEntrada : datetime,       textoEtiqueta: Fecha Inicio , textoAyuda:  , marcaAguaTexto:  ,icono: calendar_today, iconoInterno:   , textoCapitalizacion : none , protegerTextoEscrito : false  } 
       # txtusuarios : { tipo : CajaTextoForma , tipoEntrada : number,      textoEtiqueta: Usuarios , textoAyuda:  ,  marcaAguaTexto: Costo ,icono: usuarios, iconoInterno:   , textoCapitalizacion : none , protegerTextoEscrito : false  } 
       # txtequipos : { tipo : CajaTextoForma , tipoEntrada : number,       textoEtiqueta: Equipos , textoAyuda:  , marcaAguaTexto:  ,icono: dispositivos, iconoInterno:   , textoCapitalizacion : none , protegerTextoEscrito : false  } 

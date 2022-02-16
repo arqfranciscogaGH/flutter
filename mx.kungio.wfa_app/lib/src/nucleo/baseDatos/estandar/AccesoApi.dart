@@ -89,11 +89,11 @@ class AccesoApi extends IAccesoBD {
     else
     {
       url= configuracion.urlApi + "/" + nombreTabla.toLowerCase() ;
-      if (id != null || id != 0)
+      if (id != null && id != 0)
             url+= "/" + id.toString();
       else
       { 
-          if (configuracion.filtro != null || configuracion.filtro != '')
+          if (configuracion.filtro != null && configuracion.filtro != '')
             url+= "/0/" + configuracion.filtro;
       }
         

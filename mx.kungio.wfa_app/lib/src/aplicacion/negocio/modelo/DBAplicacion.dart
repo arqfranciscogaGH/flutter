@@ -18,8 +18,9 @@ class DBAplicacion extends ModelodBase {
 
   AccesoTabla<Suscripcion> tablaSuscripcion;
   AccesoTabla<Usuario> tablaUsuario;
-
+ AccesoTabla<CuentaUsuario> tablaCuentaUsuario;
   AccesoTabla<Persona> tablaPersona;
+ AccesoTabla<Cliente> tablaCliente;  
   AccesoTabla<Perfil> tablaPerfil;
   AccesoTabla<Grupo> tablaGrupo;
   AccesoTabla<NivelRed> tablaNivelRed;
@@ -72,7 +73,8 @@ class DBAplicacion extends ModelodBase {
       version: 1,
       persitenciaPorDefecto: false,
       contadorRegistros: true,
-      urlApi: 'http://arqfranciscoga-001-site1.btempurl.com/api',
+     // urlApi: 'http://arqfranciscoga-001-site1.btempurl.com/api',
+      urlApi: 'http://kungio.mx/api',
       sincronizarServidor: true,
     );
     ConfiguracionAccesoBD configuracionPersitenciaApiIdentity =
@@ -83,7 +85,7 @@ class DBAplicacion extends ModelodBase {
       version: 1,
       persitenciaPorDefecto: false,
       contadorRegistros: false,
-      urlApi: 'http://arqfranciscoga-001-site1.btempurl.com/api',
+     urlApi: 'http://kungio.mx/api',
       sincronizarServidor: true,
     );
     ConfiguracionAccesoBD configuracionApiParametros = ConfiguracionAccesoBD(
@@ -126,9 +128,12 @@ class DBAplicacion extends ModelodBase {
 
     tablaUsuario =
         agregarTabla<Usuario>(Usuario().iniciar(), configuracionApiParametros);
-
+   tablaCuentaUsuario =
+        agregarTabla<CuentaUsuario>(CuentaUsuario().iniciar(), configuracionApiParametros);
     tablaPersona =
         agregarTabla<Persona>(Persona().iniciar(), configuracionApiParametros);
+      tablaCliente =
+        agregarTabla<Cliente>(Cliente().iniciar(), configuracionApiParametros);    
     tablaPerfil =
         agregarTabla<Perfil>(Perfil().iniciar(), configuracionApiParametros);
     tablaGrupo =

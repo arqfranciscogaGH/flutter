@@ -207,32 +207,32 @@ class _Suscripcion_captura_state extends State<Suscripcion_captura> {
       idControl: "txttipo",
     );
  */
-    if (entidadCaptura.tipo=='')
-        entidadCaptura.tipo="Bronze";
-    _listaTipo
-        .add(ElementoLista(valor: "Bronze", titulo: "Bronze", subitulo: "100"));
-    _listaTipo
-        .add(ElementoLista(valor: "Silver", titulo: "Silver", subitulo: "200"));
-    _listaTipo
-        .add(ElementoLista(valor: "Gold", titulo: "Gold", subitulo: "300"));
-    _listaTipo
-        .add(ElementoLista(valor: "GoldX", titulo: "GoldX", subitulo: "300"));
-    _listaTipo
-        .add(ElementoLista(valor: "pureGold", titulo: "pureGold", subitulo: "300"));
-    _listaTipo
-        .add(ElementoLista(valor: "Zafiro", titulo: "Zafiro", subitulo: "300"));  
-    _listaTipo
-        .add(ElementoLista(valor: "Kungio", titulo: "Grand Loyalty", subitulo: "300"));  
+    // if (entidadCaptura.tipo=='')
+    //     entidadCaptura.tipo="B";
+    // _listaTipo
+    //     .add(ElementoLista(valor: "B", titulo: "Bronze", subitulo: "100"));
+    // _listaTipo
+    //     .add(ElementoLista(valor: "S", titulo: "Silver", subitulo: "200"));
+    // _listaTipo
+    //     .add(ElementoLista(valor: "G", titulo: "Gold", subitulo: "300"));
+    // _listaTipo
+    //     .add(ElementoLista(valor: "GoldX", titulo: "GoldX", subitulo: "300"));
+    // _listaTipo
+    //     .add(ElementoLista(valor: "P", titulo: "pureGold", subitulo: "300"));
+    // _listaTipo
+    //     .add(ElementoLista(valor: "Zafiro", titulo: "Zafiro", subitulo: "300"));  
+    // _listaTipo
+    //     .add(ElementoLista(valor: "Kungio", titulo: "Grand Loyalty", subitulo: "300"));  
 
-    //  Gratuita, Mensual, Trimestral, Anual
-    Control controlListaTipo = new Control(
-      idControl: "txttipo",
-    );
-    controlListaTipo = controlListaTipo.asignar(
-        idioma, pagina, entidadCaptura.tipo, cambiarValor, validar);
-    controlListaTipo.controlEdicion = _controllerLista;
-    controlListaTipo.lista = _listaTipo;
-    controles.add(controlListaTipo);
+    // //  Gratuita, Mensual, Trimestral, Anual
+    // Control controlListaTipo = new Control(
+    //   idControl: "txttipo",
+    // );
+    // controlListaTipo = controlListaTipo.asignar(
+    //     idioma, pagina, entidadCaptura.tipo, cambiarValor, validar);
+    // controlListaTipo.controlEdicion = _controllerLista;
+    // controlListaTipo.lista = _listaTipo;
+    // controles.add(controlListaTipo);
 
 
     controles.add(Control(
@@ -313,7 +313,7 @@ class _Suscripcion_captura_state extends State<Suscripcion_captura> {
     entidadCaptura.fechaEstatus =
         DateFormat('MM-dd-yyyy').format(DateTime.now());
     entidadCaptura.fechaInicio =
-        DateFormat('MM-dd-yyyy').format(DateTime.now());
+        DateFormat('MM/dd/yyyy').format(DateTime.now());
 
     // DateTime result = DateTime.parse('04-18-2019 06:05');
     // DateTime dateTime = DateTime.parse(cadenafecha);

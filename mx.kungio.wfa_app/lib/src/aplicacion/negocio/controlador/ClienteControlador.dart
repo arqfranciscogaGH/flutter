@@ -1,4 +1,3 @@
-//  librerias internas de flutter
 import 'package:flutter/material.dart';
 
 //  librerias importadas flutter
@@ -7,51 +6,66 @@ import 'package:flutter/material.dart';
 
 import '../../contexto/contexto.dart';
 
-class SuscripcionControlador extends ChangeNotifier {
+class ClienteControlador extends ChangeNotifier {
   bool actualizarControles = false;
+  // List<dynamic> _lista;
+  // dynamic _entidad;
   dynamic get entidad {
-    return ContextoAplicacion.db.tablaSuscripcion.entidad;
+    // if (this._entidad==null)
+    // {
+    //     ContextoAplicacion ContextoAplicacion =ContextoAplicacion.obtener(null);
+    //     this._entidad= ContextoAplicacion.db.tablaCliente.entidad;
+    // }
+    return ContextoAplicacion.db.tablaCliente.entidad;
   }
 
   set entidad(dynamic entidad) {
-    ContextoAplicacion.db.tablaSuscripcion.entidad = entidad;
+    ContextoAplicacion.db.tablaCliente.entidad = entidad;
     // this._entidad =entidad;
     this.actualizarControles = true;
     notifyListeners();
   }
 
   List<dynamic> get lista {
-    return ContextoAplicacion.db.tablaSuscripcion.lista;
+    // if (this._lista==null)
+    // {
+    //     ContextoAplicacion ContextoAplicacion =ContextoAplicacion.obtener(null);
+    //     this._lista = ContextoAplicacion.db.tablaCliente.lista;
+    // }
+    return ContextoAplicacion.db.tablaCliente.lista;
   }
 
   set lista(List<dynamic> lista) {
-    ContextoAplicacion.db.tablaSuscripcion.lista = lista;
+    ContextoAplicacion.db.tablaCliente.lista = lista;
     notifyListeners();
   }
 
   //
   //  metodos de negocio y actualizar  el estado de  entidades
   //
+
   void limpiar() {
-    ContextoAplicacion.db.tablaSuscripcion.lista = null;
-    Suscripcion entidad = Suscripcion().iniciar();
-    ContextoAplicacion.db.tablaSuscripcion.entidad = entidad;
+    ContextoAplicacion.db.tablaCliente.lista = null;
+    Cliente entidad = this.iniciarEntidad();
   }
   //
   //  asignar paramtros de api para consulta
   //
    dynamic asignarParametros( dynamic parmetros,String llaveApi) {
-      ContextoAplicacion.db.tablaSuscripcion.configuracion.parmetros=parmetros;
-      ContextoAplicacion.db.tablaSuscripcion.configuracion.llaveApi=llaveApi;
+      ContextoAplicacion.db.tablaCliente.configuracion.parmetros=parmetros;
+      ContextoAplicacion.db.tablaCliente.configuracion.llaveApi=llaveApi;
    }
-   dynamic asignarParametrosFiltro( dynamic parmetros,String llaveApi,String filtro) {
-      ContextoAplicacion.db.tablaSuscripcion.configuracion.parmetros=parmetros;
-      ContextoAplicacion.db.tablaSuscripcion.configuracion.filtro=filtro;
-      ContextoAplicacion.db.tablaSuscripcion.configuracion.llaveApi=llaveApi;
-   }
+   
+  //
+  //  metodos de negocio y actualizar  el estado de  entidades
+  //
+
   dynamic iniciarEntidad() {
-    Suscripcion entidad = Suscripcion().iniciar();
+    Cliente entidad = Cliente().iniciar();
     // se asigna  datos entidad padre
+
+    if (ContextoAplicacion.db.tablaSuscripcion.entidad.id != null)
+      entidad.idSuscriptor = ContextoAplicacion.db.tablaSuscripcion.entidad.id;
     this.entidad = entidad;
     return entidad;
   }
@@ -59,11 +73,11 @@ class SuscripcionControlador extends ChangeNotifier {
   //
   //  metodos de negocio y  acceso  a  base de datos
   //
-  consultarEntidad(Suscripcion entidad, Function metodoRespuestaConsultar) {
-    ContextoAplicacion.db.tablaSuscripcion
+  consultarEntidad(Cliente entidad, Function metodoRespuestaConsultar) {
+    ContextoAplicacion.db.tablaCliente
         .obtenerLista(entidad)
         .then((listaRespuesta) {
-      List<Suscripcion> lista = listaRespuesta.cast<Suscripcion>().toList();
+      List<Cliente> lista = listaRespuesta.cast<Cliente>().toList();
       this.lista = lista;
       if (metodoRespuestaConsultar != null) metodoRespuestaConsultar(lista);
     });
@@ -71,9 +85,9 @@ class SuscripcionControlador extends ChangeNotifier {
 
   void obtenerEntidad(BuildContext context, ElementoLista elemento,
       Function metodorRespuestaObtener) {
-    Suscripcion entidad = Suscripcion().iniciar();
+    Cliente entidad = Cliente().iniciar();
     entidad.id = elemento.id;
-    ContextoAplicacion.db.tablaSuscripcion.obtener(entidad).then((respuesta) {
+    ContextoAplicacion.db.tablaCliente.obtener(entidad).then((respuesta) {
       if (respuesta != null) {
         this.entidad = respuesta;
         if (metodorRespuestaObtener != null)
@@ -84,7 +98,7 @@ class SuscripcionControlador extends ChangeNotifier {
 
   dynamic obtenerEntidadDeLista(BuildContext context, ElementoLista elemento,
       Function metodorRespuestaObtener) {
-    Suscripcion entidad = Suscripcion().iniciar();
+    Cliente entidad = Cliente().iniciar();
     entidad.id = elemento.id;
     List<dynamic> lista = this.lista;
     if (lista != null) entidad = lista.where((s) => s.id == entidad.id).first;
@@ -94,9 +108,9 @@ class SuscripcionControlador extends ChangeNotifier {
     return entidad;
   }
 
-  insertarEntidad(BuildContext context, ElementoLista elemento,
-      Suscripcion entidad, Function metodoRespuestaInsertar) {
-    ContextoAplicacion.db.tablaSuscripcion.insertar(entidad).then((respuesta) {
+  insertarEntidad(BuildContext context, ElementoLista elemento, Cliente entidad,
+      Function metodoRespuestaInsertar) {
+    ContextoAplicacion.db.tablaCliente.insertar(entidad).then((respuesta) {
       print(respuesta);
       this.entidad = entidad.fromMap(respuesta);
       if (metodoRespuestaInsertar != null)
@@ -105,10 +119,8 @@ class SuscripcionControlador extends ChangeNotifier {
   }
 
   modificarEntidad(BuildContext context, ElementoLista elemento,
-      Suscripcion entidad, Function metodoRespuestaModificar) {
-    ContextoAplicacion.db.tablaSuscripcion
-        .actualizar(entidad)
-        .then((respuesta) {
+      Cliente entidad, Function metodoRespuestaModificar) {
+    ContextoAplicacion.db.tablaCliente.actualizar(entidad).then((respuesta) {
       this.entidad = respuesta;
       if (metodoRespuestaModificar != null)
         metodoRespuestaModificar(context, elemento, entidad);
@@ -117,11 +129,11 @@ class SuscripcionControlador extends ChangeNotifier {
 
   void eliminarEntidad(BuildContext context, ElementoLista elemento,
       Function metodoRespuestaEliminar) {
-    Suscripcion entidad = Suscripcion().iniciar();
+    Cliente entidad = Cliente().iniciar();
     entidad.id = elemento.id;
     entidad.nombre = elemento.titulo;
 
-    ContextoAplicacion.db.tablaSuscripcion.eliminar(entidad).then((respuesta) {
+    ContextoAplicacion.db.tablaCliente.eliminar(entidad).then((respuesta) {
       // if (respuesta!=null)
       // {
       List<dynamic> lista = this.lista;
@@ -142,26 +154,12 @@ class SuscripcionControlador extends ChangeNotifier {
     List<dynamic> listaRespuesta;
     if (this.lista != null) {
       listaRespuesta = this.lista;
-      // obtenerRedPorSuscripcion(idSuscriptor);
-      // if (idSuscriptor == 1)
-      //   listaRespuesta = this.lista;
-      // else if (idSuscriptor > 1)
-      //   listaRespuesta =
-      //       this.lista.where((s) => s.idSuscriptor == idSuscriptor).toList();
+      if (idSuscriptor == 1)
+        listaRespuesta = this.lista;
+      else if (idSuscriptor > 1)
+        listaRespuesta =
+            this.lista.where((s) => s.idSuscriptor == idSuscriptor).toList();
     }
     return listaRespuesta;
-  }
-
-  List<dynamic> obtenerRedPorSuscripcion(int idSuscriptor) {
-    List<dynamic> listaEntrada = this.lista;
-    // List<dynamic> listaRespuesta =
-    //     listaEntrada.where((s) => s.idSuscriptor == idSuscriptor).toList();
-    // for (Suscripcion entidad in listaRespuesta) {
-    //   print("idSuscriptor:${entidad.idSuscriptor}");
-    //   print("id:${entidad.id}");
-    //   print("nombre:${entidad.nombre}");
-    //   obtenerRedPorSuscripcion(entidad.id);
-    // }
-    return listaEntrada;
   }
 }

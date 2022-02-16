@@ -50,59 +50,59 @@ class Suscripcion extends EntidadBase {
   //    métodos
 
   factory Suscripcion.fromMap(Map<String, dynamic> map) => new Suscripcion(
-        id: map["id"],
-        llave: map["llave"],
-        clave: map["clave"],
-        nombre: map["nombre"],
-        fecha: map["fecha"],
-        tipo: map["tipo"],
-        usuarios: map["usuarios"],
-        equipos: map["equipos"],
-        negocios: map["negocios"],
-        costo: map["costo"],
-        fechaInicio: map["fechaInicio"],
-        fechaVencimiento: map["fechaVencimiento"],
-        informacion: map["informacion"],
-        idSuscriptor: map["idSuscriptor"],
-        fechaEstatus: map["fechaEstatus"],
-        estatus: int.parse(map["estatus"].toString()),
+        id: map["IdSuscriptor"],
+        // llave: map["llave"],
+        // clave: map["clave"],
+        nombre: map["NombreCorto"],
+        // fecha: map["fecha"],
+        // tipo: map["Tipo"],
+        // usuarios: map["usuarios"],
+        // equipos: map["equipos"],
+        // negocios: map["negocios"],
+        // costo: map["costo"],
+        fechaInicio: map["FechaInicio"],
+        // fechaVencimiento: map["fechaVencimiento"],
+        // informacion: map["informacion"],
+        // idSuscriptor: map["idSuscriptor"],
+        // fechaEstatus: map["fechaEstatus"],
+         estatus: map["Activo"] == true ? 1 : 0,
       );
 
   Suscripcion fromMap(Map<String, dynamic> map) => new Suscripcion(
-        id: map["id"],
-        llave: map["llave"],
-        clave: map["clave"],
-        nombre: map["nombre"],
-        fecha: map["fecha"],
-        tipo: map["tipo"],
-        usuarios: map["usuarios"],
-        equipos: map["equipos"],
-        negocios: map["negocios"],
-        costo: map["costo"],
-        fechaInicio: map["fechaInicio"],
-        fechaVencimiento: map["fechaVencimiento"],
-        informacion: map["informacion"],
-        idSuscriptor: map["idSuscriptor"],
-        fechaEstatus: map["fechaEstatus"],
-        estatus: int.parse(map["estatus"].toString()),
+        id: map["IdSuscriptor"],
+        // llave: map["llave"],
+        // clave: map["clave"],
+        nombre: map["NombreCorto"],
+        // fecha: map["fecha"],
+        // tipo: map["Tipo"],
+        // usuarios: map["usuarios"],
+        // equipos: map["equipos"],
+        // negocios: map["negocios"],
+        // costo: map["costo"],
+        fechaInicio: map["FechaInicio"],
+        // fechaVencimiento: map["fechaVencimiento"],
+        // informacion: map["informacion"],
+        // idSuscriptor: map["idSuscriptor"],
+        // fechaEstatus: map["fechaEstatus"],
+        estatus: map["Activo"] == true ? 1 : 0,
       );
   Map<String, dynamic> toMap() => {
-        "id": id,
-        "llave": llave,
-        "clave": clave,
-        "nombre": nombre,
-        "fecha": fecha,
-        "tipo": tipo,
-        "usuarios": usuarios,
-        "equipos": equipos,
-        "negocios": negocios,
-        "costo": costo,
-        "fechaInicio": fechaInicio,
-        "fechaVencimiento": fechaVencimiento,
-        "informacion": informacion,
-        "idSuscriptor": idSuscriptor,
-        "fechaEstatus": fechaEstatus,
-        "estatus": estatus,
+        "IdSuscriptor": id,
+        // "llave": llave,
+        // "clave": clave,
+        "NombreCorto": nombre,
+        // "fecha": fecha,
+        // "tipo": tipo,
+        // "usuarios": usuarios,
+        // "equipos": equipos,
+        // "negocios": negocios,
+        // "costo": costo,
+        "FechaInicio": fechaInicio,
+        // "fechaVencimiento": fechaVencimiento,
+        // "informacion": informacion,
+        // "idSuscriptor": idSuscriptor,
+        // "fechaEstatus": fechaEstatus,
+          "Activo": estatus,
       };
   String sqlTabla() {
     String sql = "CREATE TABLE if not exists  " +
@@ -130,19 +130,19 @@ class Suscripcion extends EntidadBase {
   Suscripcion iniciar() {
     Suscripcion entidad = Suscripcion();
     entidad.id = 0;
-    entidad.llave = "";
-    entidad.clave = "";
+    // entidad.llave = "";
+    // entidad.clave = "";
     entidad.nombre = "";
-    entidad.fecha = "";
-    entidad.tipo = "Bronze";
-    entidad.usuarios = 1;
-    entidad.equipos = 1;
-    entidad.negocios = 1;
-    entidad.costo = 0;
-    entidad.fechaInicio = "";
-    entidad.fechaVencimiento = "";
-    entidad.fechaEstatus = "";
-    entidad.idSuscriptor = 0;
+    // entidad.fecha = "";
+    // entidad.tipo = "Bronze";
+    // entidad.usuarios = 1;
+    // entidad.equipos = 1;
+    // entidad.negocios = 1;
+    // entidad.costo = 0;
+    // entidad.fechaInicio = "";
+    // entidad.fechaVencimiento = "";
+    // entidad.fechaEstatus = "";
+    // entidad.idSuscriptor = 0;
     //entidad.fecha=DateTime.now().toString();
     entidad.estatus = 1;
     return entidad;

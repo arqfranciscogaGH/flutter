@@ -46,6 +46,10 @@ import '../endidad/ConsultaTramite.dart';
 import '../endidad/EstadisticasVista.dart';
 import '../endidad/EstadisticasVistaDetalle.dart';
 
+
+import '../endidad/CuentaUsuario.dart';
+import '../endidad/Cliente.dart';
+
 export '../endidad/Suscripcion.dart';
 export '../endidad/Usuario.dart';
 export '../endidad/MisPendientes.dart';
@@ -84,6 +88,10 @@ export '../endidad/ConsultaTramite.dart';
 
 export '../endidad/EstadisticasVista.dart';
 export '../endidad/EstadisticasVistaDetalle.dart';
+
+export '../endidad/CuentaUsuario.dart';
+export '../endidad/Cliente.dart';
+
 class ModeloAplicacion extends ModelodBase {
   // declarar entidades
   ConfiguracionAccesoBD configuracionPersitencia;
