@@ -67,7 +67,7 @@ class _pagina_EstadisticasInformacion extends State<pagina_EstadisticasInformaci
 
   //  Interfaz  comun
   EstadisticasInformacionUI ui;
-
+  EstadisticasVista entidad;
   //  controladores
 
   //  otros
@@ -77,7 +77,7 @@ class _pagina_EstadisticasInformacion extends State<pagina_EstadisticasInformaci
   void initState() {
     super.initState();
     widget.pagina = pagina_EstadisticasInformacion.ruta;
-    EstadisticasVista entidad=ContextoUI.obtenerKey("estadisticas").entidad;
+    entidad=ContextoUI.obtenerKey("estadisticas").entidad;
     int id=0;
     if  (entidad!=null)
     {
@@ -165,6 +165,7 @@ class _pagina_EstadisticasInformacion extends State<pagina_EstadisticasInformaci
     idioma = IdiomaAplicacion.obtener(context, idioma);
     ui.iniciar(context, scaffoldKey, idioma, widget);
     widget.titulo = idioma.obtenerElemento(widget.pagina, "titulo");
+    widget.titulo="" +entidad.vista +":" + entidad.concepto;
     return ChangeNotifierProvider.value(
         value: provider,
         child: Scaffold(

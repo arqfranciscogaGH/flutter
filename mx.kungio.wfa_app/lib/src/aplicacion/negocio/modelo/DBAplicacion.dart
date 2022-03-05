@@ -17,7 +17,7 @@ class DBAplicacion extends ModelodBase {
   ConfiguracionAccesoBD configuracionPersitencia;
 
   AccesoTabla<Suscripcion> tablaSuscripcion;
-  AccesoTabla<Usuario> tablaUsuario;
+
  AccesoTabla<CuentaUsuario> tablaCuentaUsuario;
   AccesoTabla<Persona> tablaPersona;
  AccesoTabla<Cliente> tablaCliente;  
@@ -43,6 +43,8 @@ class DBAplicacion extends ModelodBase {
 
   AccesoTabla<EstadisticasVista> tablaEstadisticasVista;
   AccesoTabla<EstadisticasVistaDetalle> tablaEstadisticasVistaDetalle;
+  AccesoTabla<ConsultarSocios> tablaConsultarSocios;
+
 
 
 /*   AccesoTabla<Categoria> tablaCategoria;
@@ -73,8 +75,8 @@ class DBAplicacion extends ModelodBase {
       version: 1,
       persitenciaPorDefecto: false,
       contadorRegistros: true,
-     // urlApi: 'http://arqfranciscoga-001-site1.btempurl.com/api',
-      urlApi: 'http://kungio.mx/api',
+      urlApi: 'http://arqfranciscoga-002-site3.btempurl.com/api',
+      //urlApi: 'http://kungio.mx/api',
       sincronizarServidor: true,
     );
     ConfiguracionAccesoBD configuracionPersitenciaApiIdentity =
@@ -85,7 +87,8 @@ class DBAplicacion extends ModelodBase {
       version: 1,
       persitenciaPorDefecto: false,
       contadorRegistros: false,
-     urlApi: 'http://kungio.mx/api',
+      urlApi: 'http://arqfranciscoga-002-site3.btempurl.com/api',
+      //urlApi: 'http://kungio.mx/api',
       sincronizarServidor: true,
     );
     ConfiguracionAccesoBD configuracionApiParametros = ConfiguracionAccesoBD(
@@ -95,7 +98,8 @@ class DBAplicacion extends ModelodBase {
       version: 1,
       persitenciaPorDefecto: false,
       contadorRegistros: false,
-      urlApi: 'http://kungio.mx/api',
+      urlApi: 'http://arqfranciscoga-002-site3.btempurl.com/api',
+      //urlApi: 'http://kungio.mx/api',
       sincronizarServidor: true,
     );
 
@@ -126,8 +130,7 @@ class DBAplicacion extends ModelodBase {
     tablaSuscripcion = agregarTabla<Suscripcion>(
         Suscripcion().iniciar(), configuracionApiParametros);
 
-    tablaUsuario =
-        agregarTabla<Usuario>(Usuario().iniciar(), configuracionApiParametros);
+
    tablaCuentaUsuario =
         agregarTabla<CuentaUsuario>(CuentaUsuario().iniciar(), configuracionApiParametros);
     tablaPersona =
@@ -170,6 +173,9 @@ class DBAplicacion extends ModelodBase {
    tablaEstadisticasVista =agregarTabla<EstadisticasVista>(EstadisticasVista().iniciar(), configuracionApiParametros);
 
    tablaEstadisticasVistaDetalle =agregarTabla<EstadisticasVistaDetalle>(EstadisticasVistaDetalle().iniciar(), configuracionApiParametros);
+  
+   tablaConsultarSocios =agregarTabla<ConsultarSocios>(ConsultarSocios().iniciar(), configuracionApiParametros);
+
 
 /* 
 

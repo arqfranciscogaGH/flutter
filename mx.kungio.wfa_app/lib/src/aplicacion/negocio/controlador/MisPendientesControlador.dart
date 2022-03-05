@@ -51,6 +51,12 @@ class MisPendientesControlador extends ChangeNotifier {
   //
    dynamic asignarParametros( dynamic parmetros,String llaveApi) {
       ContextoAplicacion.db.tablaMisPendientes.configuracion.parmetros=parmetros;
+      ContextoAplicacion.db.tablaMisPendientes.configuracion.filtro=""; 
+      ContextoAplicacion.db.tablaMisPendientes.configuracion.llaveApi=llaveApi;
+   }
+   dynamic asignarParametrosFiltro( dynamic parmetros,dynamic filtro,String llaveApi) {
+      ContextoAplicacion.db.tablaMisPendientes.configuracion.parmetros=parmetros;
+      ContextoAplicacion.db.tablaMisPendientes.configuracion.filtro=filtro; 
       ContextoAplicacion.db.tablaMisPendientes.configuracion.llaveApi=llaveApi;
    }
   //

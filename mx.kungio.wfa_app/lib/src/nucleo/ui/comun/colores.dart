@@ -114,13 +114,13 @@ final listaIColoresPersonalizado = <String, Color>{
       'grismasfuerte'        : Colors.grey[800],  
 
 
-      'Kungio'             : Colors.blue[400],
-      'Zafiro'             : Colors.blue[900],
-      'pureGold'           : Colors.yellow[900],
-      'GoldX'              : Colors.yellow[800],
-      'Gold'               : Colors.yellow[700],
-      'Silver'             : Colors.grey[400],
-      'Bronze'             : Colors.brown[600],
+      'F'             : Colors.blue[400],
+      'SA'             : Colors.indigo[600],
+      'WG'            : Colors.yellow[100],
+      'PG'            : Colors.yellow[900],
+      'G'             : Colors.yellow[700],
+      'S'             : Colors.grey[400],
+      'B'             : Colors.brown[600],
 
  };
 

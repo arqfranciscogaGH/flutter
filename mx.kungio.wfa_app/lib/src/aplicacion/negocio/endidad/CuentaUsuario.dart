@@ -14,7 +14,7 @@ class CuentaUsuario extends EntidadBase {
   //    variables
   //    propiedades
 
-  String fecha;
+ 
   String cuenta;
   String contrasena;
   String correo;
@@ -24,8 +24,8 @@ class CuentaUsuario extends EntidadBase {
   String rutaFoto;
   String urlFoto;
   String idEstacionTrabajo;
-  String tema;
-  int idIdioma;
+  int idUsuarioSuperior;
+   int idIdioma;
   int sesiones;
   int intentos;
   String perfiles;
@@ -33,24 +33,26 @@ class CuentaUsuario extends EntidadBase {
   String privilegios;
   int expira;
   int idSuscriptor;
-  String fechaEstatus;
-  int estatus;
+  String tema;
+  int   idEstatusUsuario;
+  int   activo;
+  String  fechaRegistro;
+  String  fechaVigencia;
+  String  fechaCambioEstatus;
+  // int estatus;
   CuentaUsuario({
     id,
     nombre,
     clave,
     llave,
-    this.fecha,
     this.cuenta,
     this.contrasena,
     this.correo,
-    this.telefono,
-    this.fechaNacimiento,
-    this.genero,
     this.rutaFoto,
     this.urlFoto,
     this.idEstacionTrabajo,
-    this.tema,
+    this.idUsuarioSuperior,
+
     this.idIdioma,
     this.sesiones,
     this.intentos,
@@ -59,8 +61,13 @@ class CuentaUsuario extends EntidadBase {
     this.privilegios,
     this.expira,
     this.idSuscriptor,
-    this.fechaEstatus,
-    this.estatus,
+    this.tema,
+    this.idEstatusUsuario,
+    this.activo,      
+    this.fechaRegistro,
+    this.fechaVigencia,
+    this.fechaCambioEstatus,
+    // this.estatus,
   }) : super(
             id: id,
             clave: clave,
@@ -68,88 +75,100 @@ class CuentaUsuario extends EntidadBase {
             nombre: nombre,
             tabla: "CuentaUsuarios");
   //    métodos
-
+ 
+   
   factory CuentaUsuario.fromMap(Map<String, dynamic> map) => new CuentaUsuario(
-        id: map["id"],
+        id: map["IdUsuario"],
         llave: map["llave"],
         clave: map["clave"],
         nombre: map["nombre"],
-        fecha: map["fecha"],
-        cuenta: map["cuenta"],
-        contrasena: map["contrasena"],
+
+        cuenta: map["Cuenta"],
+        contrasena: map["Contrasena"],
         correo: map["correo"],
-        telefono: map["telefono"],
-        fechaNacimiento: map["fechaNacimiento"],
-        genero: map["genero"],
+
         rutaFoto: map["rutaFoto"],
         urlFoto: map["urlFoto"],
-        idEstacionTrabajo: map["idEstacionTrabajo"],
-        tema: map["tema"],
-        idIdioma: map["idIdioma"],
-        sesiones: map["sesiones"],
-        intentos: map["intentos"],
-        grupos: map["grupos"],
-        perfiles: map["perfiles"],
-        privilegios: map["privilegios"],
-        expira: map["expira"],
-        idSuscriptor: map["idSuscriptor"],
-        fechaEstatus: map["fechaEstatus"],
-        estatus: int.parse(map["estatus"].toString()),
+        idEstacionTrabajo: map["IdEstacionTrabajo"],
+        idUsuarioSuperior: map["IdUsuarioSuperior"],
+        
+        idIdioma: map["IdIdioma"],
+        sesiones: map["Sesiones"],
+        intentos: map["Intentos"],
+        grupos: map["Grupos"],
+        perfiles: map["Perfiles"],
+        privilegios: map["Privilegios"],
+        expira: map["Expira"],
+        idSuscriptor: map["IdSuscriptor"],
+        tema: map["Tema"],
+        idEstatusUsuario: map["IdEstatusUsuario"],
+        activo: map["Activo"],                
+ 
+        fechaRegistro: map["FechaRegistro"],
+        fechaVigencia: map["fechaVigencia"],
+        fechaCambioEstatus: map["FechaCambioEstatus"],
+        // estatus: int.parse(map["estatus"].toString()),
       );
 
   CuentaUsuario fromMap(Map<String, dynamic> map) => new CuentaUsuario(
-        id: map["id"],
+        id: map["IdUsuario"],
         llave: map["llave"],
         clave: map["clave"],
         nombre: map["nombre"],
-        fecha: map["fecha"],
-        cuenta: map["cuenta"],
-        contrasena: map["contrasena"],
+
+        cuenta: map["Cuenta"],
+        contrasena: map["Contrasena"],
         correo: map["correo"],
-        telefono: map["telefono"],
-        fechaNacimiento: map["fechaNacimiento"],
-        genero: map["genero"],
+
         rutaFoto: map["rutaFoto"],
         urlFoto: map["urlFoto"],
-        idEstacionTrabajo: map["idEstacionTrabajo"],
-        tema: map["tema"],
-        idIdioma: map["idIdioma"],
-        sesiones: map["sesiones"],
-        intentos: map["intentos"],
-        grupos: map["grupos"],
-        perfiles: map["perfiles"],
-        privilegios: map["privilegios"],
-        expira: map["expira"],
-        idSuscriptor: map["idSuscriptor"],
-        fechaEstatus: map["fechaEstatus"],
-        estatus: int.parse(map["estatus"].toString()),
+        idEstacionTrabajo: map["IdEstacionTrabajo"],
+        idUsuarioSuperior: map["IdUsuarioSuperior"],
+        
+        idIdioma: map["IdIdioma"],
+        sesiones: map["Sesiones"],
+        intentos: map["Intentos"],
+        grupos: map["Grupos"],
+        perfiles: map["Perfiles"],
+        privilegios: map["Privilegios"],
+        expira: map["Expira"],
+        idSuscriptor: map["IdSuscriptor"],
+        tema: map["Tema"],
+        idEstatusUsuario: map["IdEstatusUsuario"],
+        activo: map["Activo"],                
+ 
+        fechaRegistro: map["FechaRegistro"],
+        fechaVigencia: map["fechaVigencia"],
+        fechaCambioEstatus: map["FechaCambioEstatus"],
+        // estatus: int.parse(map["estatus"].toString()),
       );
   Map<String, dynamic> toMap() => {
         "id": id,
         "llave": llave,
         "clave": clave,
         "nombre": nombre,
-        "fecha": fecha,
-        "cuenta": cuenta,
-        "contrasena": contrasena,
+        "Cuenta": cuenta,
+        "Contrasena": contrasena,
         "correo": correo,
-        "telefono": telefono,
-        "fechaNacimiento": fechaNacimiento,
-        "genero": genero,
+
         "rutaFoto": rutaFoto,
         "urlFoto": urlFoto,
-        "idEstacionTrabajo": idEstacionTrabajo,
-        "tema": tema,
-        "idIdioma": idIdioma,
-        "sesiones": sesiones,
-        "intentos": intentos,
-        "grupos": grupos,
-        "perfiles": perfiles,
-        "privilegios": privilegios,
-        "expira": expira,
-        "idSuscriptor": idSuscriptor,
-        "fechaEstatus": fechaEstatus,
-        "estatus": estatus,
+  
+        "IdUsuarioSuperior": idUsuarioSuperior,
+        "IdEstatusUsuario": idEstatusUsuario,
+        "Activo": activo,                
+
+        "IdEstacionTrabajo": idEstacionTrabajo,
+        "Tema": tema,
+        "IdIdioma": idIdioma,
+        "Sesiones": sesiones,
+        "Intentos": intentos,
+        "Grupos": grupos,
+        "Perfiles": perfiles,
+        "Privilegios": privilegios,
+        "Expira": expira,
+        "IdSuscriptor": idSuscriptor,
+
       };
   String sqlTabla() {
     String sql = "CREATE TABLE if not exists  " +
@@ -159,17 +178,15 @@ class CuentaUsuario extends EntidadBase {
             "llave   TEXT , "
             "clave   TEXT , "
             "nombre   TEXT , "
-            "fecha   TEXT , "
             "cuenta    TEXT , "
             "contrasena   TEXT, "
             "correo   TEXT, "
-            "telefono   TEXT, "
-            "fechaNacimiento   TEXT, "
-            "genero  TEXT , "
             "rutaFoto  TEXT , "
             "urlFoto  TEXT , "
             "idEstacionTrabajo   TEXT , "
             "tema   TEXT , "
+            "idUsuarioSuperior   INTEGER , "
+            "idEstatusUsuario   INTEGER , "     
             "idIdioma   INTEGER , "
             "sesiones   INTEGER , "
             "intentos   INTEGER , "
@@ -177,9 +194,8 @@ class CuentaUsuario extends EntidadBase {
             "perfiles   TEXT , "
             "privilegios   TEXT , "
             "expira   INTEGER , "
-            "idSuscriptor   INTEGER, "
-            "fechaEstatus   TEXT , "
-            "estatus   INTEGER )";
+            "idSuscriptor   INTEGER ) ";
+    
     return sql;
   }
 
@@ -189,16 +205,14 @@ class CuentaUsuario extends EntidadBase {
     entidad.llave = "";
     entidad.clave = "";
     entidad.nombre = "";
-    entidad.fecha = "";
     entidad.cuenta = "";
     entidad.contrasena = "";
     entidad.correo = "";
-    entidad.telefono = "";
-    entidad.fechaNacimiento = "";
-    entidad.genero = "F";
     entidad.rutaFoto = "";
     entidad.urlFoto = "";
     entidad.idEstacionTrabajo = "";
+    entidad.idUsuarioSuperior=0;   
+    entidad.idEstatusUsuario=0;   
     entidad.tema = "";
     entidad.idIdioma = 0;
     entidad.intentos = 3;
@@ -211,8 +225,7 @@ class CuentaUsuario extends EntidadBase {
     entidad.expira = 0;
 
     entidad.idSuscriptor = 0;
-    entidad.fecha = DateFormat('MM-dd-yyyy').format(DateTime.now());
-    entidad.estatus = 1;
+
     return entidad;
   }
 

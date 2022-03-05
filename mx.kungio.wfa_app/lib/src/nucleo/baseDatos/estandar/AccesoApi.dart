@@ -85,7 +85,11 @@ class AccesoApi extends IAccesoBD {
   String generarUrl(String nombreTabla, int id) {
     String url="";
     if (configuracion.parmetros!=null  && configuracion.parmetros!="") 
-       url= configuracion.urlApi + "/" + configuracion.parmetros;
+    {
+         url= configuracion.urlApi + "/" + configuracion.parmetros;
+         if (configuracion.filtro != null && configuracion.filtro != "")
+            url+= "/" + configuracion.filtro;   
+    }
     else
     {
       url= configuracion.urlApi + "/" + nombreTabla.toLowerCase() ;

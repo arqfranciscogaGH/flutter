@@ -51,6 +51,13 @@ class EstadisticasVistaControlador extends ChangeNotifier {
   //
    dynamic asignarParametros( dynamic parmetros,String llaveApi) {
       ContextoAplicacion.db.tablaEstadisticasVista.configuracion.parmetros=parmetros;
+      ContextoAplicacion.db.tablaEstadisticasVista.configuracion.filtro="";  
+      ContextoAplicacion.db.tablaEstadisticasVista.configuracion.llaveApi=llaveApi;
+   }
+
+  dynamic asignarParametrosFiltro( dynamic parmetros,dynamic filtro,String llaveApi) {
+      ContextoAplicacion.db.tablaEstadisticasVista.configuracion.parmetros=parmetros;
+      ContextoAplicacion.db.tablaEstadisticasVista.configuracion.filtro=filtro;  
       ContextoAplicacion.db.tablaEstadisticasVista.configuracion.llaveApi=llaveApi;
    }
   //

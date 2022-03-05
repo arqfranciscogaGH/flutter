@@ -52,6 +52,7 @@ class ProductividadDetalleControlador extends ChangeNotifier {
   //
    dynamic asignarParametros( dynamic parmetros,String llaveApi) {
       ContextoAplicacion.db.tablaProductividadDetalle.configuracion.parmetros=parmetros;
+      ContextoAplicacion.db.tablaProductividadDetalle.configuracion.filtro="";  
       ContextoAplicacion.db.tablaProductividadDetalle.configuracion.llaveApi=llaveApi;
    }
   //

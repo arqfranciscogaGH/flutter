@@ -11,8 +11,8 @@ import '../../../configuracion/configuracionAplicacion.dart';
 import '../../../../nucleo/ui/ui.dart';
 import '../../../contexto/contexto.dart';
 
-import '../../../negocio/controlador/UsuarioControlador.dart';
-export '../../../negocio/controlador/UsuarioControlador.dart';
+import '../../../negocio/controlador/CuentaUsuarioControlador.dart';
+export '../../../negocio/controlador/CuentaUsuarioControlador.dart';
 
 import '../../../negocio/controlador/SuscripcionControlador.dart';
 export '../../../negocio/controlador/SuscripcionControlador.dart';
@@ -20,7 +20,7 @@ export '../../../negocio/controlador/SuscripcionControlador.dart';
 class UsuarioUI {
   UsuarioUI({this.provider, this.idioma});
 
-  UsuarioControlador provider;
+  CuentaUsuarioControlador provider;
   IdiomaAplicacion idioma;
   BuildContext context;
   GlobalKey<ScaffoldState> scaffoldKey;
@@ -266,7 +266,7 @@ class UsuarioUI {
         this.widget.paginaAnterior != null)
       Accion.hacer(context, OpcionesMenus.obtener(this.widget.paginaAnterior));
     else if (this.widget.accionPagina == null || this.widget.accionPagina == "")
-      provider.consultarEntidad(Usuario().iniciar(), null);
+      provider.consultarEntidad(CuentaUsuario().iniciar(), null);
   }
   //
   //   respuestas   Insertar

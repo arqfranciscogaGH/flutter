@@ -39,8 +39,8 @@ class _pagina_acceso_state extends State<pagina_acceso> {
   //  declaración de variables
 
   IdiomaAplicacion idioma;
-  Usuario entidadCaptura;
-  List<Usuario> listaEntidad;
+  CuentaUsuario entidadCaptura;
+  List<CuentaUsuario> listaEntidad;
 
   GlobalKey<FormState> keyFormulario;
 
@@ -49,7 +49,7 @@ class _pagina_acceso_state extends State<pagina_acceso> {
   ElementoLista accionGuardar;
 
   //  provider
-  UsuarioControlador provider;
+CuentaUsuarioControlador provider;
 
   //  Interfaz  comun
 
@@ -66,7 +66,7 @@ class _pagina_acceso_state extends State<pagina_acceso> {
     // contextoAplicacion=ContextoAplicacion.obtener(widget.contextoAplicacion);
     super.initState();
     widget.pagina = "pagina_acceso";
-    provider = UsuarioControlador();
+    provider = CuentaUsuarioControlador();
     // ui=UsuarioUI(provider: provider);
     //accionGuardar=ElementoLista ( id:4, icono: "save" , ruta:widget.paginaSiguiente, accion: ui.guardarEntidad ,callBackAccion: ui.respuestaInsertar,  callBackAccion2: ui.respuestaModificar  , callBackAccion3:respuestaGuardar , argumento: widget.pagina  );
     keyFormulario = GlobalKey<FormState>();
@@ -80,7 +80,7 @@ class _pagina_acceso_state extends State<pagina_acceso> {
     provider.limpiar();
     entidadCaptura = provider.entidad;
     provider.asignarParametros(null, "prueba");
-    provider.consultarEntidad(Usuario().iniciar(), actualizarEstadoLista);
+    provider.consultarEntidad(CuentaUsuario().iniciar(), actualizarEstadoLista);
 
   }
 
@@ -101,7 +101,7 @@ class _pagina_acceso_state extends State<pagina_acceso> {
             body: Stack(
           children: <Widget>[
             _crearFondo(context),
-            Consumer<UsuarioControlador>(
+            Consumer<CuentaUsuarioControlador>(
                 builder: (context, _provider, widgetPadre) {
               return _loginForm(context);
             }),
@@ -214,7 +214,7 @@ class _pagina_acceso_state extends State<pagina_acceso> {
     );
   }
 
-  Widget _crearBoton(Usuario cuenta, BuildContext context) {
+  Widget _crearBoton(CuentaUsuario cuenta, BuildContext context) {
     return RaisedButton(
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
@@ -349,19 +349,19 @@ class _pagina_acceso_state extends State<pagina_acceso> {
     });
   }
 
-  _validarCuenta(Usuario usuario, BuildContext context) {
+  _validarCuenta(CuentaUsuario usuario, BuildContext context) {
     bool resultado = false;
     if (!keyFormulario.currentState.validate()) return;
     keyFormulario.currentState.save();
     // listaEntidad = provider.lista;
     print(listaEntidad.length);
-    Usuario usuarioEncontrado;
+    CuentaUsuario usuarioEncontrado;
     if (listaEntidad.length > 0 && usuario.cuenta != "")
       usuarioEncontrado = listaEntidad
           .firstWhere((s) => s.cuenta.toUpperCase() == usuario.cuenta.toUpperCase(), orElse: () => null);
 
     if (usuarioEncontrado != null &&
-        usuario.contrasena.toUpperCase() == usuarioEncontrado.contrasena.toUpperCase()  &&  usuarioEncontrado.estatus==1) {
+        usuario.contrasena.toUpperCase() == usuarioEncontrado.contrasena.toUpperCase()  &&  usuarioEncontrado.activo==1) {
        resultado = true;
        usuario= usuarioEncontrado;
 

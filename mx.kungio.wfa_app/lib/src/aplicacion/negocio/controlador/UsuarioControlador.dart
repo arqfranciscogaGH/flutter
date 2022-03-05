@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../../contexto/contexto.dart';
 
-class UsuarioControlador extends ChangeNotifier {
+class CuentaUsuarioControlador extends ChangeNotifier {
   bool actualizarControles = false;
   // List<dynamic> _lista;
   // dynamic _entidad;
@@ -14,13 +14,13 @@ class UsuarioControlador extends ChangeNotifier {
     // if (this._entidad==null)
     // {
     //     ContextoAplicacion ContextoAplicacion =ContextoAplicacion.obtener(null);
-    //     this._entidad= ContextoAplicacion.db.tablaUsuario.entidad;
+    //     this._entidad= ContextoAplicacion.db.tablaCuentaUsuario.entidad;
     // }
-    return ContextoAplicacion.db.tablaUsuario.entidad;
+    return ContextoAplicacion.db.tablaCuentaUsuario.entidad;
   }
 
   set entidad(dynamic entidad) {
-    ContextoAplicacion.db.tablaUsuario.entidad = entidad;
+    ContextoAplicacion.db.tablaCuentaUsuario.entidad = entidad;
     // this._entidad =entidad;
     this.actualizarControles = true;
     notifyListeners();
@@ -30,13 +30,13 @@ class UsuarioControlador extends ChangeNotifier {
     // if (this._lista==null)
     // {
     //     ContextoAplicacion ContextoAplicacion =ContextoAplicacion.obtener(null);
-    //     this._lista = ContextoAplicacion.db.tablaUsuario.lista;
+    //     this._lista = ContextoAplicacion.db.tablaCuentaUsuario.lista;
     // }
-    return ContextoAplicacion.db.tablaUsuario.lista;
+    return ContextoAplicacion.db.tablaCuentaUsuario.lista;
   }
 
   set lista(List<dynamic> lista) {
-    ContextoAplicacion.db.tablaUsuario.lista = lista;
+    ContextoAplicacion.db.tablaCuentaUsuario.lista = lista;
     notifyListeners();
   }
 
@@ -45,15 +45,15 @@ class UsuarioControlador extends ChangeNotifier {
   //
 
   void limpiar() {
-    ContextoAplicacion.db.tablaUsuario.lista = null;
-    Usuario entidad = this.iniciarEntidad();
+    ContextoAplicacion.db.tablaCuentaUsuario.lista = null;
+    CuentaUsuario entidad = this.iniciarEntidad();
   }
   //
   //  asignar paramtros de api para consulta
   //
    dynamic asignarParametros( dynamic parmetros,String llaveApi) {
-      ContextoAplicacion.db.tablaUsuario.configuracion.parmetros=parmetros;
-      ContextoAplicacion.db.tablaUsuario.configuracion.llaveApi=llaveApi;
+      ContextoAplicacion.db.tablaCuentaUsuario.configuracion.parmetros=parmetros;
+      ContextoAplicacion.db.tablaCuentaUsuario.configuracion.llaveApi=llaveApi;
    }
    
   //
@@ -61,7 +61,7 @@ class UsuarioControlador extends ChangeNotifier {
   //
 
   dynamic iniciarEntidad() {
-    Usuario entidad = Usuario().iniciar();
+    CuentaUsuario entidad = CuentaUsuario().iniciar();
     // se asigna  datos entidad padre
 
     if (ContextoAplicacion.db.tablaSuscripcion.entidad.id != null)
@@ -73,11 +73,11 @@ class UsuarioControlador extends ChangeNotifier {
   //
   //  metodos de negocio y  acceso  a  base de datos
   //
-  consultarEntidad(Usuario entidad, Function metodoRespuestaConsultar) {
-    ContextoAplicacion.db.tablaUsuario
+  consultarEntidad(CuentaUsuario entidad, Function metodoRespuestaConsultar) {
+    ContextoAplicacion.db.tablaCuentaUsuario
         .obtenerLista(entidad)
         .then((listaRespuesta) {
-      List<Usuario> lista = listaRespuesta.cast<Usuario>().toList();
+      List<CuentaUsuario> lista = listaRespuesta.cast<CuentaUsuario>().toList();
       this.lista = lista;
       if (metodoRespuestaConsultar != null) metodoRespuestaConsultar(lista);
     });
@@ -85,9 +85,9 @@ class UsuarioControlador extends ChangeNotifier {
 
   void obtenerEntidad(BuildContext context, ElementoLista elemento,
       Function metodorRespuestaObtener) {
-    Usuario entidad = Usuario().iniciar();
+    CuentaUsuario entidad = CuentaUsuario().iniciar();
     entidad.id = elemento.id;
-    ContextoAplicacion.db.tablaUsuario.obtener(entidad).then((respuesta) {
+    ContextoAplicacion.db.tablaCuentaUsuario.obtener(entidad).then((respuesta) {
       if (respuesta != null) {
         this.entidad = respuesta;
         if (metodorRespuestaObtener != null)
@@ -98,7 +98,7 @@ class UsuarioControlador extends ChangeNotifier {
 
   dynamic obtenerEntidadDeLista(BuildContext context, ElementoLista elemento,
       Function metodorRespuestaObtener) {
-    Usuario entidad = Usuario().iniciar();
+    CuentaUsuario entidad = CuentaUsuario().iniciar();
     entidad.id = elemento.id;
     List<dynamic> lista = this.lista;
     if (lista != null) entidad = lista.where((s) => s.id == entidad.id).first;
@@ -108,9 +108,9 @@ class UsuarioControlador extends ChangeNotifier {
     return entidad;
   }
 
-  insertarEntidad(BuildContext context, ElementoLista elemento, Usuario entidad,
+  insertarEntidad(BuildContext context, ElementoLista elemento, CuentaUsuario entidad,
       Function metodoRespuestaInsertar) {
-    ContextoAplicacion.db.tablaUsuario.insertar(entidad).then((respuesta) {
+    ContextoAplicacion.db.tablaCuentaUsuario.insertar(entidad).then((respuesta) {
       print(respuesta);
       this.entidad = entidad.fromMap(respuesta);
       if (metodoRespuestaInsertar != null)
@@ -119,8 +119,8 @@ class UsuarioControlador extends ChangeNotifier {
   }
 
   modificarEntidad(BuildContext context, ElementoLista elemento,
-      Usuario entidad, Function metodoRespuestaModificar) {
-    ContextoAplicacion.db.tablaUsuario.actualizar(entidad).then((respuesta) {
+      CuentaUsuario entidad, Function metodoRespuestaModificar) {
+    ContextoAplicacion.db.tablaCuentaUsuario.actualizar(entidad).then((respuesta) {
       this.entidad = respuesta;
       if (metodoRespuestaModificar != null)
         metodoRespuestaModificar(context, elemento, entidad);
@@ -129,11 +129,11 @@ class UsuarioControlador extends ChangeNotifier {
 
   void eliminarEntidad(BuildContext context, ElementoLista elemento,
       Function metodoRespuestaEliminar) {
-    Usuario entidad = Usuario().iniciar();
+    CuentaUsuario entidad = CuentaUsuario().iniciar();
     entidad.id = elemento.id;
     entidad.nombre = elemento.titulo;
 
-    ContextoAplicacion.db.tablaUsuario.eliminar(entidad).then((respuesta) {
+    ContextoAplicacion.db.tablaCuentaUsuario.eliminar(entidad).then((respuesta) {
       // if (respuesta!=null)
       // {
       List<dynamic> lista = this.lista;

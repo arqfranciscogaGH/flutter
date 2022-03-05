@@ -21,6 +21,9 @@ import '../../contexto/contexto.dart';
 
 import '../../negocio/controlador/SuscripcionControlador.dart';
 
+import '../../negocio/controlador/ConsultarSociosControlador.dart';
+
+
 class pagina_red extends StatefulWidget {
   pagina_red(
   { Key key,
@@ -49,16 +52,21 @@ class _pagina_red_State extends State<pagina_red> {
   BuchheimWalkerConfiguration builder = BuchheimWalkerConfiguration();
   Random r = Random();
   List<Map<String, dynamic>> socios = List<Map<String, dynamic>>();
-  List<Suscripcion> _listaSocios = List<Suscripcion>();
-  SuscripcionControlador provider ;
+  List<ConsultarSocios> _listaSocios = List<ConsultarSocios>();
+  ConsultarSociosControlador provider;
+
   @override
   void initState() {
     super.initState();
     widget.pagina = pagina_red.ruta;
-    provider = SuscripcionControlador();
+
+    provider = ConsultarSociosControlador();
     provider.limpiar();
-    provider.asignarParametros(null, "prueba");
-    provider.consultarEntidad(Suscripcion().iniciar(), actualizarEstadoLista);
+  
+    provider.asignarParametrosFiltro("ConsultarSocios","0/''", "prueba");
+    provider.consultarEntidad(ConsultarSocios().iniciar(), actualizarEstadoListaU);
+
+
 
     builder
       ..siblingSeparation = (50)
@@ -175,9 +183,9 @@ class _pagina_red_State extends State<pagina_red> {
                   ..style = PaintingStyle.stroke,
                 builder: (Node node) {
                   // I can decide what widget should be shown here based on the id
-                  var a = node.key.value as int;
-                  print(' pintando nodo  ${a}');
-                  return rectangleWidget(a);
+                  var id = node.key.value as int;
+                  print(' pintando nodo  ${id}');
+                  return rectangleWidget(id);
                 },
               )),
         ),
@@ -186,65 +194,66 @@ class _pagina_red_State extends State<pagina_red> {
   }
 
 
-    void actualizarEstadoLista(List<dynamic> listaRespuesta) {
+  
+     void actualizarEstadoListaU(List<dynamic> listaRespuesta) {
       _listaSocios=listaRespuesta;
       setState(() {});
       // cargaElementos();
     }
-    List<dynamic>  obteenrSocioRed() {
-       int idSocio=Sesion.idSuscriptor;
-       idSocio=1;
-       List<dynamic> lista_red= List<dynamic> ();
-       lista_red.add(_listaSocios
-          .where((s) => s.id == idSocio)
-          .first ) ;
-       List<dynamic> lista_hijos = obteenrSociosHijos( idSocio, _listaSocios, lista_red);
-       
-     
-       return  lista_red;
 
+    List<dynamic>  obtenerRedSocios() {
+      int idSocio=Sesion.idUsuario;
+      ConsultarSocios socio;
+      List<dynamic> lista_red= List<dynamic> ();
+      if ( _listaSocios.length>0)
+      {
+          if ( idSocio==null || idSocio==0 )
+            socio=_listaSocios.first;
+          else
+            socio=_listaSocios.where((s) => s.idUsuario == idSocio).first;
+          idSocio=socio.idUsuario;   
+
+          lista_red.add(_listaSocios.where((s) => s.idUsuario == idSocio).first ) ;
+          List<dynamic> lista_hijos = obtenerSociosRedPorSocio( idSocio, _listaSocios, lista_red);
+      }
+      return  lista_red;
     }
-    List<dynamic>  obteenrSociosHijos( int idSocio,  List<dynamic> listaSocios,  List<dynamic> lista_red) {
+    List<dynamic>  obtenerSociosRedPorSocio( int idSocio,  List<dynamic> listaSocios,  List<dynamic> lista_red) {
+
         List<dynamic> listaHijos = listaSocios
-          .where((s) => s.idSuscriptor == idSocio)
+          .where((s) => s.idUsuarioSuperior == idSocio)
           .toList();
-        for (Suscripcion socio in listaHijos) {
-          print(socio.clave);
+        for (ConsultarSocios socio in listaHijos) {
+          print(socio.idUsuario);
+          print(socio.idUsuarioSuperior);
+          print(socio.cuenta);
           print(socio.nombre);
-          print(socio.tipo);
-          print(socio.id);
-          print(socio.idSuscriptor);
-            lista_red.add(socio);
-            obteenrSociosHijos(socio.id, listaSocios ,lista_red );
+          print(socio.idNivelRed);
+          print(socio.claveNivelRed);
+          print(socio.nivelRed);
+          lista_red.add(socio);
+          obtenerSociosRedPorSocio(socio.id, listaSocios ,lista_red );
         }
        return listaHijos;
    }
-  creaDiagramaSocios( List<dynamic> lista_red)
-  {
-    for (Suscripcion socio in lista_red) {
-      if  (socio.id!=1)
-      {
-          print(socio.clave);
-          print(socio.nombre);
-          print(socio.tipo);
-          print(socio.id);
-          print(socio.idSuscriptor);
-          Node nodePadre = Node.Id(socio.id);
-          List<dynamic> lista_hijos =
-              obtenerRedPorSuscripcion(lista_red, socio.id);
-          for (Suscripcion hijo in lista_hijos) {
-            print(hijo.id);
-            Node nodeHijo = Node.Id(hijo.id);
-            graph.addEdge(nodePadre, nodeHijo,
-                paint: Paint()..color = Colors.black);
-          }
-      }
-    }
+  List<dynamic> obtenerSociosNivelInferior( List<dynamic> listaEntrada, int idUsuarioSuperior) {
+
+    List<dynamic> listaRespuesta = listaEntrada
+        .where((s) => s.idUsuarioSuperior == idUsuarioSuperior)
+        .toList();
+    // for (ConsultarSocios entidad in listaRespuesta) {
+    //   print("id:${entidad.id}");
+    //   print("idSuscriptor:${entidad.idUsuarioSuperior}");
+    //   print("tipo:${entidad.cuenta}");
+    //   print("nombre:${entidad.nombre}");
+    // }
+    return listaRespuesta;
   }
+ 
   cargaElementos() {
-
-    creaDiagramaSocios( obteenrSocioRed() );
-
+     creaDiagramaSocios( obtenerRedSocios()  );
+   }
+  cargaElementosPrueba() {
 
     // if ( _listaSocios!=null && _listaSocios.length==0 )  
     // {
@@ -351,9 +360,6 @@ class _pagina_red_State extends State<pagina_red> {
     //   print(socios[i]['idSuscriptor']);
     //   print(socios[i]['idSuscriptorAscendente']);
     // }
-
-
-
     // for (Suscripcion socio in _listaSocios) {
     //   if  (socio.id!=1)
     //   {
@@ -376,7 +382,71 @@ class _pagina_red_State extends State<pagina_red> {
 
   }
 
+ 
+  creaDiagramaSocios( List<dynamic> lista_Socios)
+  {
+    List<dynamic> listaLideresSocios = lista_Socios.where((s) => s.idNivelRed != 1).toList();
+    for (ConsultarSocios socio in listaLideresSocios) {
+          print(socio.id);
+          print(socio.idUsuario);
+          print(socio.clave);
+          print(socio.nombre);
+          print(socio.idUsuarioSuperior);
+          print(socio.idNivelRed);
+          print(socio.claveNivelRed);
+          print(socio.nivelRed);
+          Node nodePadre = Node.Id(socio.id);
+          List<dynamic> lista_hijos =
+              obtenerSociosNivelInferior(lista_Socios, socio.id);
+          for (ConsultarSocios hijo in lista_hijos) {
+            print(hijo.id);
+            Node nodeHijo = Node.Id(hijo.id);
+            graph.addEdge(nodePadre, nodeHijo,
+                paint: Paint()..color = Colors.black);
+          }
+      // }
+    }
+  }
 
+
+  Widget rectangleWidget(int id) {
+   ConsultarSocios s =ConsultarSocios();
+    if ( _listaSocios!=null && _listaSocios.length>0 )  
+    {
+        print(' buscar : ${id}');
+        // s= _listaSocios.where((s) => s.id == id).first;
+        s = _listaSocios.firstWhere((s) => s.id == id, orElse: () => null);
+        print(' encontro widget : ${s.id}');
+        print(' encontro widget : ${s.cuenta}');
+        print(' encontro widget : ${s.claveNivelRed}');
+           if (s==null)
+        s =ConsultarSocios();
+        if (s.claveNivelRed==null  || s.claveNivelRed==''  )
+            s.claveNivelRed="B";
+        if (s.cuenta==null  || s.cuenta==''  )
+            s.cuenta="sin Nombre";
+        
+        // print(' widget : ${s.tipo}');
+        return InkWell(
+          onTap: () {
+            print('clicked ${id}');
+          },
+          child: Container(
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(40),
+                boxShadow: [
+                  BoxShadow(color: Colores.obtenerColor(s.claveNivelRed), spreadRadius: 1),
+                ],
+              ),
+              child: Text('${s.cuenta}')),
+        );
+    }
+    else
+    return Container();
+ 
+  }
+  
   // iniciarNodos() {
   //   final node1 = Node.Id(1);
   //   final node2 = Node.Id(2);
@@ -405,153 +475,4 @@ class _pagina_red_State extends State<pagina_red> {
   //   graph.addEdge(node11, node12);
   // }
 
-  List<dynamic> obtenerRedPorSuscripcion(
-      List<dynamic> listaEntrada, int idSuscriptor) {
-    List<dynamic> listaRespuesta = listaEntrada
-        .where((s) => s.idSuscriptor == idSuscriptor)
-        .toList();
-    for (Suscripcion entidad in listaRespuesta) {
-      print("id:${entidad.id}");
-      print("idSuscriptor:${entidad.idSuscriptor}");
-      print("tipo:${entidad.tipo}");
-      print("nombre:${entidad.nombre}");
-    }
-    return listaRespuesta;
-  }
-
-  Widget rectangleWidget(int id) {
-   Suscripcion s =Suscripcion( id: 1,clave: "Kungio" ,nombre: "Kungio" , tipo: "Kungio");
-    if ( _listaSocios!=null && _listaSocios.length>0 )  
-    {
-        print(' buscar : ${id}');
-        // s= _listaSocios.where((s) => s.id == id).first;
-        s = _listaSocios.firstWhere((s) => s.id == id, orElse: () => null);
-        print(' encontro widget : ${s.id}');
-        print(' encontro widget : ${s.nombre}');
-    }
-
-    // print(' widget : ${s.tipo}');
-    return InkWell(
-      onTap: () {
-        print('clicked ${id}');
-      },
-      child: Container(
-          padding: EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(40),
-            boxShadow: [
-              BoxShadow(color: Colores.obtenerColor(s.tipo), spreadRadius: 1),
-            ],
-          ),
-          child: Text('${s.clave}')),
-    );
-  }
 }
-
-// class Suscripcion {
-//   //    variables
-//   //    propiedades
-//   int id;
-//   String nombre;
-//   String tipo;
-//   int idSuscriptor;
-//   Suscripcion(
-//       {this.id,
-//       this.nombre,
-//       this.tipo,
-//       this.idSuscriptor});
-// }
-
-// class Colores {
-//   static Color obtenerColor(String color) {
-//     Color matcolor = Colors.transparent;
-//     if (color != null && color != "")
-//       matcolor = _listaIColoresPersonalizado[color];
-
-//     return matcolor;
-//   }
-// }
-
-// final _listaIColores = <String, MaterialColor>{
-//   'morado': Colors.purple,
-//   'moradoclaro': Colors.purple[200],
-//   'moradofuerte': Colors.purple[700],
-//   'azul': Colors.blue,
-//   'azulclaro': Colors.blue[200],
-//   'azulfuerte': Colors.blue[700],
-//   'azulindigo': Colors.indigo,
-//   'azulindigoclaro': Colors.indigo[200],
-//   'azulindigofuerte': Colors.indigo[700],
-//   'negro': Colors.black,
-//   'negroclaro': Colors.black,
-//   'negrofuerte': Colors.black,
-//   'gris': Colors.grey,
-//   'grisclaro': Colors.grey[200],
-//   'grisfuerte': Colors.grey[700],
-//   'rojo': Colors.red,
-//   'rojoclaro': Colors.red[200],
-//   'rojofuerte': Colors.red[700],
-//   'rosa': Colors.pink,
-//   'rosaclaro': Colors.pink[200],
-//   'rosafuerte': Colors.pink[700],
-//   'verde': Colors.green,
-//   'verdeclaro': Colors.green[200],
-//   'rojofuerte': Colors.green[700],
-//   'lima': Colors.lime,
-//   'amarillo': Colors.yellow,
-//   'amarilloclaro': Colors.yellow[200],
-//   'amarillofuerte': Colors.yellow[700],
-//   'cafe': Colors.brown,
-//   'cafeclaro': Colors.brown[200],
-//   'cafefuerte': Colors.brown[700],
-//   'naranja': Colors.orange,
-//   'naranjaclaro': Colors.orange[200],
-//   'naranjafuerte': Colors.orange[700],
-// };
-// final _listaIColoresPersonalizado = <String, Color>{
-
-//   'O': Colors.yellow[700],
-//   'P': Colors.grey[600],
-//   'B': Colors.brown[400],
-
-//   'Kungio': Colors.blue[400],
-//   'Gold': Colors.yellow[700],
-//   'Platino': Colors.grey[600],
-//   'Bronze': Colors.brown[400],
-//   'morado': Colors.purple,
-//   'moradoclaro': Colors.purpleAccent,
-//   'moradofuerte': Colors.purple[700],
-//   'azul': Colors.blue,
-//   'azulclaro': Colors.blueAccent,
-//   'azulfuerte': Colors.blue[700],
-//   'azulindigo': Colors.indigo,
-//   'azulindigoclaro': Colors.indigoAccent,
-//   'azulindigofuerte': Colors.indigo[700],
-//   'negro': Colors.black12,
-//   'negroclaro': Colors.black38,
-//   'negrofuerte': Colors.black87,
-//   'gris': Colors.grey,
-//   'grisclaro': Colors.grey[200],
-//   'grisfuerte': Colors.grey[700],
-//   'rojo': Colors.red,
-//   'rojoclaro': Colors.redAccent,
-//   'rojofuerte': Colors.red[700],
-//   'rosa': Colors.pink,
-//   'rosaclaro': Colors.pinkAccent,
-//   'rosafuerte': Colors.pink[700],
-//   'verde': Colors.green,
-//   'verdeclaro': Colors.greenAccent,
-//   'rojofuerte': Colors.green[700],
-//   'rojouFuerte': Color.fromRGBO(125, 3, 3, 10.0),
-//   'lima': Colors.lime,
-//   'amarillo': Colors.yellow,
-//   'amarilloclaro': Colors.yellowAccent,
-//   'amarillofuerte': Colors.yellow[700],
-//   'cafe': Colors.brown,
-//   'cafeclaro': Colors.brown[200],
-//   'cafefuerte': Colors.brown[700],
-//   'naranja': Colors.orange,
-//   'naranjaclaro': Colors.orange[200],
-//   'naranjafuerte': Colors.orange[700],
-// };
- 

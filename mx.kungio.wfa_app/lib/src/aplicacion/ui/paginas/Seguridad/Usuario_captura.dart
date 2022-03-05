@@ -46,8 +46,8 @@ class _Usuario_captura_state extends State<Usuario_captura> {
   //  declaración de variables
 
   IdiomaAplicacion idioma;
-  Usuario entidadCaptura;
-  List<Usuario> listaEntidad;
+  CuentaUsuario entidadCaptura;
+  List<CuentaUsuario> listaEntidad;
 
   // captura
 
@@ -58,7 +58,7 @@ class _Usuario_captura_state extends State<Usuario_captura> {
   ElementoLista accionGuardar;
 
   //  provider
-  UsuarioControlador provider;
+  CuentaUsuarioControlador provider;
 
   //  Interfaz  comun
   UsuarioUI ui;
@@ -73,7 +73,7 @@ class _Usuario_captura_state extends State<Usuario_captura> {
   @override
   void initState() {
     super.initState();
-    provider = UsuarioControlador();
+    provider = CuentaUsuarioControlador();
     ui = UsuarioUI(provider: provider);
     accionGuardar = ElementoLista(
         id: 4,
@@ -105,7 +105,7 @@ class _Usuario_captura_state extends State<Usuario_captura> {
     // contextoAplicacion=ContextoAplicacion.obtener(ModalRoute.of(context).settings.arguments);
     idioma = IdiomaAplicacion.obtener(context, idioma);
     ui.idioma = idioma;
-    provider = Provider.of<UsuarioControlador>(context);
+    provider = Provider.of<CuentaUsuarioControlador>(context);
     entidadCaptura = provider.entidad;
 
     //  asignacion nuevo  keyFormulario para realizar  nueva  captura parcial,
@@ -297,12 +297,12 @@ class _Usuario_captura_state extends State<Usuario_captura> {
         entidadCaptura.grupos = valor;
         break;       
       case "apaestatus":
-        entidadCaptura.estatus = valor == true ? 1 : 0;
+        entidadCaptura.activo = valor == true ? 1 : 0;
         break;
     }
-    entidadCaptura.fechaEstatus =
+    entidadCaptura.fechaRegistro =
         DateFormat('MM-dd-yyyy').format(DateTime.now());
-    entidadCaptura.fecha = DateFormat('MM-dd-yyyy').format(DateTime.now());
+    entidadCaptura.fechaCambioEstatus = DateFormat('MM-dd-yyyy').format(DateTime.now());
 
     print(control.idControl + "  , valor  : $valor");
     imprimir(entidadCaptura);

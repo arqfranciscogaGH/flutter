@@ -52,7 +52,7 @@ class _pagina_Usuario_lista extends State<pagina_Usuario_lista> {
   ElementoLista accionFiltrar;
 
   //  provider
-  UsuarioControlador provider;
+  CuentaUsuarioControlador provider;
 
   //  Interfaz  comun
   UsuarioUI ui;
@@ -66,7 +66,7 @@ class _pagina_Usuario_lista extends State<pagina_Usuario_lista> {
   void initState() {
     super.initState();
     widget.pagina = pagina_Usuario_lista.ruta;
-    provider = UsuarioControlador();
+    provider = CuentaUsuarioControlador();
     ui = UsuarioUI(provider: provider);
     // cuando es captura  parcial ,la ruta debe ser null    para qe  ejecute  la pagina siguiente
     accionAgregar = ElementoLista(
@@ -98,7 +98,7 @@ class _pagina_Usuario_lista extends State<pagina_Usuario_lista> {
 
     provider.limpiar();
     provider.asignarParametros(null, "prueba");
-    provider.consultarEntidad(Usuario().iniciar(), null);
+    provider.consultarEntidad(CuentaUsuario().iniciar(), null);
   }
 
   @override
@@ -167,7 +167,7 @@ class _pagina_Usuario_lista extends State<pagina_Usuario_lista> {
   //
 
   Widget mostrarContenido() {
-    return Consumer<UsuarioControlador>(
+    return Consumer<CuentaUsuarioControlador>(
         builder: (context, _provider, widgetPadre) {
       return Vista_lista(
           lista:
@@ -183,7 +183,7 @@ class _pagina_Usuario_lista extends State<pagina_Usuario_lista> {
   //  filtar  informacion
   //
   Widget filtrarElementos(String query) {
-    List<Usuario> lista = provider.obtenerListaPorSuscripcion(ui.obtenerIdSuscriptor());
+    List<CuentaUsuario> lista = provider.obtenerListaPorSuscripcion(ui.obtenerIdSuscriptor());
     if (query != "")
       lista = lista
           .where((s) => s.nombre.toLowerCase().contains(query.toLowerCase()))

@@ -15,8 +15,11 @@ class Cliente extends EntidadBase {
   //
 
   String idTipoCliente;
+  int idEstado;
+  int idSuscriptor;
+  int idOperacion;
   int idUsuario;
-
+  int idSocio;
   String apellidoPaterno;
   String apellidoMaterno;
   String rfc;
@@ -38,7 +41,7 @@ class Cliente extends EntidadBase {
   String fecha;
   String fechaRegistro;
   String fechaEntrega;
-  int idSuscriptor;
+ 
   String fechaEstatus;
   int estatus;
 

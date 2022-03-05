@@ -43,8 +43,8 @@ class _pagina_Usuario_captura_state extends State<pagina_Usuario_captura> {
   //  declaración de variables
 
   IdiomaAplicacion idioma;
-  Usuario entidadCaptura;
-  List<Usuario> listaEntidad;
+  CuentaUsuario entidadCaptura;
+  List<CuentaUsuario> listaEntidad;
   // KEYS
 
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
@@ -58,7 +58,7 @@ class _pagina_Usuario_captura_state extends State<pagina_Usuario_captura> {
   ElementoLista accionGuardar;
 
   //  provider
-  UsuarioControlador provider;
+  CuentaUsuarioControlador provider;
 
   //  Interfaz  comun
   UsuarioUI ui;
@@ -72,7 +72,7 @@ class _pagina_Usuario_captura_state extends State<pagina_Usuario_captura> {
   void initState() {
     super.initState();
     widget.pagina = pagina_Usuario_captura.ruta;
-    provider = UsuarioControlador();
+    provider = CuentaUsuarioControlador();
     provider.asignarParametros(null, "prueba");
     ui = UsuarioUI(provider: provider);
     accionGuardar = ElementoLista(

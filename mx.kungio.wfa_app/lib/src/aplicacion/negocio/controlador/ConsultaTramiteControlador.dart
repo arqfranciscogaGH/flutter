@@ -49,9 +49,16 @@ class ConsultaTramiteControlador extends ChangeNotifier {
   //
   //  asignar paramtros de api para consulta
   //
-   dynamic asignarParametros( dynamic parmetros,String llaveApi) {
-      ContextoAplicacion.db.tablaConsultaTramite.configuracion.parmetros=parmetros;
-      ContextoAplicacion.db.tablaConsultaTramite.configuracion.llaveApi=llaveApi;
+  dynamic asignarParametros( dynamic parmetros,String llaveApi) {
+      ContextoAplicacion.db.tablaConsultarSocios.configuracion.parmetros=parmetros;
+      ContextoAplicacion.db.tablaConsultarSocios.configuracion.filtro=""; 
+      ContextoAplicacion.db.tablaConsultarSocios.configuracion.llaveApi=llaveApi;
+   }
+
+  dynamic asignarParametrosFiltro( dynamic parmetros,dynamic filtro,String llaveApi) {
+      ContextoAplicacion.db.tablaConsultarSocios.configuracion.parmetros=parmetros;
+      ContextoAplicacion.db.tablaConsultarSocios.configuracion.filtro=filtro;  
+      ContextoAplicacion.db.tablaConsultarSocios.configuracion.llaveApi=llaveApi;
    }
   //
   //  metodos de negocio y  acceso  a  base de datos

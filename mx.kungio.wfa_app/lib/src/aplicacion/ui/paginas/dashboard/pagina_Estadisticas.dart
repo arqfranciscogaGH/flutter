@@ -82,7 +82,7 @@ class _pagina_Estadisticas extends State<pagina_Estadisticas> {
   
 
   String  url="FTConsulta/LINEAIV/";
-  String  consulta="/1/VerEstadisticasFlujoPorVista/";
+  String  consulta="/1/VerEstadisticasFlujoPorVista";
   String  argumentos ="";
 
   String iconoGrafica="dona";

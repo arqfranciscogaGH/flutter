@@ -49,8 +49,16 @@ class ProductividadControlador extends ChangeNotifier {
   //
   //  asignar paramtros de api para consulta
   //
-   dynamic asignarParametros( dynamic parmetros,String llaveApi) {
+   
+    dynamic asignarParametros( dynamic parmetros,String llaveApi) {
       ContextoAplicacion.db.tablaProductividad.configuracion.parmetros=parmetros;
+      ContextoAplicacion.db.tablaProductividad.configuracion.filtro=""; 
+      ContextoAplicacion.db.tablaProductividad.configuracion.llaveApi=llaveApi;
+   }
+
+  dynamic asignarParametrosFiltro( dynamic parmetros,dynamic filtro,String llaveApi) {
+      ContextoAplicacion.db.tablaProductividad.configuracion.parmetros=parmetros;
+      ContextoAplicacion.db.tablaProductividad.configuracion.filtro=filtro;  
       ContextoAplicacion.db.tablaProductividad.configuracion.llaveApi=llaveApi;
    }
   //

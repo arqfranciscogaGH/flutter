@@ -51,6 +51,13 @@ class SeguimientoControlador extends ChangeNotifier {
   //
    dynamic asignarParametros( dynamic parmetros,String llaveApi) {
       ContextoAplicacion.db.tablaSeguimiento.configuracion.parmetros=parmetros;
+      ContextoAplicacion.db.tablaSeguimiento.configuracion.filtro=""; 
+      ContextoAplicacion.db.tablaSeguimiento.configuracion.llaveApi=llaveApi;
+   }
+
+  dynamic asignarParametrosFiltro( dynamic parmetros,dynamic filtro,String llaveApi) {
+      ContextoAplicacion.db.tablaSeguimiento.configuracion.parmetros=parmetros;
+      ContextoAplicacion.db.tablaSeguimiento.configuracion.filtro=filtro;  
       ContextoAplicacion.db.tablaSeguimiento.configuracion.llaveApi=llaveApi;
    }
   //
