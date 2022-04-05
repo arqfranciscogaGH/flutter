@@ -77,7 +77,7 @@ class _pagina_ProductividadDetalle_lista extends State<pagina_ProductividadDetal
  
 
 
-    String  url="FTConsulta/LINEAIV/";
+    String  url="FTConsulta/''/";
     String  consulta="/1/VerProductividadVencidasdDetalle/";
     String  variables='';
     String  argumentos='';

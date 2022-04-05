@@ -27,16 +27,7 @@ class Sesion {
     Preferencias.guardar("version", valor);
   }
 
-  static int get idUsuario {
-    if (_idUsuario == null || _idUsuario == 0)
-      _idUsuario = Preferencias.obtener("idUsuario", _idUsuario);
-    return _idUsuario == null || _idUsuario == 0 ? 0 : _idUsuario;
-  }
 
-  static set idUsuario(int valor) {
-    _idUsuario = valor;
-    Preferencias.guardar("idUsuario", valor);
-  }
 
   static String get nombre {
     if (_nombre == null || _nombre == '')
@@ -59,12 +50,21 @@ class Sesion {
     _cuenta = valor;
     Preferencias.guardar("cuenta", valor);
   }
+  static int get idUsuario {
+    if (_idUsuario == null || _idUsuario == 0)
+      _idUsuario = Preferencias.obtener("idUsuario", _idUsuario);
+    return _idUsuario == null || _idUsuario == 0 ? 0 : _idUsuario;
+  }
 
+  static set idUsuario(int valor) {
+    _idUsuario = valor;
+    Preferencias.guardar("idUsuario", valor);
+  }
   static int get idSuscriptor {
-    _idSuscriptor == null ? 0 : _idSuscriptor;
+    // _idSuscriptor == null ? 0 : _idSuscriptor;
     if (_idSuscriptor == null || _idSuscriptor == 0)
       _idSuscriptor = Preferencias.obtener("idSuscriptor", _idSuscriptor);
-    return _idSuscriptor == null ? 0 : _idSuscriptor;
+    return _idSuscriptor == null  || _idSuscriptor == 0  ? 0 : _idSuscriptor;
   }
 
   static set idSuscriptor(int valor) {

@@ -70,7 +70,7 @@ class _pagina_ConsultaTramite_lista extends State<pagina_ConsultaTramite_lista> 
     widget.pagina = pagina_ConsultaTramite_lista.ruta;
 
     //  definir  url y sus  parametros 
-    String url ="FTConsulta/LINEAIV/";
+    String url ="FTConsulta/''/";
     String argumentos ="";
     String consulta ="/1/VerTramite";
  

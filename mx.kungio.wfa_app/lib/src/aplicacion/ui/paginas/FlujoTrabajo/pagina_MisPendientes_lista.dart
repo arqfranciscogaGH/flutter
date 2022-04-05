@@ -71,7 +71,7 @@ class _pagina_MisPendientes_lista extends State<pagina_MisPendientes_lista> {
     widget.pagina = pagina_MisPendientes_lista.ruta;
 
         //  definir  url y sus  parametros 
-    String url ="FTConsulta/LINEAIV/";
+    String url ="FTConsulta/''/";
     String argumentos ="";
     String consulta ="/1/ConsultarMisPendientes/";
     // url+= providerPadre.entidad.identificador!=null ? providerPadre.entidad.identificador: "100";

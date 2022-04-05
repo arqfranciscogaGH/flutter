@@ -57,7 +57,7 @@ class MisPendientes extends EntidadBase {
   factory MisPendientes.fromMap(Map<String, dynamic> map) => new MisPendientes(
         id: map["id"],
         llave: map["llave"],
-        clave: map["clave"],
+        clave: map["Clave"],
         nombre: map["Nombre"],
         descripcion : map['Descripcion'],         
         importe : map['Importe'],    
@@ -80,7 +80,7 @@ class MisPendientes extends EntidadBase {
   MisPendientes fromMap(Map<String, dynamic> map) => new MisPendientes(
         id: map["id"],
         llave: map["llave"],
-        clave: map["clave"],
+        clave: map["Clave"],
         nombre: map["Nombre"],
         descripcion : map['Descripcion'],         
         importe : map['Importe'],    

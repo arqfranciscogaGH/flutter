@@ -90,7 +90,7 @@ class _pagina_EstadisticasInformacion extends State<pagina_EstadisticasInformaci
     print (ContextoUI.obtenerKey("estadisticas").entidad.clave);
     print (ContextoUI.obtenerKey("estadisticas").entidad.concepto); 
 
-    String  url="FTConsulta/LINEAIV/";
+    String  url="FTConsulta/''/";
     String  consulta="/1/VerEstadisticasFlujoPorVistaDetallePorFiltro/";
     String  argumentos ="";
 

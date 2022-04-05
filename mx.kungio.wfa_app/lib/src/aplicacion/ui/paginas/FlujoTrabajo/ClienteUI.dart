@@ -11,8 +11,8 @@ import '../../../configuracion/configuracionAplicacion.dart';
 import '../../../../nucleo/ui/ui.dart';
 import '../../../contexto/contexto.dart';
 
-import '../../../negocio/controlador/PersonaControlador.dart';
-export '../../../negocio/controlador/PersonaControlador.dart';
+import '../../../negocio/controlador/ClienteControlador.dart';
+export '../../../negocio/controlador/ClienteControlador.dart';
 
 import '../../../negocio/controlador/SuscripcionControlador.dart';
 export '../../../negocio/controlador/SuscripcionControlador.dart';
@@ -23,7 +23,7 @@ export '../../../negocio/controlador/FTAvanzarActividadControlador.dart';
 class ClienteUI {
   ClienteUI({this.provider, this.idioma});
 
-  PersonaControlador provider;
+  ClienteControlador provider;
   IdiomaAplicacion idioma;
   BuildContext context;
   GlobalKey<ScaffoldState> scaffoldKey;
@@ -305,7 +305,7 @@ class ClienteUI {
         this.widget.paginaAnterior != null)
       Accion.hacer(context, OpcionesMenus.obtener(this.widget.paginaAnterior));
     else if (this.widget.accionPagina == null || this.widget.accionPagina == "")
-      provider.consultarEntidad(Persona().iniciar(), null);
+      provider.consultarEntidad(Cliente().iniciar(), null);
   }
   //
   //   respuestas   Insertar
@@ -387,36 +387,26 @@ class ClienteUI {
 
     entidadAvance.clave =claveServicio ;
     entidadAvance.idAccion = idAccion;
- 
     entidadAvance.llave = "prueba";
     entidadAvance.identificador = entidadCaptura.referencia;
 
     //      parametros
     entidadAvance.parametros = "";
-    entidadAvance.parametros +=
-        entidadCaptura.nombre == null ? "" : "@Nombre:" + entidadCaptura.nombre;
-    entidadAvance.parametros += entidadCaptura.saldo == null
-        ? ""
-        : ", @Importe:" + entidadCaptura.saldo.toString();
-    //entidadAvance.parametros+=entidadCaptura.importe==null? "":",@Importe:"+entidadCaptura.importe.toString();
-    entidadAvance.parametros +=
-        entidadCaptura.rfc == null || entidadCaptura.rfc == ""
-            ? ""
-            : ", @Referencia:" + entidadCaptura.rfc;
+    entidadAvance.parametros += entidadCaptura.nombre == null ? "" : "@Nombre:" + entidadCaptura.nombre;
+    entidadAvance.parametros += entidadCaptura.importe == null ? "" : ", @Importe:" + entidadCaptura.importe.toString();
+    entidadAvance.parametros +=   entidadCaptura.rfc == null || entidadCaptura.rfc == "" ? "" : ", @Referencia:" + entidadCaptura.rfc;
     // se guarda id cliente
-    entidadAvance.parametros +=
-        entidadCaptura.id == null || entidadCaptura.id == 0
-            ? ""
-            : ", @Numero:" + entidadCaptura.id.toString();
+    entidadAvance.parametros += entidadCaptura.id == null || entidadCaptura.id == 0 ? "": ", @Numero:" + entidadCaptura.id.toString();
+    entidadAvance.parametros += entidadCaptura.id == null || entidadCaptura.id == 0 ? "": ", @IdCliente:" + entidadCaptura.id.toString();
+    entidadAvance.parametros += Sesion.idUsuario == null || Sesion.idUsuario == 0 ? "": ", @IdSocio:" + Sesion.idUsuario.toString();
+    entidadAvance.parametros += Sesion.idUsuario == null || Sesion.idUsuario == 0 ? "": ", @IdUsuario:" + Sesion.idUsuario.toString();
+    entidadAvance.parametros += Sesion.idSuscriptor== null ||Sesion.idSuscriptor == 0 ? "": ", @IdSuscriptor:" + Sesion.idSuscriptor.toString();
+    entidadAvance.parametros += Sesion.perfiles== null ||Sesion.perfiles == "" ? "": ", @IdPerfil:" + Sesion.perfiles;
+    entidadAvance.parametros += Sesion.grupos == null || Sesion.grupos== ""? "": "@IdGrupo:" + Sesion.grupos;
 
     //  variables
-    entidadAvance.variables =
-        Sesion.idSuscriptor == null && Sesion.idSuscriptor == 0
-            ? ""
-            : "IdSocio:" + Sesion.idSuscriptor.toString() + ",";
-    entidadAvance.variables += Sesion.grupos == null && Sesion.grupos == ""
-        ? ""
-        : "IdGrupo:" + Sesion.grupos;
+    entidadAvance.variables = Sesion.idSuscriptor == null && Sesion.idUsuario == 0 ? ""  : "IdSocio:" + Sesion.idUsuario.toString();
+    entidadAvance.variables += Sesion.grupos == null && Sesion.grupos == "" ? "" : ",IdGrupo:" + Sesion.grupos;
 
     //  entidadAvance.parametros="";
     //

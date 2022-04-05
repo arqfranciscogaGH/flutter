@@ -200,31 +200,31 @@ class OpcionesMenus {
     // elemento.activo = 0;
     // elementos.add(elemento);
 
-    // elemento = ElementoLista();
-    // elemento.titulo = "Clientes";
-    // elemento.ruta = "pagina_Cliente_lista";
-    // elemento.subitulo = "";
-    // elemento.icono = "account_box";
-    // elemento.iconoLateral = "arrow_right";
-    // //  elemento.animacionPagina = eAnimacionPagina.FadeRoute;
-    // elemento.pagina = pagina_Cliente_lista(
-    //     paginaSiguiente: "pagina_Cliente_captura", accionPagina: "avanzar");
-    // elemento.animacionPagina = eAnimacionPagina.ScaleRotateRoute;
-    // elemento.activo = 1;
-    // elementos.add(elemento);
+    elemento = ElementoLista();
+    elemento.titulo = "Clientes";
+    elemento.ruta = "pagina_Cliente_lista";
+    elemento.subitulo = "";
+    elemento.icono = "account_box";
+    elemento.iconoLateral = "arrow_right";
+    //  elemento.animacionPagina = eAnimacionPagina.FadeRoute;
+    elemento.pagina = pagina_Cliente_lista(
+        paginaSiguiente: "pagina_Cliente_captura", accionPagina: "avanzar");
+    elemento.animacionPagina = eAnimacionPagina.ScaleRotateRoute;
+    elemento.activo = 1;
+    elementos.add(elemento);
 
-    // elemento = ElementoLista();
-    // elemento.titulo = "Cliente";
-    // elemento.ruta = "pagina_Cliente_captura";
-    // elemento.subitulo = "";
-    // elemento.icono = "account_box";
-    // elemento.iconoLateral = "arrow_right";
-    // // elemento.animacionPagina = eAnimacionPagina.FadeRoute;
-    // elemento.pagina = pagina_Cliente_captura(
-    //     paginaSiguiente: "pagina_Cliente_lista", accionPagina: "avanzar");
-    // elemento.animacionPagina = eAnimacionPagina.ScaleRotateRoute;
-    // elemento.activo = 0;
-    // elementos.add(elemento);
+    elemento = ElementoLista();
+    elemento.titulo = "Cliente";
+    elemento.ruta = "pagina_Cliente_captura";
+    elemento.subitulo = "";
+    elemento.icono = "account_box";
+    elemento.iconoLateral = "arrow_right";
+    // elemento.animacionPagina = eAnimacionPagina.FadeRoute;
+    elemento.pagina = pagina_Cliente_captura(
+        paginaSiguiente: "pagina_Cliente_lista", accionPagina: "avanzar");
+    elemento.animacionPagina = eAnimacionPagina.ScaleRotateRoute;
+    elemento.activo = 0;
+    elementos.add(elemento);
 
     if (Sesion.perfiles.contains("1") || Sesion.perfiles.contains("7")) {
       elemento = ElementoLista();
@@ -248,7 +248,7 @@ class OpcionesMenus {
       elemento.iconoLateral = "arrow_right";
       elemento.activo = 0;
       elemento.pagina = pagina_AvanzarTarea(
-          paginaSiguiente: "pagina_ActivdadInfo_listaGeneral",
+          paginaSiguiente: "pagina_misPendientes_lista",
           accionPagina: "avanzar");
       elemento.animacionPagina = eAnimacionPagina.ScaleRotateRoute;
       elementos.add(elemento);

@@ -52,7 +52,7 @@ class _pagina_Cliente_lista extends State<pagina_Cliente_lista> {
   ElementoLista accionFiltrar;
 
   //  provider
-  PersonaControlador provider;
+ ClienteControlador provider;
 
   //  Interfaz  comun
   ClienteUI ui;
@@ -66,7 +66,7 @@ class _pagina_Cliente_lista extends State<pagina_Cliente_lista> {
   void initState() {
     super.initState();
     widget.pagina = pagina_Cliente_lista.ruta;
-    provider = PersonaControlador();
+    provider = ClienteControlador();
     ui = ClienteUI(provider: provider);
     // cuando es captura  parcial ,la ruta debe ser null    para qe  ejecute  la pagina siguiente
     accionAgregar = ElementoLista(
@@ -112,8 +112,18 @@ class _pagina_Cliente_lista extends State<pagina_Cliente_lista> {
     // }) ;
 
     provider.limpiar();
-    provider.asignarParametros(null, "prueba");
-    provider.consultarEntidad(Persona().iniciar(), null);
+    Cliente entidadCaptura = Cliente().iniciar();
+
+    print  (Sesion.idUsuario);
+    print  (Sesion.perfiles);
+/*     if (Sesion.idUsuario!=null && Sesion.idUsuario!=0)
+    {
+       entidadCaptura.id=Sesion.idUsuario;
+       provider..asignarParametrosFiltro(null,"idSocio","prueba");
+    }
+    else  */
+      provider.asignarParametros(null,"prueba");
+    provider.consultarEntidad(entidadCaptura, null);
   }
 
   @override
@@ -183,7 +193,7 @@ class _pagina_Cliente_lista extends State<pagina_Cliente_lista> {
   //
 
   Widget mostrarContenido() {
-    return Consumer<PersonaControlador>(
+    return Consumer<ClienteControlador>(
         builder: (context, _provider, widgetPadre) {
       return Vista_lista(
           lista:

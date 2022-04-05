@@ -16,6 +16,7 @@ class ConsultaTramite extends EntidadBase {
 
   int idTarea;
   int idActividad;
+  String claveActividad;
   String actividad;
   String estatus;
   String estatusTarea;
@@ -48,6 +49,8 @@ class ConsultaTramite extends EntidadBase {
   
     this.idTarea,
     this.idActividad,
+    this.claveActividad,
+
     this.actividad,
     this.estatus,  
     this.estatusTarea,  
@@ -90,6 +93,8 @@ class ConsultaTramite extends EntidadBase {
         descripcion : map['descripcion'],    
         idTarea : map['idTarea'],     
         idActividad : map['idActividad'],
+        claveActividad : map['claveActividad'],        
+
         actividad : map['actividad'],
         estatus : map['estatus'],   
         estatusTarea : map['estatusTarea'],  
@@ -125,6 +130,7 @@ class ConsultaTramite extends EntidadBase {
         descripcion : map['descripcion'],    
         idTarea : map['idTarea'],     
         idActividad : map['idActividad'],
+        claveActividad : map['claveActividad'],
         actividad : map['actividad'],
         estatus : map['estatus'],   
         estatusTarea : map['estatusTarea'],  
@@ -159,6 +165,7 @@ class ConsultaTramite extends EntidadBase {
 
         "idTarea": idTarea,   
         "idActividad": idActividad,
+        "claveActividad": claveActividad,    
         "actividad": actividad,  
         "estatus": estatus,    
         "estatusTarea": estatusTarea,   
@@ -234,6 +241,7 @@ class ConsultaTramite extends EntidadBase {
 
     entidad.idTarea = 0;
     entidad.idActividad = 0;
+    entidad.claveActividad= "";
     entidad.actividad = "";
     entidad.estatus = "";  
     entidad.estatusTarea = "";  

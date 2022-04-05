@@ -81,7 +81,7 @@ class _pagina_Estadisticas extends State<pagina_Estadisticas> {
   List<EstadisticasVista> listaEntidad  ;  //=List<EstadisticasFlujo>();
   
 
-  String  url="FTConsulta/LINEAIV/";
+  String  url="FTConsulta/''/";
   String  consulta="/1/VerEstadisticasFlujoPorVista";
   String  argumentos ="";
 

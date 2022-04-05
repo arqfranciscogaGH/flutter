@@ -51,9 +51,16 @@ class ClienteControlador extends ChangeNotifier {
   //
   //  asignar paramtros de api para consulta
   //
-   dynamic asignarParametros( dynamic parmetros,String llaveApi) {
-      ContextoAplicacion.db.tablaCliente.configuracion.parmetros=parmetros;
-      ContextoAplicacion.db.tablaCliente.configuracion.llaveApi=llaveApi;
+  dynamic asignarParametros( dynamic parmetros,String llaveApi) {
+      ContextoAplicacion.db.tablaConsultarSocios.configuracion.parmetros=parmetros;
+      ContextoAplicacion.db.tablaConsultarSocios.configuracion.filtro=""; 
+      ContextoAplicacion.db.tablaConsultarSocios.configuracion.llaveApi=llaveApi;
+   }
+
+  dynamic asignarParametrosFiltro( dynamic parmetros,dynamic filtro,String llaveApi) {
+      ContextoAplicacion.db.tablaConsultarSocios.configuracion.parmetros=parmetros;
+      ContextoAplicacion.db.tablaConsultarSocios.configuracion.filtro=filtro;  
+      ContextoAplicacion.db.tablaConsultarSocios.configuracion.llaveApi=llaveApi;
    }
    
   //

@@ -71,7 +71,7 @@ class _pagina_Productividad_lista extends State<pagina_Productividad_lista> {
     provider = ProductividadControlador();
 
     //  definir  url y sus  parametros 
-    String url ="FTConsulta/LINEAIV/";
+    String url ="FTConsulta/''/";
     String argumentos ="";
     String consulta ="/1/VerProductividadVencidas";
  

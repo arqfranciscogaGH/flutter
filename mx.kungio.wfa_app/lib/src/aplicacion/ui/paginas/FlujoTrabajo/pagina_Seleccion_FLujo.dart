@@ -50,7 +50,7 @@ class _pagina_Seleccion_FLujo extends State<pagina_Seleccion_FLujo> {
   //  declaración de variables
 
   IdiomaAplicacion idioma;
-  Persona entidadCaptura ;
+  Cliente entidadCaptura ;
   //List<Suscripcion> listaEntidad;
 
   // KEYS
@@ -64,7 +64,7 @@ class _pagina_Seleccion_FLujo extends State<pagina_Seleccion_FLujo> {
   ElementoLista accionFiltrar;
 
   //  provider
-  PersonaControlador provider;
+  ClienteControlador provider;
 
   //  Interfaz  comun
   ClienteUI ui;
@@ -181,7 +181,7 @@ class _pagina_Seleccion_FLujo extends State<pagina_Seleccion_FLujo> {
    void opcionSeleccionada(String id) {
      ElementoLista elemento = ElementoLista();
 
-     provider = PersonaControlador();
+     provider = ClienteControlador();
      entidadCaptura=provider.entidad;
      ui = ClienteUI(provider: provider);
      print(id);

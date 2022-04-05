@@ -78,12 +78,13 @@ class _pagina_Seguimiento_lista extends State<pagina_Seguimiento_lista> {
     // providerPadre = MisPendientesControlador();
  
     //  definir  url y sus  parametros 
-    String url ="FTConsulta/LINEAIV/";
+    String url ="FTConsulta/";
     String argumentos ="";
     String consulta ="/1/Seguimiento";
     // url+= providerPadre.entidad.identificador!=null ? providerPadre.entidad.identificador: "100";
     // url+="/1/Seguimiento";
     //  obtener argumentos  de pagina  comun
+    url+=ContextoUI.obtenerKey("seguimiento").entidad.clave+"/";
     argumentos= ContextoUI.obtenerKey("seguimiento").entidad.identificador;
     argumentos=argumentos==null  || argumentos=="" ?"''":argumentos;
     print (argumentos);

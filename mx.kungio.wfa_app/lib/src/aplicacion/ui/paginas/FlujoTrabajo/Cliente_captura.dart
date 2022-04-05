@@ -46,8 +46,8 @@ class _Cliente_captura_state extends State<Cliente_captura> {
   //  declaración de variables
 
   IdiomaAplicacion idioma;
-  Persona entidadCaptura;
-  List<Persona> listaEntidad;
+  Cliente entidadCaptura;
+  List<Cliente> listaEntidad;
 
   // captura
 
@@ -58,7 +58,7 @@ class _Cliente_captura_state extends State<Cliente_captura> {
   ElementoLista accionGuardar;
 
   //  provider
-  PersonaControlador provider;
+ ClienteControlador provider;
 
   //  Interfaz  comun
   ClienteUI ui;
@@ -73,7 +73,7 @@ class _Cliente_captura_state extends State<Cliente_captura> {
   @override
   void initState() {
     super.initState();
-    provider = PersonaControlador();
+    provider = ClienteControlador();
     ui = ClienteUI(provider: provider);
     accionGuardar = ElementoLista(
         id: 4,
@@ -105,7 +105,7 @@ class _Cliente_captura_state extends State<Cliente_captura> {
     // contextoAplicacion=ContextoAplicacion.obtener(ModalRoute.of(context).settings.arguments);
     idioma = IdiomaAplicacion.obtener(context, idioma);
     ui.idioma = idioma;
-    provider = Provider.of<PersonaControlador>(context);
+    provider = Provider.of<ClienteControlador>(context);
     entidadCaptura = provider.entidad;
 
     //  asignacion nuevo  keyFormulario para realizar  nueva  captura parcial,
@@ -192,8 +192,8 @@ class _Cliente_captura_state extends State<Cliente_captura> {
         Control(idControl: "txtfechaNacimiento", valor: entidadCaptura.fechaNacimiento , controlEdicion: _controllerFecha));
     controles.add(
         Control(idControl: "txtsaldo", valor: entidadCaptura.saldo.toString()));
-    // controles.add(
-    //     Control(idControl: "txtimporte", valor: entidadCaptura.importe));
+    controles.add(
+       Control(idControl: "txtimporte", valor: entidadCaptura.importe.toString()));
       controles.add(
         Control(idControl: "txttelefono", valor: entidadCaptura.telefono));  
     controles.add(
@@ -273,6 +273,9 @@ class _Cliente_captura_state extends State<Cliente_captura> {
         break;     
       case "txtsaldo":
         entidadCaptura.saldo = int.parse(valor);
+        break;  
+       case "txtimporte":
+        entidadCaptura.importe = int.parse(valor);
         break;  
       case "txttelefono":
         entidadCaptura.telefono = valor;
