@@ -75,8 +75,8 @@ class DBAplicacion extends ModelodBase {
       version: 1,
       persitenciaPorDefecto: false,
       contadorRegistros: true,
-      urlApi: 'http://arqfranciscoga-002-site3.btempurl.com/api',
-      //urlApi: 'http://kungio.mx/api',
+      // urlApi: 'http://arqfranciscoga-002-site3.btempurl.com/api',
+      urlApi: 'http://kungio.com/api',
       sincronizarServidor: true,
     );
     ConfiguracionAccesoBD configuracionPersitenciaApiIdentity =
@@ -87,7 +87,9 @@ class DBAplicacion extends ModelodBase {
       version: 1,
       persitenciaPorDefecto: false,
       contadorRegistros: false,
-      urlApi: 'http://arqfranciscoga-002-site3.btempurl.com/api',
+     // urlApi: 'http://arqfranciscoga-002-site3.btempurl.com/api',
+      urlApi: 'http://kungio.com/api',
+      
       //urlApi: 'http://kungio.mx/api',
       sincronizarServidor: true,
     );
@@ -98,8 +100,10 @@ class DBAplicacion extends ModelodBase {
       version: 1,
       persitenciaPorDefecto: false,
       contadorRegistros: false,
-      urlApi: 'http://arqfranciscoga-002-site3.btempurl.com/api',
-      //urlApi: 'http://kungio.mx/api',
+      // urlApi: 'http://arqfranciscoga-002-site3.btempurl.com/api',
+      urlApi: 'http://kungio.com/api',
+
+
       sincronizarServidor: true,
     );
 

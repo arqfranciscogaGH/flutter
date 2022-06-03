@@ -384,12 +384,11 @@ class ClienteUI {
     // FTAvanzarActividades
     dynamic entidadAvance = providerAF.entidad;
     entidadAvance.id = 0;
-
     entidadAvance.clave =claveServicio ;
     entidadAvance.idAccion = idAccion;
     entidadAvance.llave = "prueba";
     entidadAvance.identificador = entidadCaptura.referencia;
-
+    entidadAvance.nombre=entidadCaptura.nombre;
     //      parametros
     entidadAvance.parametros = "";
     entidadAvance.parametros += entidadCaptura.nombre == null ? "" : "@Nombre:" + entidadCaptura.nombre;

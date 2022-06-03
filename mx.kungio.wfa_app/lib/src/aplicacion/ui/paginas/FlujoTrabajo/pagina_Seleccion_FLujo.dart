@@ -165,6 +165,8 @@ class _pagina_Seleccion_FLujo extends State<pagina_Seleccion_FLujo> {
               children: <Widget>[
               vista_tarjeta(  id:'LINEAIV' , titulo:'LINEAIV REMODELAVIT', color: Colors.greenAccent,rutaIcono:'assets/img/remodelavit.jpg' , accion:opcionSeleccionada , rutaPagina:''), 
               vista_tarjeta( id:'MEJORAVIT' , titulo:'MEJORAVIT', color:Colors.blueAccent  ,rutaIcono:'assets/img/mejoravit.jpg'  , accion:opcionSeleccionada , rutaPagina:''), 
+              vista_tarjeta( id:'CP' , titulo:'Crédito Pensionados ', color:Colors.blueAccent  ,rutaIcono:'assets/img/CP.jpg'  , accion:opcionSeleccionada , rutaPagina:''), 
+              vista_tarjeta( id:'RCA' , titulo:'Recupetación Capital Afore', color:Colors.blueAccent  ,rutaIcono:'assets/img/RCA.jpg'  , accion:opcionSeleccionada , rutaPagina:''),   
               //vista_tarjeta(titulo:'Socio', color:Colors.redAccent   ,rutaIcono:'assets/img/socio2.png'  , accion:opcionSeleccionada , rutaPagina:''),              
             ])
        ) );

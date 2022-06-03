@@ -254,35 +254,35 @@ class MisPendientesUI {
          // FTAvanzarActividades
          dynamic entidadAvance =providerAF.entidad;
          entidadAvance.id=0;
-        //  entidadAvance.clave=entidadCaptura.clave;
          entidadAvance.clave=entidadCaptura.clave;
          entidadAvance.idAccion=idAccion;
-        //  entidadAvance.llave=entidadCaptura.llave;
          entidadAvance.llave="prueba";
-
          entidadAvance.identificador=entidadCaptura.identificador;
          entidadAvance.nombre=entidadCaptura.nombre;
+//        Info de  ultimo  tarea y  estatus  selccionado
          entidadAvance.idTarea=entidadCaptura.idTarea;
          entidadAvance.claveEstatus=entidadCaptura.estatusOperacion;
 
 
  //      parametros
     entidadAvance.parametros = "";
-    // entidadAvance.parametros += entidadCaptura.nombre == null ? "" : "@Nombre:" + entidadCaptura.nombre;
-    // entidadAvance.parametros += entidadCaptura.importe == null ? "" : ", @Importe:" + entidadCaptura.importe.toString();
-    //entidadAvance.parametros +=   entidadCaptura.rfc == null || entidadCaptura.rfc == "" ? "" : ", @Referencia:" + entidadCaptura.rfc;
+    entidadAvance.parametros += entidadCaptura.nombre == null ? "" : "@Nombre:" + entidadCaptura.nombre;
+    entidadAvance.parametros += entidadCaptura.importe == null ? "" : ", @Importe:" + entidadCaptura.importe.toString();
+    // entidadAvance.parametros +=   entidadCaptura.rfc == null || entidadCaptura.rfc == "" ? "" : ", @Referencia:" + entidadCaptura.rfc;
     // se guarda id cliente
     // entidadAvance.parametros += entidadCaptura.id == null || entidadCaptura.id == 0 ? "": ", @Numero:" + entidadCaptura.id.toString();
     // entidadAvance.parametros += entidadCaptura.id == null || entidadCaptura.id == 0 ? "": ", @IdCliente:" + entidadCaptura.id.toString();
     // entidadAvance.parametros += Sesion.idUsuario == null || Sesion.idUsuario == 0 ? "": ", @IdSocio:" + Sesion.idUsuario.toString();
     entidadAvance.parametros += Sesion.idUsuario == null || Sesion.idUsuario == 0 ? "": ", @IdUsuario:" + Sesion.idUsuario.toString();
-    // entidadAvance.parametros += Sesion.idSuscriptor== null ||Sesion.idSuscriptor == 0 ? "": ", @IdSuscriptor:" + Sesion.idSuscriptor.toString();
-    // entidadAvance.parametros += Sesion.perfiles== null ||Sesion.perfiles == "" ? "": ", @IdPerfil:" + Sesion.perfiles;
-    // entidadAvance.parametros += Sesion.grupos == null || Sesion.grupos== ""? "": "@IdGrupo:" + Sesion.grupos;
+    entidadAvance.parametros += Sesion.idSuscriptor== null ||Sesion.idSuscriptor == 0 ? "": ", @IdSuscriptor:" + Sesion.idSuscriptor.toString();
+    entidadAvance.parametros += Sesion.perfiles== null ||Sesion.perfiles == "" ? "": ", @IdPerfil:" + Sesion.perfiles;
+    entidadAvance.parametros += Sesion.grupos == null || Sesion.grupos== ""? "": "@IdGrupo:" + Sesion.grupos;
      entidadAvance.parametros+=entidadCaptura.observacion==null? "":"@Observacion:"+entidadCaptura.observacion;
     //  variables
-    // entidadAvance.variables = Sesion.idSuscriptor == null && Sesion.idUsuario == 0 ? ""  : "IdSocio:" + Sesion.idUsuario.toString();
-    // entidadAvance.variables += Sesion.grupos == null && Sesion.grupos == "" ? "" : "IdGrupo:" + Sesion.grupos;
+    entidadAvance.variables = Sesion.idSuscriptor == null && Sesion.idUsuario == 0 ? ""  : "IdSocio:" + Sesion.idUsuario.toString();
+    entidadAvance.variables += Sesion.grupos == null && Sesion.grupos == "" ? "" : ",IdGrupo:" + Sesion.grupos;
+
+
 
        
  

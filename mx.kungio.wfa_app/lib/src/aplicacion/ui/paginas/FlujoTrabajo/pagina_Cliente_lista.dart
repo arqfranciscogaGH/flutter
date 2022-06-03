@@ -209,7 +209,7 @@ class _pagina_Cliente_lista extends State<pagina_Cliente_lista> {
   //  filtar  informacion
   //
   Widget filtrarElementos(String query) {
-    List<Persona> lista = provider.obtenerListaPorSuscripcion(ui.obtenerIdSuscriptor());
+    List<Cliente> lista = provider.obtenerListaPorSuscripcion(ui.obtenerIdSuscriptor());
     if ( lista !=null && query != "")
       lista = lista
           .where((s) => s.nombre.toLowerCase().contains(query.toLowerCase()))
