@@ -34,6 +34,9 @@ class MyApp extends StatelessWidget {
        ],
    
      child: */
+     String paginaInicio="pagina_inicio";
+     if  (Sesion.idUsuario==0)
+        paginaInicio="pagina_acceso";
      return  new  DynamicTheme(
       //defaultBrightness: Brightness.light,
       data: (brightness) => Tema.creaTema("default", context),
@@ -58,7 +61,7 @@ class MyApp extends StatelessWidget {
                            primarySwatch: Colores.obtener(Configuracion.tema) ,
                         ), */
           routes: ObtenerRutas(),
-          initialRoute: "pagina_inicio",
+          initialRoute: paginaInicio,
           // onGenerateRoute: (settings) {
           //     // generarRuta(context,settings);
           // },

@@ -114,7 +114,7 @@ final listaIColoresPersonalizado = <String, Color>{
       'grismasfuerte'        : Colors.grey[800],  
 
 
-      'F'             : Colors.blueGrey[900],
+      'F'             : Colors.blueGrey[700],
       'D'             : Colors.blueGrey[200],
       'P'             : Colors.grey[800],
       'SA+'           : Colors.deepPurple[900],

@@ -48,6 +48,8 @@ import '../endidad/EstadisticasVistaDetalle.dart';
 
 
 import '../endidad/CuentaUsuario.dart';
+import '../endidad/AdministracionUsuarios.dart';
+
 import '../endidad/Cliente.dart';
 
 import '../endidad/ConsultarSocios.dart';
@@ -94,6 +96,7 @@ export '../endidad/EstadisticasVista.dart';
 export '../endidad/EstadisticasVistaDetalle.dart';
 
 export '../endidad/CuentaUsuario.dart';
+export '../endidad/AdministracionUsuarios.dart';
 export '../endidad/Cliente.dart';
 export '../endidad/ConsultarSocios.dart';
 

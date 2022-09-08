@@ -181,14 +181,15 @@ class _ConsultaTramite_captura_state extends State<ConsultaTramite_captura> {
         .add(Control(idControl: "lblcurp", valor: entidadCaptura.curp));
     controles
         .add(Control(idControl: "lblimporte", valor: entidadCaptura.importe.toString()));
-    controles
-        .add(Control(idControl: "lblgrupo", valor: entidadCaptura.grupo));
-    controles
-        .add(Control(idControl: "lblsocio", valor: entidadCaptura.socio));
+
       controles
         .add(Control(idControl: "lbltelefonoMovil", valor: entidadCaptura.telefonoMovil));
     controles
-        .add(Control(idControl: "lblcorreo", valor: entidadCaptura.correo));      
+        .add(Control(idControl: "lblcorreo", valor: entidadCaptura.correo));   
+    controles
+        .add(Control(idControl: "lblsocio", valor: entidadCaptura.socio));   
+    controles
+        .add(Control(idControl: "lblgrupo", valor: entidadCaptura.grupo));
 
     // controles.add(Control(
     //     idControl: "apaestatus",
