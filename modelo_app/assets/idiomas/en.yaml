@@ -1,0 +1,94 @@
+menu_principal:
+      opcion1 : { id : 1 ,ruta : menu_principal_pagina , pagina : menu_principal_pagina , animacionPagina: rotationRoute , titulo : Main Menu, subtitulo : ,  icono: menu, iconoLateral : arrow_right , activo : 1 } 
+      opcion2 : {id : 2 , ruta : prueba_pagina , pagina : prueba_pagina , animacionPagina: rotationRoute , titulo :  Test , subtitulo : ,   icono: menu,  iconoLateral : arrow_right , activo: 1 }         
+      opcion3 : { id : 3 ,ruta : tema_pagina , pagina : tema_pagina , animacionPagina: rotationRoute ,  titulo : Theme , subtitulo : ,  icono: tema , iconoLateral : arrow_right , activo : 1 } 
+      opcion4 : { id : 4 ,ruta : preferencias_pagina , pagina : preferencias_pagina , animacionPagina: rotationRoute ,   titulo : References , subtitulo : ,  icono: settings , iconoLateral : arrow_right , activo : 1 } 
+      opcion5 : { id : 5 , ruta : botones_pagina , pagina : botones_pagina , animacionPagina: rotationRoute ,      titulo : buttons , subtitulo : ,  icono: boton ,   iconoLateral : arrow_right , activo : 1 } 
+      opcion6 : { id : 6 , ruta : Modelo_pagina_lista , pagina : Modelo_pagina_lista , animacionPagina: rotationRoute ,      titulo : query list , subtitulo : ,  icono: list_alt ,   iconoLateral : arrow_right , activo : 1 } 
+      opcion7 : { id : 7 , ruta : Modelo_pagina_captura , pagina : Modelo_pagina_captura , animacionPagina: rotationRoute ,      titulo : Capture data, subtitulo : ,  icono: captura ,   iconoLateral : arrow_right , activo : 1 } 
+
+pagina_Comun:
+      borde :  Lineal        
+      colorBorde : rojo   
+      idiomaES : Spanish  
+      idiomaEN : English   
+      suscripcion : { titulo : Subscription } 
+      cuenta : { titulo : Account }   
+      nombre : { titulo : Name }
+      grupo : { titulo : Group }
+      perfil : { titulo : Profile } 
+      accionAgregar : { titulo : Agregar , icono: add_circle  ,  mensaje :  Se ha agregado  un  Elemento  }
+      accionSeleccionar : { titulo : Seleccionar , icono: edit  ,mensaje : Se ha seleccionado el Elemento     }
+      accionFiltrar : { titulo : Filtrar , icono: list  ,mensaje : Consultando infromación     }
+      accionConfirmarEliminacion : { titulo : Confirmar eliminación , icono: info , mensaje : Desea eliminar elemento seleccionado ? , opciones : Si No  }
+      accionEliminar : { titulo : Eliminar , icono:  info  , mensaje :  Se ha eliminado Elemento  , opciones : Aceptar   }
+      accionInsertar : { titulo : Insertar , icono:  info , mensaje :  Se ha insertado Elemento  , opciones : Aceptar   }
+      accionModificar : { titulo : Modificar , icono: info  , mensaje : Se ha actulizado  Elemento  , opciones : Aceptar   }
+      accionGuardar : { titulo : Guardar , icono: save  , mensaje : Se ha guardado la información   } 
+      operacionExitosa : { titulo : Operacion , icono: info  , mensaje : La operación se realizó correctamente , opciones : Aceptar }
+      cargando : { titulo : Cargando , icono:  , mensaje : obteniendo información }
+      noInformacion : { titulo : Consultar ,  icono:  , mensaje : No hay información   }
+
+pagina_inicio:
+      titulo: Home
+      borde :  Lineal        
+      colorBorde : rojo    
+      textoContador : número de letras    
+      botGuardar : Iniciar   
+
+pagina_acceso:
+      titulo: Access
+      borde :  Lineal        
+      colorBorde : rojo    
+      textoContador : número de letras    
+      botGuardar : Ingresar   
+      txtCuenta : { tipo : CajaTextoForma , tipoEntrada : text,  textoEtiqueta: Cuenta , textoAyuda: Captura cuenta o correo , marcaAguaTexto:  Captura cuenta o correo  ,icono: emailArroba, iconoInterno:   , textoCapitalizacion : none , protegerTextoEscrito : false  } 
+      txtContrasena : { tipo : CajaTextoForma , tipoEntrada : text,  textoEtiqueta: Contraseña , textoAyuda: Captura Contraseña , marcaAguaTexto:  Captura Contraseña  ,icono: contrasena, iconoInterno:   , textoCapitalizacion : words , protegerTextoEscrito : true  } 
+
+menu_principal_pagina:
+      titulo: Main Menu
+      botGuardar : guardar   
+      borde :  Rectangular           
+      lisColoresTema : { tipo : ListaDespegableFija ,textoEtiqueta: Theme Color  , textoAyuda: Select theme please , marcaAguaTexto: Select theme ,icono: calendar_today, iconoInterno: calendar_today  }     
+      txtTelefono : { tipo : CajaTextoForma , textoEtiqueta: Phone , textoAyuda: Capture Person Phone  , marcaAguaTexto:  Person Phone  ,icono: telefono, iconoInterno: telefono  } 
+      etiqueta : label    
+      txtCuenta : account
+      lista :
+            - Masculino
+            - Femenino
+      txtCorreo : email
+      opciones : {name: Martin D'vloper, job: Developer, skill: Elite}      
+
+tema_pagina:
+      titulo: Theme
+      borde :  Lineal        
+      colorBorde : rojo    
+      textoContador : N       
+      botGuardar : guardar   
+      lisColoresTema : { tipo : ListaDespegable , tipoEntrada : text, textoEtiqueta: Color Theme , textoAyuda:  , marcaAguaTexto: select color ,icono: tema, iconoInterno:  , textoCapitalizacion : none , protegerTextoEscrito : false  }     
+      colorSecundario : { tipo : ListaDespegable , tipoEntrada : text, textoEtiqueta: Color secondary , textoAyuda:  , marcaAguaTexto: select color secondary ,icono: tema, iconoInterno:  , textoCapitalizacion : none , protegerTextoEscrito : false  }    
+      apaBrillo : { tipo : Apagador , tipoEntrada : text,  textoEtiqueta: brightness  , textoAyuda:  , marcaAguaTexto:  brightness ,icono: brillo, iconoInterno:  , textoCapitalizacion : none , protegerTextoEscrito : false  }   
+
+preferencias_pagina:
+      titulo: Preferences
+      borde :  Lineal        
+      colorBorde : rojo    
+      textoContador :     
+      botGuardar : guardar   
+      listaIdiomas : { tipo : ListaDespegable , tipoEntrada : text, textoEtiqueta: idiom , textoAyuda:  , marcaAguaTexto: Select idiom ,icono: tema, iconoInterno:  , textoCapitalizacion : none , protegerTextoEscrito : false  }     
+            
+prueba_pagina:
+      titulo: Test
+      borde :  Lineal        
+      colorBorde : rojo    
+      textoContador :     
+      botGuardar : guardar   
+      listaIdiomas : { tipo : ListaDespegable , tipoEntrada : text, textoEtiqueta: Color tema , textoAyuda:  , marcaAguaTexto: Seleccione color ,icono: tema, iconoInterno:  , textoCapitalizacion : none , protegerTextoEscrito : false  }     
+      colorSecundario : { tipo : ListaDespegable , tipoEntrada : text, textoEtiqueta: Color secundario , textoAyuda:  , marcaAguaTexto: Seleccione color ,icono: tema, iconoInterno:  , textoCapitalizacion : none , protegerTextoEscrito : false  }    
+      apaBrillo : { tipo : Apagador , tipoEntrada : text,  textoEtiqueta: Brillo  , textoAyuda:  , marcaAguaTexto:  Brillo ,icono: brillo, iconoInterno:  , textoCapitalizacion : none , protegerTextoEscrito : false  }    
+
+Modelo_pagina_lista:
+      titulo: Query  List
+      botGuardar : guardar   
+      borde :  Rectangular           
+    
