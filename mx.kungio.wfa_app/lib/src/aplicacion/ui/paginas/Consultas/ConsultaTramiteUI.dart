@@ -51,8 +51,14 @@ class ConsultaTramiteUI {
     elemento.argumento=entidad;
     elemento.id =entidad.idInstancia  ;
     elemento.titulo = entidad.nombre ;
-    elemento.subitulo =entidad.actividad ;
-    elemento.nota =entidad.grupo +";"+entidad.socio ;
+    elemento.subitulo =entidad.clave;
+
+       
+   if(entidad.estatus==null)   
+     elemento.subitulo +="sin estatus";
+   else
+     elemento.subitulo +=";"+entidad.estatus;
+    elemento.nota =entidad.grupo +";"+ entidad.socio==null?"": entidad.socio.toString();
 
     elemento.icono = ele.icono;
     elemento.ruta = ele.ruta;

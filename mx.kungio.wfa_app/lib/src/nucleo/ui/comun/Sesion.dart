@@ -8,12 +8,15 @@ import 'preferencias.dart';
 //  librerias  proyecto
 
 class Sesion {
-  static int _idUsuario;
-  static String _nombre;
-  static String _cuenta;
+  static int _idUsuario= 0;
+  static String _nombre="";
+  static String _cuenta="";
   static int _idSuscriptor = 0;
-  static String _perfiles;
-  static String _grupos;
+  static String _perfil="";
+  static String _perfiles="";
+  static String _grupo="";
+  static String _grupos="";
+  static String _nivelRed="";
   static String _version = '6.0';
 
   static String get version {
@@ -56,6 +59,8 @@ class Sesion {
     return _idUsuario == null || _idUsuario == 0 ? 0 : _idUsuario;
   }
 
+ 
+
   static set idUsuario(int valor) {
     _idUsuario = valor;
     Preferencias.guardar("idUsuario", valor);
@@ -78,11 +83,31 @@ class Sesion {
     return _perfiles == null ? '' : _perfiles;
   }
 
+  static String get perfil {
+    if (_perfil == null)
+      _perfil = Preferencias.obtener("perfil", _perfil);
+    return _perfil == null ? '' : _perfil;
+  }
+
+  static set perfil(String valor) {
+    _perfil = valor;
+    Preferencias.guardar("perfil", valor);
+  }
+
   static set perfiles(String valor) {
     _perfiles = valor;
     Preferencias.guardar("perfiles", valor);
   }
 
+  static String get grupo {
+    if (_grupo == null) _grupo = Preferencias.obtener("grupo", _grupo);
+    return _grupo == null ? 0 : _grupo;
+  }
+
+  static set grupo(String valor) {
+    _grupo = valor;
+    Preferencias.guardar("grupo", valor);
+  }
   static String get grupos {
     if (_grupos == null) _grupos = Preferencias.obtener("grupos", _grupos);
     return _grupos == null ? 0 : _grupos;
@@ -92,4 +117,15 @@ class Sesion {
     _grupos = valor;
     Preferencias.guardar("grupos", valor);
   }
+
+  static String get nivelRed {
+    if (_nivelRed == null) _nivelRed = Preferencias.obtener("nivelRed", _nivelRed);
+    return _nivelRed == null ? 0 : _nivelRed;
+  }
+
+  static set nivelRed(String valor) {
+    _nivelRed = valor;
+    Preferencias.guardar("nivelRed", valor);
+  }
+  
 }

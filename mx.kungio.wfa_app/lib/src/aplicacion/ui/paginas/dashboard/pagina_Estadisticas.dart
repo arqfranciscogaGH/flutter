@@ -369,6 +369,9 @@ class _pagina_Estadisticas extends State<pagina_Estadisticas> {
   //
   // mostrar Contenido
   //
+
+
+
   Widget mostrarPagina(int indexPaginaSeleccionado) {
       return paginas[indexPaginaSeleccionado];
   }

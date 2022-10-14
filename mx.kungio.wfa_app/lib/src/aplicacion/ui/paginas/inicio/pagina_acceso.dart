@@ -13,6 +13,7 @@ import '../../../../nucleo/ui/ui.dart';
 import '../../../contexto/contexto.dart';
 
 import '../../../negocio/controlador/UsuarioControlador.dart';
+import '../../../negocio/controlador/AdministracionUsuariosControlador.dart';
 
 class pagina_acceso extends StatefulWidget {
   pagina_acceso(
@@ -39,8 +40,8 @@ class _pagina_acceso_state extends State<pagina_acceso> {
   //  declaración de variables
 
   IdiomaAplicacion idioma;
-  CuentaUsuario entidadCaptura;
-  List<CuentaUsuario> listaEntidad;
+  AdministracionUsuarios entidadCaptura;
+  List<AdministracionUsuarios> listaEntidad;
 
   GlobalKey<FormState> keyFormulario;
 
@@ -49,7 +50,8 @@ class _pagina_acceso_state extends State<pagina_acceso> {
   ElementoLista accionGuardar;
 
   //  provider
-CuentaUsuarioControlador provider;
+CuentaUsuarioControlador providerA;
+AdministracionUsuariosControlador provider;
 
   //  Interfaz  comun
 
@@ -65,23 +67,29 @@ CuentaUsuarioControlador provider;
   void initState() {
     // contextoAplicacion=ContextoAplicacion.obtener(widget.contextoAplicacion);
     super.initState();
+      Sesion.idUsuario=0;
+      Sesion.nombre="";
+      Sesion.cuenta = "";
+      Sesion.idSuscriptor = 0;
+      Sesion.perfiles = "";
+      Sesion.grupos = "";  
     widget.pagina = "pagina_acceso";
-    provider = CuentaUsuarioControlador();
+    providerA = CuentaUsuarioControlador();
+    provider = AdministracionUsuariosControlador();
+    provider.limpiar();
+    entidadCaptura=provider.entidad;
     // ui=UsuarioUI(provider: provider);
     //accionGuardar=ElementoLista ( id:4, icono: "save" , ruta:widget.paginaSiguiente, accion: ui.guardarEntidad ,callBackAccion: ui.respuestaInsertar,  callBackAccion2: ui.respuestaModificar  , callBackAccion3:respuestaGuardar , argumento: widget.pagina  );
     keyFormulario = GlobalKey<FormState>();
     ContextoUI.guadarKey(widget.pagina, keyFormulario);
     //  iniciar y consultar lista para obtener elemento y obtener el elemento que insertará
 
-    // provider.limpiar();
-    // entidadCaptura = provider.entidad;
-    // provider.consultarEntidad(Usuario().iniciar(), actualizarEstadoLista);
-
-    provider.limpiar();
-    entidadCaptura = provider.entidad;
-    provider.asignarParametros(null, "prueba");
-    provider.consultarEntidad(CuentaUsuario().iniciar(), actualizarEstadoLista);
-
+ 
+ 
+ 
+ 
+   
+  
   }
 
   //
@@ -101,7 +109,7 @@ CuentaUsuarioControlador provider;
             body: Stack(
           children: <Widget>[
             _crearFondo(context),
-            Consumer<CuentaUsuarioControlador>(
+            Consumer<AdministracionUsuariosControlador>(
                 builder: (context, _provider, widgetPadre) {
               return _loginForm(context);
             }),
@@ -149,15 +157,11 @@ CuentaUsuarioControlador provider;
           child: Column(
             children: <Widget>[
               //Icon( Icons.person_pin_circle, color: Colors.white, size: 100.0 ),
-              SizedBox(height: 1.0, width: double.infinity),
-              Text('O ficina',
-                  style: TextStyle(color: Colors.white, fontSize: 25.0)),
-              Text(' E lectrónica',
-                  style: TextStyle(color: Colors.white, fontSize: 25.0)),
-              Text('   S ervicios Financieros ',
-                  style: TextStyle(color: Colors.white, fontSize: 25.0)),
-              Text('     T rámites ',
-                  style: TextStyle(color: Colors.white, fontSize: 25.0))
+              SizedBox(height: .5, width: double.infinity),
+              Text('Oficina Electrónica',
+                  style: TextStyle(color: Colors.white, fontSize: 16.0)),
+                Text('Servicios Financieros ',
+                  style: TextStyle(color: Colors.white, fontSize: 16.0)),
             ],
           ),
         )
@@ -214,7 +218,7 @@ CuentaUsuarioControlador provider;
     );
   }
 
-  Widget _crearBoton(CuentaUsuario cuenta, BuildContext context) {
+  Widget _crearBoton(AdministracionUsuarios cuenta, BuildContext context) {
     return RaisedButton(
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
@@ -225,7 +229,7 @@ CuentaUsuarioControlador provider;
         color: Theme.of(context).primaryColor,
         textColor: Colors.white,
         onPressed: cuenta.contrasena != null
-            ? () => _validarCuenta(entidadCaptura, context)
+            ? () => _obtenerCuenta(entidadCaptura, context)
             : null);
   }
 
@@ -306,7 +310,8 @@ CuentaUsuarioControlador provider;
         break;
     }
     print(control.idControl + "  , valor  :$valor");
-
+    // if ( entidadCaptura.cuenta!="" && entidadCaptura.contrasena!="" )
+    //    obtenerInformacion ( entidadCaptura);
     return entidadCaptura;
   }
 
@@ -339,7 +344,7 @@ CuentaUsuarioControlador provider;
   void actualizarEstadoLista(List<dynamic> listaRespuesta) {
     // setState(() {
     listaEntidad = listaRespuesta;
-    // });
+    _validarCuenta ( entidadCaptura,context);
   }
 
   void actualizarEstadoEntidad(dynamic entidad) {
@@ -349,19 +354,64 @@ CuentaUsuarioControlador provider;
     });
   }
 
-  _validarCuenta(CuentaUsuario usuario, BuildContext context) {
+ 
+  _obtenerCuenta(dynamic usuario, BuildContext context) {
+     provider.entidad=usuario;
+     if (!keyFormulario.currentState.validate()) return;
+          keyFormulario.currentState.save();
+     obtenerInformacion(usuario);
+     if (provider.lista!=null && provider.lista.length>0)  
+          _validarCuenta ( provider.entidad,context);
+      //      provider.consultarEntidad(AdministracionUsuarios().iniciar(), actualizarEstadoLista);
+      //  else 
+      //      _validarCuenta ( provider.entidad,context);
+     
+  }
+  obtenerInformacion (dynamic entidadCaptura)
+   {
+    //  definir  url y sus  parametros 
+    String url ="AdministracionUsuarios/";
+    String argumentos =entidadCaptura.cuenta+"/C";
+    String consulta ="";
+    bool  buscar=false;
+ 
+    if  (  provider.lista==null  && entidadCaptura.cuenta != "" )
+        buscar=true;
+    else if (  ( provider.lista!=null && provider.lista.length==0 )  && entidadCaptura.cuenta != "")
+    {
+        AdministracionUsuarios usuarioEncontrado;
+        usuarioEncontrado = listaEntidad.firstWhere((s) => s.cuenta.trim().toLowerCase()  == entidadCaptura.cuenta.trim().toLowerCase() , orElse: () => null);
+        if (usuarioEncontrado == null)
+            buscar=true;
+    }
+    if ( buscar==true)  
+    {
+          //  obtener argumentos  de pagina  comun
+          // argumentos= ContextoUI.obtenerKey("seguimiento").entidad.identificador;
+          argumentos=argumentos==null  || argumentos=="" ?"''":argumentos;
+          print (argumentos);
+          url+= argumentos ;
+          url+= consulta ;
+          print (url);
+
+          provider.limpiar();
+          provider.asignarParametros(url, "prueba");
+          provider.consultarEntidad(AdministracionUsuarios().iniciar(), actualizarEstadoLista);
+    }
+   }
+  _validarCuenta(dynamic usuario, BuildContext context) {
     bool resultado = false;
-    if (!keyFormulario.currentState.validate()) return;
-    keyFormulario.currentState.save();
-    // listaEntidad = provider.lista;
+    // if (!keyFormulario.currentState.validate()) return;
+    // keyFormulario.currentState.save();
+    listaEntidad = provider.lista;
     print(listaEntidad.length);
-    CuentaUsuario usuarioEncontrado;
-    if (listaEntidad.length > 0 && usuario.cuenta != "")
+    AdministracionUsuarios usuarioEncontrado;
+    if (listaEntidad!=null && listaEntidad.length > 0 && usuario.cuenta != "")
       usuarioEncontrado = listaEntidad
-          .firstWhere((s) => s.cuenta.toUpperCase() == usuario.cuenta.toUpperCase(), orElse: () => null);
+          .firstWhere((s) => s.cuenta.trim().toLowerCase() == usuario.cuenta.trim().toLowerCase(), orElse: () => null);
 
     if (usuarioEncontrado != null &&
-        usuario.contrasena.toUpperCase() == usuarioEncontrado.contrasena.toUpperCase()  &&  usuarioEncontrado.activo==1) {
+        usuario.contrasena.trim().toLowerCase()  == usuarioEncontrado.contrasena.trim().toLowerCase()   ) {
        resultado = true;
        usuario= usuarioEncontrado;
 
@@ -387,7 +437,7 @@ CuentaUsuarioControlador provider;
       print("La  Usuario y contraseña son de administrador  ");
     } else {
       print(
-          "El  Usuario o contraseña son incorrectos,  capture nuevamente por favor.");
+          "El  Usuario o contraseña son incorrectos, o esta inactivo,  capture nuevamente por favor.");
       Dialogo.mostrarAlerta(
           context,
           "error",
@@ -404,20 +454,25 @@ CuentaUsuarioControlador provider;
       Sesion.nombre=usuario.nombre;
       Sesion.cuenta = usuario.cuenta;
       Sesion.idSuscriptor = usuario.idSuscriptor;
+      Sesion.perfil = usuario.perfil;
       Sesion.perfiles = usuario.perfiles;
-      Sesion.grupos = usuario.grupos;   
+      Sesion.grupo = usuario.grupo;   
+      Sesion.grupos = usuario.grupos;  
+      Sesion.nivelRed = usuario.nivelRed;    
       Accion.hacer(context, OpcionesMenus.obtener("pagina_menu_principal"));
     }
   }
+
+  bool validarEmail(String email) {
+    Pattern pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regExp = new RegExp(pattern);
+    bool resultado = regExp.hasMatch(email);
+    return resultado;
+ }
+   //  termina   widget
 }
 
-bool validarEmail(String email) {
-  Pattern pattern =
-      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-  RegExp regExp = new RegExp(pattern);
-  bool resultado = regExp.hasMatch(email);
-  return resultado;
-}
 
 /* 
 Widget MostrarDetalle ()

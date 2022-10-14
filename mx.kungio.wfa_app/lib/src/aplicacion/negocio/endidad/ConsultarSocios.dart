@@ -22,6 +22,7 @@ class ConsultarSocios extends EntidadBase {
   String nivelRed;
   int orden;
   double comision;
+  int activo;
   ConsultarSocios({
     id,
     nombre,
@@ -35,6 +36,7 @@ class ConsultarSocios extends EntidadBase {
     this.nivelRed,
     this.orden,
     this.comision,
+    this.activo
    }) : super(
             id: id,
             clave: clave,
@@ -54,6 +56,8 @@ class ConsultarSocios extends EntidadBase {
         nombre: map["nivelRed"],
         orden: map["orden"],
         comision: map["comision"],
+        activo: map["Activo"] == true ? 1 : 0,   
+        
       );
 
   ConsultarSocios fromMap(Map<String, dynamic> map) => new ConsultarSocios(
@@ -67,6 +71,7 @@ class ConsultarSocios extends EntidadBase {
         nombre: map["nivelRed"],
         orden: map["orden"],
         comision: map["comision"],
+        activo: map["Activo"] == true ? 1 : 0,   
       );
   Map<String, dynamic> toMap() => {
          "id": id,
@@ -79,6 +84,7 @@ class ConsultarSocios extends EntidadBase {
          "nombre": nivelRed,
          "orden": orden,
          "comision": comision,
+         "activo": activo,
       };
   String sqlTabla() {
     String sql = "CREATE TABLE if not exists  " +
@@ -112,6 +118,7 @@ class ConsultarSocios extends EntidadBase {
        entidad.nivelRed = "";
        entidad.orden = 0;
        entidad.comision = 0.0;
+       entidad.activo = 0;
       return entidad;
   }
 

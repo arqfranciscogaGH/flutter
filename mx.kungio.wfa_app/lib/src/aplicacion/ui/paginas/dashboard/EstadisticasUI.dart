@@ -49,9 +49,24 @@ class EstadisticasVistaUI {
     ElementoLista elemento = ElementoLista();
 
     elemento.argumento=entidad;
-    elemento.id =entidad.id  ;
-    elemento.titulo = entidad.id.toString() + " "+ entidad.clave + " "+ entidad.concepto ;
-    elemento.subitulo =  " # " +entidad.cuenta.toString() + "  ;  "+String.fromCharCode(36) +" "+entidad.importe.toString()  ;
+
+   elemento.id =entidad.id  ;
+   elemento.titulo =  entidad.id==null   ? "0 " :entidad.id.toString()+ " " ;
+   if (entidad.concepto==null ||entidad.concepto=="")
+      elemento.titulo +=" sin concepto ";
+   else
+   {
+     if  (entidad.vista=="tarea")
+       elemento.titulo +=  ":"+  entidad.clave + ":"+  entidad.concepto ;
+     else 
+       elemento.titulo +=  ":"+  entidad.concepto ;
+   }
+    
+
+
+   elemento.subitulo = entidad.cuenta==null  ? " # sin cuenta " : "# "+ entidad.cuenta.toString()  ;  
+   elemento.subitulo +=  entidad.importe==null   ? String.fromCharCode(36) +" sin importe " :   String.fromCharCode(36) +" "+entidad.importe.toString()  ;
+
     elemento.nota ="";
 
     elemento.icono = ele.icono;

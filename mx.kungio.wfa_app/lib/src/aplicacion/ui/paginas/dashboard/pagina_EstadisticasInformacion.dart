@@ -160,12 +160,13 @@ class _pagina_EstadisticasInformacion extends State<pagina_EstadisticasInformaci
     // provider = Provider.of<FTConsultaControlador>(context,listen: false);
     // if (provider.lista==null)
     //     provider.consultarEntidad(FTConsulta().iniciar(), null);
-   
-
+    print(Sesion.idUsuario );
+      print(Sesion.cuenta);
     idioma = IdiomaAplicacion.obtener(context, idioma);
     ui.iniciar(context, scaffoldKey, idioma, widget);
     widget.titulo = idioma.obtenerElemento(widget.pagina, "titulo");
     widget.titulo="" +entidad.vista +":" + entidad.concepto;
+     widget.titulo= entidad.concepto;
     return ChangeNotifierProvider.value(
         value: provider,
         child: Scaffold(

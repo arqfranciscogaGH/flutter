@@ -102,7 +102,8 @@ class CuentaUsuario extends EntidadBase {
         idSuscriptor: map["IdSuscriptor"],
         tema: map["Tema"],
         idEstatusUsuario: map["IdEstatusUsuario"],
-        activo: map["Activo"],                
+    
+        activo: map["Activo"] == true ? 1 : 0,          
  
         fechaRegistro: map["FechaRegistro"],
         fechaVigencia: map["fechaVigencia"],
@@ -135,7 +136,7 @@ class CuentaUsuario extends EntidadBase {
         idSuscriptor: map["IdSuscriptor"],
         tema: map["Tema"],
         idEstatusUsuario: map["IdEstatusUsuario"],
-        activo: map["Activo"],                
+        activo: map["Activo"] == true ? 1 : 0,                  
  
         fechaRegistro: map["FechaRegistro"],
         fechaVigencia: map["fechaVigencia"],

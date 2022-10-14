@@ -117,6 +117,19 @@ class Menu {
     );
   }
 
+  static List<Widget> crearEncabezdoaMenuLateral()
+  {
+    List<Widget> encabezado = [];
+    encabezado.add(Text(" Id : " +Sesion.idSuscriptor.toString() +"  Cuenta: " +Sesion.cuenta,textAlign: TextAlign.left ));
+    encabezado.add(Text(" Nombre : " +Sesion.nombre ,textAlign: TextAlign.left ));
+    encabezado.add(Text(" Perfil : " +Sesion.perfil ,textAlign: TextAlign.left ));
+    encabezado.add(Text(" Grupo : " +Sesion.grupo ,textAlign: TextAlign.left ));
+    encabezado.add(Text(" Nivel Red : " +Sesion.nivelRed ,textAlign: TextAlign.left ));
+     
+    return  encabezado;
+  }
+
+
   static List<Widget> crearElementosListaMenu(
       BuildContext context, List<dynamic> elementos, String titulo) {
     final List<Widget> opciones = [];
@@ -125,31 +138,31 @@ class Menu {
       opciones
         ..add(DrawerHeader(
           child: Column( crossAxisAlignment: CrossAxisAlignment.start,
-           children: <Widget>[ 
-            Row (   crossAxisAlignment: CrossAxisAlignment.center,
-            
-              children: <Widget>[   
-                      Text(titulo),   
-                      Text(" " ),             
-                      IconButton(
-                      icon: Icon( Icons.login_outlined  ),  onPressed: ()
-                      {
-                              Sesion.nombre="";
-                              Sesion.cuenta  ="";
-                              Sesion.idSuscriptor =0;
-                              Sesion.perfiles  ="";
-                              Sesion.grupos  =""; 
-                              // Accion.regresar(context);
-                              Accion.hacer( context, OpcionesMenus.obtener("pagina_acceso"));
-                      },
-            ), 
-              ]
-            ),             
-            Text(" " ),
-            Text(" Id : " +Sesion.idSuscriptor.toString() +"  Cuenta: " +Sesion.cuenta),
-            Text(" Nombre: " +Sesion.nombre,textAlign: TextAlign.left )  ,
-            Text(" Perfil: " +Sesion.perfiles+ "  Grupo: " + Sesion.grupos),
-            Text(" versión: "  +Sesion.version),   
+                children:
+                <Widget>[ 
+                    Row (   crossAxisAlignment: CrossAxisAlignment.center,
+                    
+                      children: <Widget>[   
+                              Text(titulo),   
+                              Text(" " ),             
+                              IconButton(
+                                  icon: Icon( Icons.login_outlined  ),  onPressed: ()
+                                  {
+                                          Sesion.nombre="";
+                                          Sesion.cuenta  ="";
+                                          Sesion.idSuscriptor =0;
+                                          Sesion.perfiles  ="";
+                                          Sesion.grupos  =""; 
+                                          // Accion.regresar(context);
+                                          Accion.hacer( context, OpcionesMenus.obtener("pagina_acceso"));
+                                  },
+                              ), 
+                      ]
+                  ),             
+                  Column (   crossAxisAlignment: CrossAxisAlignment.start,
+                      children:crearEncabezdoaMenuLateral(),
+                  )
+  
  
           ]),
           decoration: BoxDecoration(
@@ -192,6 +205,7 @@ class Menu {
     }
     return opciones;
   }
+
 
   static Widget crearOpcionMenu(BuildContext context, ElementoLista elemento) {
     return ListTile(

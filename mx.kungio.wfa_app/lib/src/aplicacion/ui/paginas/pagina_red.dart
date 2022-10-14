@@ -221,7 +221,7 @@ class _pagina_red_State extends State<pagina_red> {
     List<dynamic>  obtenerSociosRedPorSocio( int idSocio,  List<dynamic> listaSocios,  List<dynamic> lista_red) {
 
         List<dynamic> listaHijos = listaSocios
-          .where((s) => s.idUsuarioSuperior == idSocio)
+          .where((s) => s.idUsuarioSuperior == idSocio && s.activo==1)
           .toList();
         for (ConsultarSocios socio in listaHijos) {
           print(socio.idUsuario);
@@ -231,15 +231,19 @@ class _pagina_red_State extends State<pagina_red> {
           print(socio.idNivelRed);
           print(socio.claveNivelRed);
           print(socio.nivelRed);
-          lista_red.add(socio);
-          obtenerSociosRedPorSocio(socio.id, listaSocios ,lista_red );
+          if (socio.activo==1)
+          {
+             lista_red.add(socio);
+             obtenerSociosRedPorSocio(socio.id, listaSocios ,lista_red );
+          }
+
         }
        return listaHijos;
    }
   List<dynamic> obtenerSociosNivelInferior( List<dynamic> listaEntrada, int idUsuarioSuperior) {
 
     List<dynamic> listaRespuesta = listaEntrada
-        .where((s) => s.idUsuarioSuperior == idUsuarioSuperior)
+        .where((s) => s.idUsuarioSuperior == idUsuarioSuperior && s.activo==1)
         .toList();
     // for (ConsultarSocios entidad in listaRespuesta) {
     //   print("id:${entidad.id}");

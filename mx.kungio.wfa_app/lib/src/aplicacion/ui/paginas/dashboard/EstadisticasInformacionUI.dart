@@ -54,7 +54,8 @@ class EstadisticasInformacionUI {
     elemento.id =entidad.id  ;
     elemento.titulo = entidad.nombre ;
     elemento.subitulo ="#"+entidad.identificador==null?" ": entidad.identificador + " "+String.fromCharCode(36)+" "+entidad.importe.toString() ;
-    elemento.nota =entidad.estatus==null?"":entidad.estatus  + " : "+entidad.claveActividad+ ":"+entidad.actividad ;
+    elemento.nota =entidad.claveActividad==null?"":entidad.claveActividad+ ":"+entidad.actividad ;
+    elemento.nota +=entidad.estatus==null?"":":"+entidad.estatus   ;
 
     elemento.icono = ele.icono;
     elemento.ruta = ele.ruta;

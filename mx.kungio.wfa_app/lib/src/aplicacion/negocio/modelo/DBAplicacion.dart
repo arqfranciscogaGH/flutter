@@ -19,6 +19,8 @@ class DBAplicacion extends ModelodBase {
   AccesoTabla<Suscripcion> tablaSuscripcion;
 
  AccesoTabla<CuentaUsuario> tablaCuentaUsuario;
+ AccesoTabla<AdministracionUsuarios> tablaAdministracionUsuarios;
+ 
   AccesoTabla<Persona> tablaPersona;
  AccesoTabla<Cliente> tablaCliente;  
   AccesoTabla<Perfil> tablaPerfil;
@@ -137,6 +139,9 @@ class DBAplicacion extends ModelodBase {
 
    tablaCuentaUsuario =
         agregarTabla<CuentaUsuario>(CuentaUsuario().iniciar(), configuracionApiParametros);
+    tablaAdministracionUsuarios =
+        agregarTabla<AdministracionUsuarios>(AdministracionUsuarios().iniciar(), configuracionApiParametros);
+    
     tablaPersona =
         agregarTabla<Persona>(Persona().iniciar(), configuracionApiParametros);
       tablaCliente =

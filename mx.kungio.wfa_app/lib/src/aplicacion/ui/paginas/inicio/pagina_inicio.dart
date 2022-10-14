@@ -59,42 +59,61 @@ class _pagina_inicio_state extends State<pagina_inicio> {
     //  contextoAplicacion=ContextoAplicacion.obtener(ModalRoute.of(context).settings.arguments);
     idioma = IdiomaAplicacion.obtener(context, idioma);
     widget.titulo = idioma.obtenerElemento(pagina_inicio.ruta, "titulo");
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.titulo),
-          actions: <Widget>[
-            // IconButton(
-            //   icon: Icon( Icons.arrow_back  ),onPressed: () {
-            //           Accion.regresar(context);
-            //   },
-            // ),
-          ],
-        ),
-        body: PageView(
-          scrollDirection: Axis.vertical,
-          children: <Widget>[
-            _paginaInicio(context),
-            _paginaPromociones(context)
-          ],
-        )
+    // if  (Sesion.idUsuario==0)
+    // {
+    //     Accion.hacer( context, OpcionesMenus.obtener("pagina_acceso"));
+    //     return (Scaffold(
+    //             appBar: AppBar(
+    //               title: Text(widget.titulo),
+    //             ),
+    //             body:Container(),
+    //           )
+    //     );
+        
+  
+    // }
+    // else
+    // {
 
-        // Column(
-        //   mainAxisAlignment:MainAxisAlignment.center,
-        //    children: <Widget>[
-        //       RaisedButton( child: Text("Subscribir"), onPressed: (){
-        //               Accion.hacer(context, ElementoLista(ruta:"Suscripcion_registro"));
-        //       }),
-        //       Divider(),
-        //       RaisedButton( child: Text("Acceder"), onPressed: (){
-        //         Navigator.pushReplacementNamed(context, pagina_acceso.routeName);
-        //               Accion.hacer(context, ElementoLista(ruta:"pagina_acceso"));
-        //       }),
-        //       Divider(),
+      return Scaffold(
+          appBar: AppBar(
+            title: Text(widget.titulo),
+            actions: <Widget>[
+              // IconButton(
+              //   icon: Icon( Icons.arrow_back  ),onPressed: () {
+              //           Accion.regresar(context);
+              //   },
+              // ),
+            ],
+          ),
+          body: PageView(
+            scrollDirection: Axis.vertical,
+            children: <Widget>[
+              _paginaInicio(context),
+              _paginaPromociones(context)
+            ],
+          )
 
-        //  ], )//Column( children :  <Widget> [
+          // Column(
+          //   mainAxisAlignment:MainAxisAlignment.center,
+          //    children: <Widget>[
+          //       RaisedButton( child: Text("Subscribir"), onPressed: (){
+          //               Accion.hacer(context, ElementoLista(ruta:"Suscripcion_registro"));
+          //       }),
+          //       Divider(),
+          //       RaisedButton( child: Text("Acceder"), onPressed: (){
+          //         Navigator.pushReplacementNamed(context, pagina_acceso.routeName);
+          //               Accion.hacer(context, ElementoLista(ruta:"pagina_acceso"));
+          //       }),
+          //       Divider(),
 
-        // )
-        );
+          //  ], )//Column( children :  <Widget> [
+
+          // )
+          );
+    // }
+    
+
   }
 
   Widget _paginaInicio(BuildContext context) {

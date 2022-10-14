@@ -406,10 +406,10 @@ pagina_ConsultaTramite_captura:
       lblrfc : { tipo : Etiqueta , tipoEntrada : text,  textoEtiqueta: RFC , textoAyuda: , marcaAguaTexto:  ,icono: articulo, iconoInterno:   , textoCapitalizacion : words , protegerTextoEscrito : false  } 
       lblcurp : { tipo : Etiqueta , tipoEntrada : text,  textoEtiqueta: CURP , textoAyuda: , marcaAguaTexto:  ,icono: articulo, iconoInterno:   , textoCapitalizacion : words , protegerTextoEscrito : false  }   
       lblimporte : { tipo : Etiqueta , tipoEntrada : text,  textoEtiqueta: Importe , textoAyuda: , marcaAguaTexto:  ,icono: articulo, iconoInterno:   , textoCapitalizacion : words , protegerTextoEscrito : false  } 
-      lblgrupo : { tipo : Etiqueta , tipoEntrada : text,  textoEtiqueta: Grupo , textoAyuda: , marcaAguaTexto:  ,icono: articulo, iconoInterno:   , textoCapitalizacion : words , protegerTextoEscrito : false  } 
-      lblsocio : { tipo : Etiqueta , tipoEntrada : text,  textoEtiqueta: Socio , textoAyuda: , marcaAguaTexto:  ,icono: articulo, iconoInterno:   , textoCapitalizacion : words , protegerTextoEscrito : false  } 
       lbltelefonoMovil : { tipo : Etiqueta , tipoEntrada : text,  textoEtiqueta: Teléfono Móvil, textoAyuda: , marcaAguaTexto:  ,icono: articulo, iconoInterno:   , textoCapitalizacion : words , protegerTextoEscrito : false  } 
       lblcorreo : { tipo : Etiqueta , tipoEntrada : text,  textoEtiqueta: Correo , textoAyuda: , marcaAguaTexto:  ,icono: articulo, iconoInterno:   , textoCapitalizacion : words , protegerTextoEscrito : false  } 
+      lblsocio : { tipo : Etiqueta , tipoEntrada : text,  textoEtiqueta: Socio , textoAyuda: , marcaAguaTexto:  ,icono: articulo, iconoInterno:   , textoCapitalizacion : words , protegerTextoEscrito : false  } 
+      lblgrupo : { tipo : Etiqueta , tipoEntrada : text,  textoEtiqueta: Grupo , textoAyuda: , marcaAguaTexto:  ,icono: articulo, iconoInterno:   , textoCapitalizacion : words , protegerTextoEscrito : false  } 
 pagina_Seleccion_Estadistica:
       titulo: Selección Estadísticas 
       borde :  Lineal        
