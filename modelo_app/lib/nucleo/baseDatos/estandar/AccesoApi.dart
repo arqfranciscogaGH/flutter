@@ -6,6 +6,7 @@ import 'dart:convert';
 
 //  librerias  proyecto
 
+/*
 import '../admin/IAccesoBD.dart';
 import '../../servicios/ServiciosRest.dart';
 
@@ -101,3 +102,5 @@ class AccesoApi extends IAccesoBD {
     return url;
   }
 }
+
+*/

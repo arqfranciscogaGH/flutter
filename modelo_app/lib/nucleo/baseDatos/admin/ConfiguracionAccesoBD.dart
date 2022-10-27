@@ -11,6 +11,8 @@ import 'AccesoTabla.dart';
 //   enumerados
 //
 
+
+
 enum ePersitencia {
   Ninguno,
   BaseDatos,
@@ -43,6 +45,7 @@ class ConfiguracionAccesoBD {
   // persitencia
   ePersitencia? persitencia; // BaseDatos,NoSQL Database ,Memoria ,Api REST
   eTipoDB? tipoDB;
+
   // base de datos
   String? nombreBD;
   int? version;
@@ -64,7 +67,7 @@ class ConfiguracionAccesoBD {
       {this.persitenciaPorDefecto,
       this.persitencia,
       this.tipoDB,
-      this.sincronizarServidor,
+       this.sincronizarServidor,
       this.intentos,
       this.contadorRegistros,
       this.nombreBD,
@@ -75,9 +78,9 @@ class ConfiguracionAccesoBD {
       this.parmetros,
       this.filtro
       });
-  AccesoTabla<T> agregarTabla<T extends EntidadBase>(T entidad) {
-    if (tablas == null) tablas = [];
-    tablas!.add(entidad);
-    return new AccesoTabla<T>(entidad: entidad);
-  }
+  // AccesoTabla<T> agregarTabla<T extends EntidadBase>(T entidad) {
+  //   if (tablas == null) tablas = [];
+  //   tablas!.add(entidad);
+  //   return new AccesoTabla<T>(entidad: entidad);
+  // }
 }

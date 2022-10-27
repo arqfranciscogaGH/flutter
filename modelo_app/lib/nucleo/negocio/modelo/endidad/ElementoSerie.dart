@@ -6,7 +6,7 @@ import 'dart:convert';
 
 //  librerias  proyecto
 
-import 'Entidadbase.dart';
+import 'EntidadBase.dart';
 
 // import 'package:charts_flutter/flutter.dart' as charts;
 
@@ -26,6 +26,9 @@ class ElementoSerie extends EntidadBase {
       nombre,
       clave,
       llave,
+      descripcion,
+      nombreTabla,
+      campoLLave,
       this.titulo,
       this.serie,
       this.valor,
@@ -40,7 +43,10 @@ class ElementoSerie extends EntidadBase {
             nombre: nombre,
             clave: clave,
             llave: llave,
-            tabla: "ElementoSerie");
+            descripcion: descripcion,
+            // nombreTabla: nombreTabla!,
+            // campoLLave: campoLLave!,
+            );
   factory ElementoSerie.fromMap(Map<String, dynamic> map) =>  ElementoSerie(
         titulo: map["titulo"],
         serie: map["serie"],
@@ -99,7 +105,7 @@ class ElementoSerie extends EntidadBase {
 
   String sqlTabla() {
     String sql ="CREATE TABLE if not exists ";
-    sql+=super.tabla;
+    sql+=super.nombreTabla!;
     sql+= " ("
           "id INTEGER PRIMARY KEY autoincrement ,"
           "titulo  TEXT , "

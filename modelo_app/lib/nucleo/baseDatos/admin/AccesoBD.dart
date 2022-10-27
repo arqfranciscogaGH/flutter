@@ -29,7 +29,8 @@ class AccesoBD extends IAccesoBD {
 
   definirPersistencia(ConfiguracionAccesoBD configuracion) {
     this.configuracion = configuracion;
-    abd = AdministradorAcceso.definirPersistencia(configuracion);
+    if (abd==null)
+       abd = AdministradorAcceso.definirPersistencia(configuracion);
   }
 
   @override
@@ -41,7 +42,7 @@ class AccesoBD extends IAccesoBD {
   @override
   abrir() async {
     if (abd! != null) {
-      abd!.abrir();
+     await  abd!.abrir();
     }
   }
 
@@ -51,9 +52,16 @@ class AccesoBD extends IAccesoBD {
   }
 
   @override
-  Future<List<dynamic>> consultar(String nombreTabla) async {
-    dynamic respuesta = await abd!.consultar(nombreTabla);
+  Future<List<dynamic>> consultarTabla(String nombreTabla) async {
+    dynamic respuesta = await abd!.consultarTabla(nombreTabla);
     return respuesta;
+  }
+
+  @override
+  Future<dynamic> consultar(String nombreTabla, Map<String, dynamic> map,
+      String campo,dynamic valor) async {
+    dynamic res = await abd!.obtener(nombreTabla, map, campo, valor);
+    return res;
   }
 
   @override
@@ -64,22 +72,22 @@ class AccesoBD extends IAccesoBD {
 
   @override
   Future<dynamic> actualizar(String nombreTabla, Map<String, dynamic> map,
-      String campo, int id) async {
-    dynamic res = await abd!.actualizar(nombreTabla, map, campo, id);
+      String campo,dynamic valor) async {
+    dynamic res = await abd!.actualizar(nombreTabla, map, campo, valor);
     return res;
   }
 
   @override
   Future<Map<String, dynamic>> eliminar(String nombreTabla,
-      Map<String, dynamic> map, String campo, int id) async {
-    dynamic res = await abd!.eliminar(nombreTabla, map, campo, id);
+      Map<String, dynamic> map, String campo,dynamic valor) async {
+    dynamic res = await abd!.eliminar(nombreTabla, map, campo, valor);
     return res;
   }
 
   @override
   Future<dynamic> obtener(String nombreTabla, Map<String, dynamic> map,
-      String campo, int id) async {
-    dynamic res = await abd!.obtener(nombreTabla, map, campo, id);
+      String campo,dynamic valor) async {
+    dynamic res = await abd!.obtener(nombreTabla, map, campo, valor);
     return res;
   }
 

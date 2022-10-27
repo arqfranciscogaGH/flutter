@@ -67,21 +67,24 @@ class DBAplicacion extends ModelodBase {
 
   DBAplicacion(this.configuracionPersitencia) {
     iniciarTablas();
+   // creacionTablas();
   }
 
   // iniciar entidades
   iniciarTablas() {
 
-     ConfiguracionAccesoBD configuracionDbSqlLite = ConfiguracionAccesoBD(
-      persitencia: ePersitencia.BaseDatos,
-      tipoDB: eTipoDB.SQLLITE,
-      nombreBD: 'prueba',
-      version: 1,
-      persitenciaPorDefecto: false,
-      contadorRegistros: false,
-      urlApi: '',
-      sincronizarServidor: true,
-    );
+  ConfiguracionAccesoBD _configuracionPersitenciaSqlLite =
+          ConfiguracionAccesoBD(
+        persitencia: ePersitencia.BaseDatos,
+        tipoDB: eTipoDB.SQLLITE,
+        nombreBD: 'prueba',
+        version: 1,
+        persitenciaPorDefecto: true,
+        contadorRegistros: false,
+        urlApi: '',
+        sincronizarServidor: true,
+      );
+
 
     ConfiguracionAccesoBD configuracionPersitenciaApiRegistros = ConfiguracionAccesoBD(
       persitencia: ePersitencia.ApiREST,
@@ -143,7 +146,7 @@ class DBAplicacion extends ModelodBase {
       sincronizarServidor: true,
     );
 
-      tCliente = agregarTabla<Cliente>(Cliente().iniciar(), configuracionPersitenciaMemoria);   
+      tCliente = agregarTabla<Cliente>(Cliente().iniciar(), _configuracionPersitenciaSqlLite);   
 
   //   tablaSuscripcion = agregarTabla<Suscripcion>(
   //       Suscripcion().iniciar(), configuracionApiParametros);
@@ -234,10 +237,14 @@ class DBAplicacion extends ModelodBase {
        urlApi: 'http://www.apimenet.somee.com/api', controladorApi: "personas" , sincronizarServidor: true,) */
   }
 
+ void creacionTablas() async
+ {
+    await  AdministradorAcceso.abrir();
+ }
   AccesoTabla<T> agregarTabla<T extends EntidadBase>(T entidad, ConfiguracionAccesoBD configuracion) {
     if (configuracion.tablas == null)
       configuracion.tablas = [];
     configuracion.tablas!.add(entidad);
-    return new AccesoTabla<T>(entidad: entidad, configuracion: configuracion);
+    return new AccesoTabla<T>(claseEntidad: entidad, configuracion: configuracion);
   }
 }

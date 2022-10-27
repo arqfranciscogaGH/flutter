@@ -5,7 +5,7 @@ import 'dart:convert';
 
 //  librerias  proyecto
 
-import 'Entidadbase.dart';
+import 'EntidadBase.dart';
 
 enum eOperacion {
   agregar,
@@ -101,6 +101,8 @@ class ElementoLista extends EntidadBase {
       nombre,
       clave,
       llave,
+      nombreTabla,
+      campoLLave,
       this.titulo,
       this.operacion,
       this.subtitulo,
@@ -132,13 +134,16 @@ class ElementoLista extends EntidadBase {
       this.pagina,
       this.pagina2,
       this.pagina3,
-      this.activo})
-      : super(
+      this.activo
+      }) : super(
             id: id,
             nombre: nombre,
             clave: clave,
             llave: llave,
-            tabla: "ElementoLista");
+            descripcion: descripcion,
+            // nombreTabla: nombreTabla!,
+            // campoLLave: campoLLave!,
+            );
 
   factory ElementoLista.fromMap(Map<String, dynamic> map) =>  ElementoLista(
         valor: map["valor"],
@@ -210,7 +215,7 @@ class ElementoLista extends EntidadBase {
 
   String sqlTabla() {
    String sql ="CREATE TABLE if not exists ";
-    sql+=super.tabla;
+    sql+=super.nombreTabla!;
     sql+=" ("
         "id INTEGER PRIMARY KEY autoincrement ,"
         "valor TEXT , "

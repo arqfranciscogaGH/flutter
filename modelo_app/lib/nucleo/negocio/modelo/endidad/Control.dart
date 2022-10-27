@@ -6,7 +6,7 @@ import 'dart:convert';
 
 //  librerias  proyecto
 
-import 'Entidadbase.dart';
+import 'EntidadBase.dart';
 import '../endidad/ElementoLista.dart';
 import '../../../utilerias/Traductor.dart';
 
@@ -78,6 +78,8 @@ class Control extends EntidadBase {
       nombre,
       clave,
       llave,
+      nombreTabla,
+      campoLLave,
       this.idControl,
       this.tipo,
       this.valor,
@@ -108,7 +110,9 @@ class Control extends EntidadBase {
             nombre: nombre,
             clave: clave,
             llave: llave,
-            tabla: "Control");
+            // nombreTabla : nombreTabla,
+            // campoLLave:campoLLave 
+            );
 
   factory Control.fromMap(Map<String, dynamic> map) =>  Control(
         idControl: map["idControl"],
@@ -159,7 +163,7 @@ class Control extends EntidadBase {
 
   String sqlTabla() {
      String sql ="CREATE TABLE if not exists ";
-    sql+=super.tabla;
+    sql+=super.nombreTabla!;
     sql+=" ("
           "id INTEGER PRIMARY KEY autoincrement ,"
           "clave TEXT , "

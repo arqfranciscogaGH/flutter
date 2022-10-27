@@ -27,7 +27,7 @@ class ClienteCE extends ChangeNotifier {
     //     ContextoAplicacion ContextoAplicacion =ContextoAplicacion.obtener(null);
     //     this._lista = ContextoAplicacion.db.tablaCliente.lista;
     // }
-    return ContextoAplicacion.db.tCliente!.lista;
+    return ContextoAplicacion.db.tCliente!.lista as  List<Cliente>;
   }
 
   set lista(List<Cliente> lista) {
@@ -66,8 +66,8 @@ class ClienteCE extends ChangeNotifier {
     Cliente entidad = Cliente().iniciar();
     // se asigna  datos entidad padre
 
-    if (ContextoAplicacion.db.tCliente!.entidad!.id != null)
-      entidad.idSuscriptor = ContextoAplicacion.db.tCliente!.entidad!.id;
+    if (ContextoAplicacion.db.tCliente!.entidad.id != null)
+      entidad.idSuscriptor = ContextoAplicacion.db.tCliente!.entidad.id;
     this.entidad = entidad;
     return entidad;
   }
@@ -77,7 +77,7 @@ class ClienteCE extends ChangeNotifier {
   //
   consultarEntidad(Cliente entidad, Function metodoRespuestaConsultar) {
     ContextoAplicacion.db.tCliente!
-        .obtenerLista(entidad)
+        .consultarTabla(entidad)
         .then((listaRespuesta) {
       List<Cliente> lista = listaRespuesta.cast<Cliente>().toList();
       this.lista = lista;
@@ -85,8 +85,7 @@ class ClienteCE extends ChangeNotifier {
     });
   }
 
-  void obtenerEntidad(BuildContext context, ElementoLista elemento,
-      Function metodorRespuestaObtener) {
+  void obtenerEntidad(BuildContext context, ElementoLista elemento, Function metodorRespuestaObtener) {
     Cliente entidad = Cliente().iniciar();
     entidad.id = elemento.id;
     ContextoAplicacion.db.tCliente!.obtener(entidad).then((respuesta) {

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 //  librerias importadas flutter
 
+/*
 import 'package:http/http.dart' as http;
 
 //  librerias  proyecto
@@ -53,3 +54,4 @@ class ServicioRest
 }
 
 
+*/

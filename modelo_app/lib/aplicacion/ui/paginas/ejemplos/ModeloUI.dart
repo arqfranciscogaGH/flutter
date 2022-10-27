@@ -133,8 +133,13 @@ class ModuloUI {
   //
   void respuestaSeleccionar(   BuildContext context, ElementoLista elemento, dynamic entidad) {
     String mensaje =  Traductor.obtenerAtrbuto('pagina_Comun','accionSeleccionar', 'mensaje');
-     this.scaffoldKey!.currentState!.showSnackBar(
-        SnackBar(content: Text(mensaje + " : " + entidad.nombre)));
+
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(mensaje + " : " + entidad.nombre)));
+
+   // ScaffoldMessengerState.show_snack_bar( SnackBar(content: Text(mensaje + " : " + entidad.nombre)));
+
+    //  this.scaffoldKey!.currentState!.showSnackBar(
+    //     SnackBar(content: Text(mensaje + " : " + entidad.nombre)));
     if (elemento.ruta != null /* && elemento.operacion==eOperacion.Consultar */)
       Accion.hacer(context, OpcionesMenus.obtener(elemento.ruta!));
     else if (elemento.ruta == null && elemento.operacion == eOperacion.filtrar)
@@ -144,8 +149,10 @@ class ModuloUI {
   void respuestaSeleccionar2(   BuildContext context, ElementoLista elemento, dynamic entidad) {
 
     String mensaje =  Traductor.obtenerAtrbuto('pagina_Comun','accionSeleccionar', 'mensaje');
-     this.scaffoldKey!.currentState!.showSnackBar(
-        SnackBar(content: Text(mensaje + " : " + entidad.nombre)));
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(mensaje + " : " + entidad.nombre)));
+
+    //  this.scaffoldKey!.currentState!.showSnackBar(
+    //     SnackBar(content: Text(mensaje + " : " + entidad.nombre)));
     if (elemento.ruta != null /* && elemento.operacion==eOperacion.Consultar */)
       Accion.hacer(context, OpcionesMenus.obtener(elemento.ruta!));
     else if (elemento.ruta == null && elemento.operacion == eOperacion.filtrar)
@@ -153,8 +160,9 @@ class ModuloUI {
   }
   void respuestaSeleccionar3(   BuildContext context, ElementoLista elemento, dynamic entidad) {
     String mensaje =  Traductor.obtenerAtrbuto('pagina_Comun','accionSeleccionar', 'mensaje');
-     this.scaffoldKey!.currentState!.showSnackBar(
-        SnackBar(content: Text(mensaje + " : " + entidad.nombre)));
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(mensaje + " : " + entidad.nombre)));   
+    //  this.scaffoldKey!.currentState!.showSnackBar(
+    //     SnackBar(content: Text(mensaje + " : " + entidad.nombre)));
     if (elemento.ruta != null /* && elemento.operacion==eOperacion.Consultar */)
       Accion.hacer(context, OpcionesMenus.obtener(elemento.ruta!));
     else if (elemento.ruta == null && elemento.operacion == eOperacion.filtrar)
@@ -185,8 +193,8 @@ class ModuloUI {
   void respuestaGuardar(BuildContext context, elemento, dynamic entidad) {
 
     String mensaje =  widget.titulo=Traductor.obtenerAtrbuto('pagina_Comun','accionSeleccionar', 'mensaje');
-    this.scaffoldKey!.currentState!.showSnackBar(
-    SnackBar(content: Text(mensaje + " : " + entidad.nombre)));
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(mensaje + " : " + entidad.nombre)));   
+    // this.scaffoldKey!.currentState!.showSnackBar(  SnackBar(content: Text(mensaje + " : " + entidad.nombre)));
     if (this.widget.accionPagina == "avanzar" &&
         this.widget.paginaSiguiente != null)
       Accion.hacer(context, OpcionesMenus.obtener(this.widget.paginaSiguiente));

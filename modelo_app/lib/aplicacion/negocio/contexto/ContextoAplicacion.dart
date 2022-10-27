@@ -16,11 +16,10 @@ class ContextoAplicacion {
   static AccesoBD? _accesoDB;
   static DBAplicacion? _db;
 
-  static AccesoBD get acesoDB {
+  static AccesoBD get accesoDB {
     if (_accesoDB == null) _accesoDB = AccesoBD();
     return _accesoDB!;
   }
-
   static ConfiguracionAccesoBD _configuracionPersitencia =
       ConfiguracionAccesoBD(
     persitencia: ePersitencia.BaseDatos,
@@ -39,11 +38,13 @@ class ContextoAplicacion {
   }
 
   ContextoAplicacion() {}
+
   static iniciar() {
-    _accesoDB = AccesoBD();
-    _accesoDB!.definirPersistencia(_configuracionPersitencia);
+    
+    // _accesoDB = AccesoBD();
+    // _accesoDB!.definirPersistencia(_configuracionPersitencia);
     _db = DBAplicacion(_configuracionPersitencia);
-    _accesoDB!.abrir();
+    // _accesoDB!.abrir();
     // _BD.sqlConsultar( 'select Persona.nombre, sum(Mov.importe) from Persona left join Mov ON Persona.id=Mov.idPersona group by Persona.nombre').then( ( listaRespuesta)
     // {
     //     List<Map> datos = listaRespuesta;

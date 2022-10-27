@@ -11,7 +11,7 @@ import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 //  librerias  proyecto
 
@@ -263,6 +263,7 @@ seleccionarFechaBotones(BuildContext context, Control control) async {
    Duration duration = new Duration(days: 365*100);
 
    DateTime fechaSeleccionada;
+   
    DatePicker.showDatePicker(context,
                showTitleActions: true,
           locale: LocaleType.es,

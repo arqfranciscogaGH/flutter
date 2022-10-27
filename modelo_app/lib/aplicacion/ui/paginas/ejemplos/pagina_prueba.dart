@@ -60,30 +60,10 @@ class _pagina_prueba_state extends State<pagina_prueba> {
    // widget.titulo = idioma.obtenerElemento(widget.pagina, "titulo");
    widget.titulo=widget.titulo??"";
 
-Preferencias.iniciar();
-Preferencias.guardar("id","xxx");
-
-// final  provTema =Provider.of<controladorEstadoTema>(context,listen: false);
-if  (ParametrosSistema.esModoObscuro)
-{
-  ParametrosSistema.esModoObscuro=false;
-  //  provTema.cambiarModoClaro();
-}
-else 
-{
-  ParametrosSistema.esModoObscuro=true;
-  // provTema.cambiarModoObscuro();
-}
-
-
-
-ParametrosSistema.primario=Colors.red;
-
 
 String  valor =Preferencias.obtener("id","valor");
 print (Sesion.nombre);
-AdministrarSesion.asignar(nombre: "hello");
-AdministrarSesion.obtener();
+
 print (Sesion.nombre);
     return Scaffold(
       appBar: AppBar(title: Text(widget.titulo!)),
