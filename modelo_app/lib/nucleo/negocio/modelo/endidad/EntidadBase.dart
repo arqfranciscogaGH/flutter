@@ -44,7 +44,6 @@ class EntidadBase {
     EntidadBase e = EntidadBase();
     e.nombreTabla='EntidadBase';
     e. campoLLave='id';
-    e.id = 0;
     e.clave = "";
     e.llave = " ";
     e.nombre = "";
@@ -52,17 +51,17 @@ class EntidadBase {
     return e;
     
   }
+     // "id INTEGER PRIMARY KEY AUTOINCREMENT  ,"
   String sqlTabla() {
     String sql = "CREATE TABLE if not exists " +
         nombreTabla! +
         " ("
-            "id INTEGER PRIMARY KEY autoincrement ,"
+            "id INTEGER primary key autoincrement ,"
             "llave TEXT , "
             "clave TEXT , "
             "nombre  TEXT , "
-            "descripcion TEXT , "
-            "fechaEstatus TEXT , "
-            "estatus INTEGER )";
+            "descripcion TEXT  "
+           " ) ";
     return sql;
   }
 

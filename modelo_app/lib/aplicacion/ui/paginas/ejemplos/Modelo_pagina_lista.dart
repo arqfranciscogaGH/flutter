@@ -4,11 +4,10 @@ import 'package:flutter/material.dart';
 
 //  librerias importadas flutter
 
- import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';
 // import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 //  librerias  proyecto
-
 
 import '../../../../inicializacion/inicializacion.dart';
 import '../../../../configuracion/configuracion.dart';
@@ -16,7 +15,6 @@ import '../../../../administracion/administracion.dart';
 
 import '../../../../nucleo/nucleo.dart';
 import '../../../../aplicacion/aplicacion.dart';
-
 
 //  librerias externas  flutter
 
@@ -38,9 +36,9 @@ class Modelo_pagina_lista extends StatefulWidget {
       : super(key: key);
 
   String? titulo;
-  String? pagina= "";
+  String? pagina = "";
   String? paginaSiguiente = "";
-  String? paginaAnterior= "";
+  String? paginaAnterior = "";
   String? accionPagina = ""; // avanzar, regresar
   bool? activarAcciones = false;
   static String ruta = "Modelo_pagina_lista";
@@ -50,10 +48,9 @@ class Modelo_pagina_lista extends StatefulWidget {
 }
 
 class _Modelo_pagina_lista_state extends State<Modelo_pagina_lista> {
-
   //  declaración de variables
 
-  //  modelo  y entidades 
+  //  modelo  y entidades
 
   // Suscripcion entidadCaptura ;
   //List<Suscripcion> listaEntidad;
@@ -70,8 +67,8 @@ class _Modelo_pagina_lista_state extends State<Modelo_pagina_lista> {
   //    control de estado  con provider
 
   ModeloCE? provider;
-  
-    //  Interfaz UI comun
+
+  //  Interfaz UI comun
 
   ModuloUI? ui;
 
@@ -83,54 +80,52 @@ class _Modelo_pagina_lista_state extends State<Modelo_pagina_lista> {
   @override
   void initState() {
     super.initState();
-    //  aasignar  ruta  a pagina 
+    //  aasignar  ruta  a pagina
     widget.pagina = Modelo_pagina_lista.ruta;
-    //  provider 
-    provider= ModeloCE();
-    // UI 
+    //  provider
+    provider = ModeloCE();
+    // UI
     ui = ModuloUI(provider: provider!);
 
     //  definir  url y sus  parametros para realizar  consulta de informacion
-    String url ="FTConsulta/''/";
-    String argumentos ="";
-    String consulta ="/1/VerTramite";
- 
+    String url = "FTConsulta/''/";
+    String argumentos = "";
+    String consulta = "/1/VerTramite";
+
     //  obtener argumentos  de pagina  comun
     // argumentos= ContextoUI.obtenerKey("seguimiento").entidad.identificador;
-    argumentos=argumentos==null  || argumentos=="" ?"''":argumentos;
-    print (argumentos);
-    url+= argumentos ;
-    url+= consulta ;
-    print (url);
+    argumentos = argumentos == null || argumentos == "" ? "''" : argumentos;
+    print(argumentos);
+    url += argumentos;
+    url += consulta;
+    print(url);
 
     accionConsultar = ElementoLista(
-        id: 2,
-        operacion: eOperacion.consultar,        
-        icono: "info",
-        ruta: widget.paginaSiguiente,
-        accion: ui!.seleccionarElemento,
-        callBackAccion: ui!.respuestaSeleccionar,
-
-        icono2: "historia",
-        ruta2:  "pagina_captura",
-        accion2: ui!.seleccionarElemento2,
-        callBackAccion2: ui!.respuestaSeleccionar2 ,
-
-        );
+      id: 2,
+      operacion: eOperacion.consultar,
+      icono: "info",
+      ruta: widget.paginaSiguiente,
+      accion: ui!.seleccionarElemento,
+      callBackAccion: ui!.respuestaSeleccionar,
+      icono2: "historia",
+      ruta2: "pagina_captura",
+      accion2: ui!.seleccionarElemento2,
+      callBackAccion2: ui!.respuestaSeleccionar2,
+    );
     accionFiltrar = ElementoLista(
-        id: 3,
-        operacion: eOperacion.filtrar,        
-        icono: "info",
-        ruta: widget.paginaSiguiente,
-        accion: ui!.seleccionarElemento,
-        callBackAccion: ui!.respuestaSeleccionar,
-   
-        icono2: "historia",
-        ruta2:  "pagina_captura",
-        accion2: ui!.seleccionarElemento,
-        callBackAccion2: ui!.respuestaSeleccionar ,    
-        );
-  }  
+      id: 3,
+      operacion: eOperacion.filtrar,
+      icono: "info",
+      ruta: widget.paginaSiguiente,
+      accion: ui!.seleccionarElemento,
+      callBackAccion: ui!.respuestaSeleccionar,
+      icono2: "historia",
+      ruta2: "pagina_captura",
+      accion2: ui!.seleccionarElemento,
+      callBackAccion2: ui!.respuestaSeleccionar,
+    );
+  }
+
   //  dispose widget
   @override
   void dispose() {
@@ -141,49 +136,45 @@ class _Modelo_pagina_lista_state extends State<Modelo_pagina_lista> {
   //
   //   construir  interfaz de usuario
   //
- //  build widget
-   @override
+  //  build widget
+  @override
   Widget build(BuildContext context) {
-
-    widget.titulo=Traductor.obtenerEtiquetaSeccion(widget.pagina!,'titulo')??'Tema';
-    print (widget.titulo);
+    widget.titulo =
+        Traductor.obtenerEtiquetaSeccion(widget.pagina!, 'titulo') ?? 'Tema';
+    print(widget.titulo);
     ui!.iniciar(context, scaffoldKey, widget);
-
     return ChangeNotifierProvider.value(
         value: provider,
-        child:Scaffold(
-            appBar: AppBar(title: Text(widget.titulo!),
-            actions: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.search),
-                  onPressed: () {
-                      Buscador buscador = Buscador();
-                      buscador.acccionConstruir = filtrarElementos;
-                      showSearch(
-                        context: context,
-                        delegate: buscador,
-                      );
-                  },
-                ),
-              ]
+        child: Scaffold(
+          appBar: AppBar(title: Text(widget.titulo!), actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                Buscador buscador = Buscador();
+                buscador.acccionConstruir = filtrarElementos;
+                showSearch(
+                  context: context,
+                  delegate: buscador,
+                );
+              },
             ),
-            drawer: Menulateral.crearMenu(context, OpcionesMenus.obtenerMenuPrincipal(), widget.titulo!),
-            body: mostrarContenido(),
-            floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-            floatingActionButton: Boton.crearBotonFlotante(context, ElementoLista( icono: "save", accion:  ejecutar   ),
-            ),
-          )
-    );
+          ]),
+          drawer: Menulateral.crearMenu(
+              context, OpcionesMenus.obtenerMenuPrincipal(), widget.titulo!),
+          body: mostrarContenido(),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          floatingActionButton: Boton.crearBotonFlotante(
+              context, ElementoLista(icono: "save", accion: ejecutar)),
+        ));
   }
 
   //
-  //  metodos 
+  //  metodos
   //
-   
-   ejecutar(BuildContext context, ElementoLista elemento, [dynamic argumetos])
-  {
-    print ("ejecuto ");
 
+  ejecutar(BuildContext context, ElementoLista elemento, [dynamic argumetos]) {
+    print("ejecuto ");
   }
 
   //
@@ -195,10 +186,8 @@ class _Modelo_pagina_lista_state extends State<Modelo_pagina_lista> {
   //
 
   Widget mostrarContenido() {
-
-    print ( provider!.lista );
-    return Consumer<ModeloCE>(
-        builder: (context, _provider, widgetPadre) {
+    print(provider!.lista);
+    return Consumer<ModeloCE>(builder: (context, _provider, widgetPadre) {
       // _provider.obtenerRedPorSuscripcion(Configuracion.idSuscriptor);
       return Vista_lista(
           lista: _provider.lista,
@@ -234,9 +223,10 @@ class _Modelo_pagina_lista_state extends State<Modelo_pagina_lista> {
     // provider.entidad=entidad;
   }
   void actualizarEstadoLista(List<dynamic> listaRespuesta) {
-      print(listaRespuesta);
+    print(listaRespuesta);
     // listaEntidad=listaRespuesta;
   }
+
   void actualizarEstadoListaEstatus(List<dynamic> listaRespuesta) {
     // listaEntidad=listaRespuesta;
     print(listaRespuesta);

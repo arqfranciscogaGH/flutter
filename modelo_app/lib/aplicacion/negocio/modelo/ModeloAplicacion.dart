@@ -11,9 +11,17 @@ export './../../../nucleo/negocio/modelo/ModeloBase.dart';
 
 //  definir entidades de modelo
 
-
 import '../modelo/entidad/Cliente.dart';
 export '../modelo/entidad/Cliente.dart';
+
+import '../modelo/entidad/ServicioAplicacion.dart';
+export '../modelo/entidad/ServicioAplicacion.dart';
+
+import '../modelo/entidad/Venta.dart';
+export '../modelo/entidad/Venta.dart';
+
+import '../modelo/entidad/VentaProducto.dart';
+export '../modelo/entidad/VentaProducto.dart';
 
 // import '../endidad/Suscripcion.dart';
 
@@ -52,7 +60,6 @@ export '../modelo/entidad/Cliente.dart';
 // import '../endidad/EstadisticasVista.dart';
 // import '../endidad/EstadisticasVistaDetalle.dart';
 
-
 // import '../endidad/CuentaUsuario.dart';
 // import '../endidad/AdministracionUsuarios.dart';
 
@@ -60,7 +67,7 @@ export '../modelo/entidad/Cliente.dart';
 
 // import '../endidad/ConsultarSocios.dart';
 
-// //   exportaciones 
+// //   exportaciones
 
 // export '../endidad/Suscripcion.dart';
 
@@ -105,7 +112,6 @@ export '../modelo/entidad/Cliente.dart';
 // export '../endidad/AdministracionUsuarios.dart';
 // export '../endidad/Cliente.dart';
 // export '../endidad/ConsultarSocios.dart';
-
 
 class ModeloAplicacion extends ModelodBase {
   // declarar entidades

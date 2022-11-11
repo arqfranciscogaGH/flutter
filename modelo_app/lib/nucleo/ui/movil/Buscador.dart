@@ -13,10 +13,10 @@ class CustomSearchHintDelegate extends SearchDelegate<String> {
   CustomSearchHintDelegate({
     required String hintText,
   }) : super(
-    searchFieldLabel: hintText,
-    keyboardType: TextInputType.text,
-    textInputAction: TextInputAction.search,
-  );
+          searchFieldLabel: hintText,
+          keyboardType: TextInputType.text,
+          textInputAction: TextInputAction.search,
+        );
   @override
   List<Widget> buildActions(BuildContext context) {
     // TODO: implement buildActions
@@ -30,18 +30,20 @@ class CustomSearchHintDelegate extends SearchDelegate<String> {
       )
     ];
   }
-  
+
   @override
   Widget buildLeading(BuildContext context) {
     // TODO: implement buildLeading
-    Widget? w= Row();
+    Widget? w = Row();
     return const Text('leading');
   }
 
   @override
+  String get searchFieldLabel => " ";
+  @override
   Widget buildResults(BuildContext context) {
     // TODO: implement buildLeading
-    Widget? w= Row();
+    Widget? w = Row();
     return const Text('buildResults');
   }
 
@@ -52,6 +54,7 @@ class CustomSearchHintDelegate extends SearchDelegate<String> {
     return acccionConstruir!(query);
   }
 }
+
 class Buscador extends SearchDelegate<EntidadBase> {
   Function? acccionConstruir;
   @override
@@ -71,14 +74,14 @@ class Buscador extends SearchDelegate<EntidadBase> {
   @override
   Widget buildLeading(BuildContext context) {
     // TODO: implement buildLeading
-    Widget? w= Row();
+    Widget? w = Row();
     return const Text('leading');
   }
 
   @override
   Widget buildResults(BuildContext context) {
     // TODO: implement buildLeading
-    Widget? w= Row();
+    Widget? w = Row();
     return const Text('buildResults');
   }
 

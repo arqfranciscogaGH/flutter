@@ -6,6 +6,8 @@ menu_principal:
       opcion5 : { id : 5 , ruta : botones_pagina , pagina : botones_pagina , animacionPagina: rotationRoute ,      titulo : buttons , subtitulo : ,  icono: boton ,   iconoLateral : arrow_right , activo : 1 } 
       opcion6 : { id : 6 , ruta : Modelo_pagina_lista , pagina : Modelo_pagina_lista , animacionPagina: rotationRoute ,      titulo : query list , subtitulo : ,  icono: list_alt ,   iconoLateral : arrow_right , activo : 1 } 
       opcion7 : { id : 7 , ruta : Modelo_pagina_captura , pagina : Modelo_pagina_captura , animacionPagina: rotationRoute ,      titulo : Capture data, subtitulo : ,  icono: captura ,   iconoLateral : arrow_right , activo : 1 } 
+      opcion8 : { id : 8 , ruta : Venta_lista , pagina : Venta_lista , animacionPagina: rotationRoute ,      titulo : List Self , subtitulo : ,  icono: list_alt ,   iconoLateral : arrow_right , activo : 1 } 
+      opcion9 : { id : 9 , ruta : Venta_captura , pagina : Venta_captura , animacionPagina: rotationRoute ,      titulo : Capture Self, subtitulo : ,  icono: captura ,   iconoLateral : arrow_right , activo : 1 } 
 
 pagina_Comun:
       borde :  Lineal        

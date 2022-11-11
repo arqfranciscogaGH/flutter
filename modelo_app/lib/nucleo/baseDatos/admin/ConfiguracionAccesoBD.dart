@@ -52,14 +52,15 @@ class ConfiguracionAccesoBD {
   List<EntidadBase>? tablas = [];
 
   // Api REST
-  String? urlApi;
-
+  String? dominioApi;
+  String? sitioApi;
+  String? llaveApi;
   // Sicronizacion
   bool? sincronizarServidor;
   int? intentos;
   bool? contadorRegistros = true;
   bool? persitenciaPorDefecto;
-  String? llaveApi;
+
   dynamic parmetros;
   dynamic filtro;
 
@@ -73,7 +74,8 @@ class ConfiguracionAccesoBD {
       this.nombreBD,
       this.version,
       this.tablas,
-      this.urlApi,
+      this.dominioApi,
+      this.sitioApi,
       this.llaveApi,
       this.parmetros,
       this.filtro

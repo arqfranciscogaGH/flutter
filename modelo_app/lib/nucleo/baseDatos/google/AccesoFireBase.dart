@@ -5,7 +5,7 @@ import 'dart:async';
 import '../../../nucleo/negocio/modelo/endidad/EntidadBase.dart';
 import '../admin/IAccesoBD.dart';
 
-class AccesoFireBase extends IAccesoBD {
+// class AccesoFireBase extends IAccesoBD {
 /*     static DatabaseReference  instancia ;  
     static DatabaseReference  db ;          
     static DatabaseReference tabla ;
@@ -187,4 +187,4 @@ class AccesoFireBase extends IAccesoBD {
   }
   */
 
-}
+// }

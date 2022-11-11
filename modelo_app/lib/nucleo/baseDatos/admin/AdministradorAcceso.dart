@@ -35,27 +35,27 @@ class AdministradorAcceso {
       abd = AccesoSqlLite();
       abd.configuracion = configuracion;
     } 
-    // else if (configuracion.persitencia == ePersitencia.ApiREST) {
-    //   abd = AccesoApi();
-    //   abd.configuracion = configuracion;configuracion.tipoDB == eTipoDB.SQLLITE
-    // } 
-    else if (configuracion.persitencia == ePersitencia.NoSQLBaseDatos &&
-        configuracion.tipoDB == eTipoDB.FireStore) {
-      abd = AccesoFireStore();
-      abd.configuracion = configuracion;
-    }
-    else if (configuracion.persitencia == ePersitencia.NoSQLBaseDatos &&
-        configuracion.tipoDB == eTipoDB.FireBase) {
-      abd = AccesoFireBase();
-      abd.configuracion = configuracion;
-    }
+    else if (configuracion.persitencia == ePersitencia.ApiREST) {
+      abd = AccesoApi();
+      abd.configuracion = configuracion;configuracion.tipoDB == eTipoDB.SQLLITE;                                                                                                                                                                    
+    } 
+    // else if (configuracion.persitencia == ePersitencia.NoSQLBaseDatos &&
+    //     configuracion.tipoDB == eTipoDB.FireStore) {
+    //   abd = AccesoFireStore();
+    //   abd.configuracion = configuracion;
+    // }
+    // else if (configuracion.persitencia == ePersitencia.NoSQLBaseDatos &&
+    //     configuracion.tipoDB == eTipoDB.FireBase) {
+    //   abd = AccesoFireBase();
+    //   abd.configuracion = configuracion;
+    // }
     return abd!;
   }
   static  abrir() async {
-    IAccesoBD? abd = AccesoBD.instancia;
-    
-    if (abd != null && abd.configuracion.tipoDB == eTipoDB.SQLLITE) {
-      await abd.abrir();
+    if (AccesoBD.isDB ) {
+      if ( AccesoBD.abd.configuracion  != null &&  AccesoBD.abd.configuracion.tipoDB == eTipoDB.SQLLITE)
+         await AccesoBD.abd.abrir();
     }
+    
   }
 }

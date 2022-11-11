@@ -4,18 +4,18 @@ import 'package:flutter/material.dart';
 
 //  librerias  proyecto
 
-import '../contexto/ContextoAplicacion.dart';
+import '../../contexto/ContextoAplicacion.dart';
 
 class ClienteCE extends ChangeNotifier {
   bool actualizarControles = false;
   // List<dynamic> _lista;
   // dynamic _entidad;
   dynamic get entidad {
-    return ContextoAplicacion.db.tCliente!.entidad;
+    return ContextoAplicacion.db.tablaCliente!.entidad;
   }
 
   set entidad(dynamic entidad) {
-    ContextoAplicacion.db.tCliente!.entidad = entidad;
+    ContextoAplicacion.db.tablaCliente!.entidad = entidad;
     // this._entidad =entidad;
     this.actualizarControles = true;
     notifyListeners();
@@ -27,11 +27,11 @@ class ClienteCE extends ChangeNotifier {
     //     ContextoAplicacion ContextoAplicacion =ContextoAplicacion.obtener(null);
     //     this._lista = ContextoAplicacion.db.tablaCliente.lista;
     // }
-    return ContextoAplicacion.db.tCliente!.lista as  List<Cliente>;
+    return ContextoAplicacion.db.tablaCliente!.lista as List<Cliente>;
   }
 
   set lista(List<Cliente> lista) {
-    ContextoAplicacion.db.tCliente!.lista = lista;
+    ContextoAplicacion.db.tablaCliente!.lista = lista;
     notifyListeners();
   }
 
@@ -40,24 +40,26 @@ class ClienteCE extends ChangeNotifier {
   //
 
   void limpiar() {
-    ContextoAplicacion.db.tCliente!.lista = [];
+    ContextoAplicacion.db.tablaCliente!.lista = [];
     Cliente entidad = this.iniciarEntidad();
   }
+
   //
   //  asignar paramtros de api para consulta
   //
-  dynamic asignarParametros( dynamic parmetros,String llaveApi) {
-      ContextoAplicacion.db.tCliente!.configuracion!.parmetros=parmetros;
-      ContextoAplicacion.db.tCliente!.configuracion!.filtro=""; 
-      ContextoAplicacion.db.tCliente!.configuracion!.llaveApi=llaveApi;
-   }
+  dynamic asignarParametros(dynamic parmetros, String llaveApi) {
+    ContextoAplicacion.db.tablaCliente!.configuracion!.parmetros = parmetros;
+    ContextoAplicacion.db.tablaCliente!.configuracion!.filtro = "";
+    ContextoAplicacion.db.tablaCliente!.configuracion!.llaveApi = llaveApi;
+  }
 
-  dynamic asignarParametrosFiltro( dynamic parmetros,dynamic filtro,String llaveApi) {
-      ContextoAplicacion.db.tCliente!.configuracion!.parmetros=parmetros;
-      ContextoAplicacion.db.tCliente!.configuracion!.filtro=filtro; 
-      ContextoAplicacion.db.tCliente!.configuracion!.llaveApi=llaveApi;
-   }
-   
+  dynamic asignarParametrosFiltro(
+      dynamic parmetros, dynamic filtro, String llaveApi) {
+    ContextoAplicacion.db.tablaCliente!.configuracion!.parmetros = parmetros;
+    ContextoAplicacion.db.tablaCliente!.configuracion!.filtro = filtro;
+    ContextoAplicacion.db.tablaCliente!.configuracion!.llaveApi = llaveApi;
+  }
+
   //
   //  metodos de negocio y actualizar  el estado de  entidades
   //
@@ -66,8 +68,8 @@ class ClienteCE extends ChangeNotifier {
     Cliente entidad = Cliente().iniciar();
     // se asigna  datos entidad padre
 
-    if (ContextoAplicacion.db.tCliente!.entidad.id != null)
-      entidad.idSuscriptor = ContextoAplicacion.db.tCliente!.entidad.id;
+    if (ContextoAplicacion.db.tablaCliente!.entidad.id != null)
+      entidad.idSuscriptor = ContextoAplicacion.db.tablaCliente!.entidad.id;
     this.entidad = entidad;
     return entidad;
   }
@@ -75,8 +77,9 @@ class ClienteCE extends ChangeNotifier {
   //
   //  metodos de negocio y  acceso  a  base de datos
   //
-  consultarEntidad(Cliente entidad, Function metodoRespuestaConsultar) {
-    ContextoAplicacion.db.tCliente!
+  consultarEntidad(Cliente entidad,
+      [Function? metodoRespuestaConsultar = null]) {
+    ContextoAplicacion.db.tablaCliente!
         .consultarTabla(entidad)
         .then((listaRespuesta) {
       List<Cliente> lista = listaRespuesta.cast<Cliente>().toList();
@@ -85,10 +88,22 @@ class ClienteCE extends ChangeNotifier {
     });
   }
 
-  void obtenerEntidad(BuildContext context, ElementoLista elemento, Function metodorRespuestaObtener) {
+  filtrarEntidad(Cliente entidad, String campo, dynamic valor,
+      [Function? metodoRespuestaConsultar = null]) {
+    ContextoAplicacion.db.tablaCliente!
+        .filtrarTabla(entidad, campo, valor)
+        .then((listaRespuesta) {
+      List<Cliente> lista = listaRespuesta.cast<Cliente>().toList();
+      this.lista = lista;
+      if (metodoRespuestaConsultar != null) metodoRespuestaConsultar(lista);
+    });
+  }
+
+  void obtenerEntidad(BuildContext context, ElementoLista elemento,
+      Function metodorRespuestaObtener) {
     Cliente entidad = Cliente().iniciar();
     entidad.id = elemento.id;
-    ContextoAplicacion.db.tCliente!.obtener(entidad).then((respuesta) {
+    ContextoAplicacion.db.tablaCliente!.obtener(entidad).then((respuesta) {
       if (respuesta != null) {
         this.entidad = respuesta;
         if (metodorRespuestaObtener != null)
@@ -97,21 +112,9 @@ class ClienteCE extends ChangeNotifier {
     });
   }
 
-  dynamic obtenerEntidadDeLista(BuildContext context, ElementoLista elemento,
-      Function metodorRespuestaObtener) {
-    Cliente entidad = Cliente().iniciar();
-    entidad.id = elemento.id;
-    List<dynamic> lista = this.lista;
-    if (lista != null) entidad = lista.where((s) => s.id == entidad.id).first;
-    this.entidad = entidad;
-    if (metodorRespuestaObtener != null)
-      metodorRespuestaObtener(context, elemento, entidad);
-    return entidad;
-  }
-
   insertarEntidad(BuildContext context, ElementoLista elemento, Cliente entidad,
       Function metodoRespuestaInsertar) {
-    ContextoAplicacion.db.tCliente!.insertar(entidad).then((respuesta) {
+    ContextoAplicacion.db.tablaCliente!.insertar(entidad).then((respuesta) {
       print(respuesta);
       this.entidad = entidad.fromMap(respuesta);
       if (metodoRespuestaInsertar != null)
@@ -121,7 +124,7 @@ class ClienteCE extends ChangeNotifier {
 
   modificarEntidad(BuildContext context, ElementoLista elemento,
       Cliente entidad, Function metodoRespuestaModificar) {
-    ContextoAplicacion.db.tCliente!.actualizar(entidad).then((respuesta) {
+    ContextoAplicacion.db.tablaCliente!.actualizar(entidad).then((respuesta) {
       this.entidad = respuesta;
       if (metodoRespuestaModificar != null)
         metodoRespuestaModificar(context, elemento, entidad);
@@ -134,8 +137,7 @@ class ClienteCE extends ChangeNotifier {
     entidad.id = elemento.id;
     entidad.nombre = elemento.titulo;
 
-    ContextoAplicacion.db.tCliente!.eliminar(entidad).then((respuesta) {
-
+    ContextoAplicacion.db.tablaCliente!.eliminar(entidad).then((respuesta) {
       // List<dynamic> lista = this.lista;
       lista.removeWhere((item) => item.id == entidad.id);
       // this.lista = lista;
@@ -144,6 +146,18 @@ class ClienteCE extends ChangeNotifier {
         metodoRespuestaEliminar(context, elemento, respuesta);
       // }
     });
+
+    dynamic obtenerEntidadDeLista(BuildContext context, ElementoLista elemento,
+        Function metodorRespuestaObtener) {
+      Cliente entidad = Cliente().iniciar();
+      entidad.id = elemento.id;
+      List<dynamic> lista = this.lista;
+      if (lista != null) entidad = lista.where((s) => s.id == entidad.id).first;
+      this.entidad = entidad;
+      if (metodorRespuestaObtener != null)
+        metodorRespuestaObtener(context, elemento, entidad);
+      return entidad;
+    }
   }
 
   //

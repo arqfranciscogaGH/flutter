@@ -1,3 +1,2 @@
-
-export 'modelo/modelo.dart';
+export 'modelo/ModeloAplicacion.dart';
 export 'controladorEstado/controladorEstado.dart';

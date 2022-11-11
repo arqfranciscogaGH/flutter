@@ -1,5 +1,3 @@
-
-
 //  librerias internas de flutter
 
 import 'package:flutter/material.dart';
@@ -11,16 +9,17 @@ import 'dart:async';
 
 import '../../../nucleo.dart';
 
+typedef void AccionRespuestaElemento(
+    BuildContext context, ElementoLista elemento);
 
 typedef void AccionSeleccionarElemento(
     BuildContext context, ElementoLista elemento);
-typedef void AccionEliminarElementoLista(
-    BuildContext context, ElementoLista elemento);
 typedef void AccionModificarElementoLista(
+    BuildContext context, ElementoLista elemento);
+typedef void AccionEliminarElementoLista(
     BuildContext context, ElementoLista elemento);
 
 class Listas {
-
   //
   //  Mostrar  elementos en lista
   //
@@ -46,33 +45,35 @@ class Listas {
   static Widget mostrarElementos(List<dynamic> lista, BuildContext context,
       ElementoLista elemento, Function metodoCrearElemento) {
     // if (lista != null) {
-      return ListView.separated(
-        itemCount: lista.length,
-        itemBuilder: (context, position) {
-          dynamic entidad = lista[position];
-          return metodoCrearElemento(context, entidad, elemento);
-        },
-        separatorBuilder: (context, position) {
-          return Container(
-            color: Theme.of(context).primaryColor.withOpacity(0.2),
-            height: 2.0,
-          );
-        },
-      );
+    return ListView.separated(
+      itemCount: lista.length,
+      itemBuilder: (context, position) {
+        dynamic entidad = lista[position];
+        return metodoCrearElemento(context, entidad, elemento);
+      },
+      separatorBuilder: (context, position) {
+        return Container(
+          color: Theme.of(context).primaryColor.withOpacity(0.2),
+          height: 2.0,
+        );
+      },
+    );
     // }
   }
 
   static Widget crearElementoListaCheck(
       BuildContext context, ElementoLista elemento) {
     return CheckboxListTile(
-          title: Text(elemento.titulo!),
-          value: elemento.valor,
-          onChanged: (dynamic value) {
-              elemento.valor=value;
-              Accion.hacer(context, elemento);
-          },
-          // selected: elemento.valor,
-         secondary:  elemento.icono != null ? Icono.crear(elemento.icono!, elemento.color) : null,
+      title: Text(elemento.titulo!),
+      value: elemento.valor,
+      onChanged: (dynamic value) {
+        elemento.valor = value;
+        Accion.hacer(context, elemento);
+      },
+      // selected: elemento.valor,
+      secondary: elemento.icono != null
+          ? Icono.crear(elemento.icono!, elemento.color)
+          : null,
     );
   }
 
@@ -91,7 +92,9 @@ class Listas {
     // if (elemento.color == null)
     //   elemento.color = Theme.of(context).primaryColor.withOpacity(0.6);
     return ListTile(
-      leading: elemento.icono != null ? Icono.crear(elemento.icono!, elemento.color) : null,
+      leading: elemento.icono != null
+          ? Icono.crear(elemento.icono!, elemento.color)
+          : null,
       title: Text(elemento.titulo!),
       subtitle: elemento.subtitulo != null ? Text(elemento.subtitulo!) : null,
       trailing: elemento.iconoLateral != null
@@ -105,8 +108,10 @@ class Listas {
       BuildContext context,
       ElementoLista elemento,
       dynamic controlModelo,
-      AccionModificarElementoLista metodoModificarElementoLista,
-      AccionEliminarElementoLista metodoEliminarElementoLista) {
+      // AccionModificarElementoLista metodoModificarElementoLista,
+      // AccionEliminarElementoLista metodoEliminarElementoLista
+      Function metodoModificarElementoLista,
+      Function metodoEliminarElementoLista) {
     return Dismissible(
         onDismissed: (direction) {
           metodoEliminarElementoLista(context, elemento);
@@ -114,24 +119,25 @@ class Listas {
         key: UniqueKey(),
         background: Container(
             color: Theme.of(context).selectedRowColor.withOpacity(0.6)),
-        child: ElementoAccion(context: context, elemento: elemento, argumentos: controlModelo));
+        child: ElementoAccion(
+            context: context, elemento: elemento, argumentos: controlModelo));
   }
 
   static Widget crearElementoListaDismisibleConAcciones(
       BuildContext context,
       ElementoLista elemento,
-      
-      AccionModificarElementoLista metodoModificarElementoLista,
-      AccionEliminarElementoLista metodoEliminarElementoLista) {
+      // AccionModificarElementoLista metodoModificarElementoLista,
+      // AccionEliminarElementoLista metodoEliminarElementoLista
+      Function metodoModificarElementoLista,
+      Function metodoEliminarElementoLista) {
     return Dismissible(
         onDismissed: (direction) {
           metodoEliminarElementoLista(context, elemento);
         },
         key: UniqueKey(),
-       background: Container(
+        background: Container(
             color: Theme.of(context).selectedRowColor.withOpacity(0.6)),
-        child: ElementoAccion(
-            context: context, elemento: elemento));
+        child: ElementoAccion(context: context, elemento: elemento));
   }
 
   static Widget crearElementoconAccionModificar(
@@ -151,23 +157,20 @@ class Listas {
               }),
         ]));
   }
+
   static Widget crearElementoConAcciones(
-      BuildContext context,
-      ElementoLista elemento
-      ) {
+      BuildContext context, ElementoLista elemento) {
     return Padding(
         padding: EdgeInsets.all(20),
-        child: ElementoAccion(  context: context, elemento: elemento)
-     );
+        child: ElementoAccion(context: context, elemento: elemento));
   }
-
 }
 
 class ElementoAccion extends StatelessWidget {
   BuildContext context;
   ElementoLista? elemento;
   dynamic argumentos;
-  ElementoAccion({ required this.context, this.elemento, this.argumentos});
+  ElementoAccion({required this.context, this.elemento, this.argumentos});
   @override
   Widget build(BuildContext context) {
     // if (elemento!.color == null)
@@ -197,9 +200,24 @@ class ElementoAccion extends StatelessWidget {
 
     acciones.add(Expanded(
         child: Column(children: <Widget>[
-      Text(elemento.titulo!,textAlign: TextAlign.center, style: TextStyle( color: elemento.colorTexto != null ?elemento.colorTexto: Theme.of(context).primaryColor )  ),
-      elemento.subtitulo != null ? Text(elemento.subtitulo! ,textAlign: TextAlign.center,) : Text(""),
-      elemento.nota != null ? Text(elemento.nota!,textAlign: TextAlign.center,) : Text(""),      
+      Text(elemento.titulo!,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              color: elemento.colorTexto != null
+                  ? elemento.colorTexto
+                  : Theme.of(context).primaryColor)),
+      elemento.subtitulo != null
+          ? Text(
+              elemento.subtitulo!,
+              textAlign: TextAlign.center,
+            )
+          : Text(""),
+      elemento.nota != null
+          ? Text(
+              elemento.nota!,
+              textAlign: TextAlign.center,
+            )
+          : Text(""),
     ])));
 
     if (elemento.icono != null &&
@@ -216,7 +234,7 @@ class ElementoAccion extends StatelessWidget {
           argumento: elemento.argumento,
           color: elemento.color,
           tamanoFuente: elemento.tamanoFuente,
-          tamanoIcono: elemento.tamanoIcono,       
+          tamanoIcono: elemento.tamanoIcono,
           icono: elemento.icono2,
           ruta: elemento.ruta2,
           accion: elemento.accion2,
@@ -228,11 +246,11 @@ class ElementoAccion extends StatelessWidget {
         (elemento.accion3 != null || elemento.ruta3 != null)) {
       elementoAccion3 = ElementoLista(
           id: elemento.id,
-          titulo: elemento.titulo,          
+          titulo: elemento.titulo,
           argumento: elemento.argumento,
           color: elemento.color,
           tamanoFuente: elemento.tamanoFuente,
-          tamanoIcono: elemento.tamanoIcono,   
+          tamanoIcono: elemento.tamanoIcono,
           icono: elemento.icono3,
           ruta: elemento.ruta3,
           accion: elemento.accion3,
@@ -244,12 +262,12 @@ class ElementoAccion extends StatelessWidget {
   }
 }
 
-Widget ListaTarjeta ( BuildContext context, List<ElementoLista> elementos) {
+Widget ListaTarjeta(BuildContext context, List<ElementoLista> elementos) {
   return Expanded(
     child: ListView.separated(
       itemCount: elementos.length,
       itemBuilder: (context, position) {
-        return Tarjeta(context : context , elemento: elementos[position]);
+        return Tarjeta(context: context, elemento: elementos[position]);
       },
       separatorBuilder: (context, position) {
         return Container(
@@ -264,7 +282,7 @@ Widget ListaTarjeta ( BuildContext context, List<ElementoLista> elementos) {
 class Tarjeta extends StatelessWidget {
   BuildContext context;
   ElementoLista? elemento;
-  Tarjeta({ required this.context, this.elemento});
+  Tarjeta({required this.context, this.elemento});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -279,5 +297,3 @@ class Tarjeta extends StatelessWidget {
     );
   }
 }
-
-

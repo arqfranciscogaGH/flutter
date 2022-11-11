@@ -8,7 +8,7 @@
 
 import '../admin/IAccesoBD.dart';
 
-class AccesoFireStore extends IAccesoBD {
+// class AccesoFireStore extends IAccesoBD {
   /*   // variables
   FirebaseFirestore _dbCloud = FirebaseFirestore.instance;
   String nombre="Persona";
@@ -130,4 +130,4 @@ class AccesoFireStore extends IAccesoBD {
       _refCloud = null;    
   } */
 
-}
+// }

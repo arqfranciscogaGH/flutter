@@ -9,31 +9,21 @@ import '../../negocio/modelo/endidad/EntidadBase.dart';
 import 'IAccesoBD.dart';
 import 'ConfiguracionAccesoBD.dart';
 import 'AdministradorAcceso.dart';
-
-// import '../.././negocio/modelo/endidad/EntidadRegistroTexto.dart';
-// import '../.././negocio/modelo/endidad/EntidadRegistroTexto.dart';
-
-//   enumerados
-enum eTipoEntidad {
-  nunguno,
-  json,
-  entidad,
-}
+import '../../negocio/controladorEstado/ControlEstadoUI.dart';
 
 class AccesoTabla<T extends EntidadBase> {
-
   // variables
 
   ConfiguracionAccesoBD? configuracion;
-
-
   T claseEntidad;
-
   List<T> _lista = [];
-
-  int? registros = 0;
+  int consecutivo = 0;
   String parametros = "";
   IAccesoBD? _abd;
+
+  EntidadResultado? _resultado;
+  EntidadRegistro? _registro;
+  ControlEstadoUI? controlEstadoUI;
 
   // Map<String, dynamic>? _registro ={};
   // List<dynamic>? _tabla= [];
@@ -41,154 +31,197 @@ class AccesoTabla<T extends EntidadBase> {
   /*   ControlLista<T> elementos; */
 
   //  Cosntructor
-  AccesoTabla({ required this.claseEntidad,  this.configuracion}) {
-
-      _abd = AdministradorAcceso.obtener(this.configuracion!);
-       entidad=claseEntidad;
-      if (configuracion!.persitenciaPorDefecto != true) _abd!.iniciar();
+  AccesoTabla({required this.claseEntidad, this.configuracion}) {
+    _abd = AdministradorAcceso.obtener(this.configuracion!);
+    _resultado = EntidadResultado();
+    _registro = EntidadRegistro();
+    _resultado!.campoLLave = claseEntidad.campoLLave;
+    entidad = claseEntidad;
+    if (configuracion!.persitenciaPorDefecto != true) _abd!.iniciar();
   }
 
   //  propiedades
 
-
 //  obtener lista tabla  map texto, se obtiene  resultado  de api o db
-  EntidadTablaTexto get tabla {
-    return  _abd!.tabla;
+  EntidadResultado get resultado {
+    return _resultado!;
   }
 
- //  asignar  lista tabla  map de texto, se obtiene  resultado  de api o db
-  set tabla(  EntidadTablaTexto tabla) {
-    _abd!.tabla = tabla;
-    if  (tabla.datos!=null  )
-       _lista= mapTolista(tabla.datos) ;
+  //  asignar  lista tabla  map de texto, se obtiene  resultado  de api o db
+
+  set resultado(EntidadResultado resultado) {
+    _resultado = resultado;
+    // if (tabla.datos != null) _lista = mapTolista(tabla.datos);
   }
 
   //  obtener  map de entidad registro texto
-   EntidadRegistroTexto get registro {
-       return _abd!.registro;
-   }
-  
-  //  asignar map a entidad  registro texto
-  set registro (EntidadRegistroTexto  r) {
-      _abd!.registro=r;
-       claseEntidad.fromMap(registro.datos);
-  }
-  
-  
-   //  obtener entidad 
 
-   T get entidad {
-      return claseEntidad;
+  EntidadRegistro get registro {
+    return _registro!;
   }
-  
-  //  asignar entidad 
-  set entidad (T  entidad) {
-     claseEntidad=entidad;
-     _abd!.registro.datos=entidad.toMap();
+
+  //  asignar map a entidad  registro texto
+  set registro(EntidadRegistro r) {
+    registro = r;
+    claseEntidad.fromMap(registro.datos);
+  }
+
+  //  obtener entidad
+
+  T get entidad {
+    return claseEntidad;
+  }
+
+  //  asignar entidad
+  set entidad(T entidad) {
+    claseEntidad = entidad;
+    registro.datos = entidad.toMap();
   }
 
 //  obtener lista  map texto, se obtiene  resultado  de api o db
   List<T> get lista {
-    List<T> listaT=[];
-    if  (tabla.datos!=null  )
-       _lista= mapTolista(tabla.datos) ;
-     return _lista;
+    List<T>? listaT;
+    if (resultado.datos != null) listaT = mapTolista(resultado.datos);
+    return listaT!;
   }
 
- //  asignar  lista  map de texto, se obtiene  resultado  de api o db
-  set lista(   List<dynamic> lista) {
-      _lista= lista as   List<T>;
-      tabla.datos= lista.map((c) => c.toMap()).toList();
+  //  asignar  lista  map de texto, se obtiene  resultado  de api o db
+  set lista(List<dynamic> lista) {
+    // _lista = lista as List<T>;
+    resultado.datos = lista.map((c) => c.toMap()).toList();
   }
 
- //  metodos conversion  lista de MAp  a   lista  de entidades 
+  dynamic iniciar() {
+    return claseEntidad.iniciar();
+  }
+  //  metodos conversion  lista de MAp  a   lista  de entidades
 
- List<T> mapTolista(List<dynamic> listaMapa) {
-  List<T> listaT = listaMapa.isNotEmpty
-        ? listaMapa.map((c) => claseEntidad.iniciar().fromMap(c)).toList() as List<T>
-        : [] ;
+  List<T> mapTolista(List<dynamic> listaMapa) {
+    List<T> listaT = listaMapa != null && listaMapa.isNotEmpty
+        ? entidad.mapTolista(listaMapa) as List<T>
+        : [];
     return listaT;
   }
 
- //  metodos conversion  lista  de entidades  a  lista  MAP  
+  //  metodos conversion  lista  de entidades  a  lista  MAP
   List<dynamic> listaToMap() {
     return lista.map((c) => c.toMap()).toList();
   }
 
- //  metodos conversion  lista  de entidades  a  cadena json 
+  //  metodos conversion  lista  de entidades  a  cadena json
 
- String listaToJson() {
+  String listaToJson() {
     return json.encode(this.listaToMap());
- }
+  }
 
- // metodos conversion cadena Json a   lista  de entidades 
+  // metodos conversion cadena Json a   lista  de entidades
 
- List<dynamic> jsonToLista(String cadenaJson) {
+  List<dynamic> jsonToLista(String cadenaJson) {
     List<dynamic> listaMap = json.decode(cadenaJson);
     List<dynamic> listaT = mapTolista(listaMap);
     return listaT;
- }
+  }
 
- //  metodos  ABC  tablas  
+  //  metodos  ABC  tablas
   Future ejecutar(String sql) async {
     final baseDatos = await _abd!.ejecutar(sql);
   }
 
-  Future<List<dynamic>> consultarTabla(T e) async {
-    List<dynamic> listaMapa = [];
-   _abd!.configuracion = this.configuracion!;
-    listaMapa = await _abd!.consultarTabla(e.nombreTabla!);
-    List<dynamic> listaT = [];
-    listaT = listaMapa != null && listaMapa.isNotEmpty
-        ? listaMapa.map((c) => e.fromMap(c)).toList()
+  Future<List<dynamic>> consultarTabla(T e,
+      [Function? metodoRespuesta = null]) async {
+    List<dynamic> respuesta = [];
+    _abd!.configuracion = this.configuracion!;
+    respuesta = await _abd!.consultarTabla(e.nombreTabla!);
+    resultado.datos = respuesta;
+    List<dynamic> lista = [];
+    lista = respuesta != null && respuesta.isNotEmpty
+        ? respuesta.map((c) => e.iniciar().fromMap(c)).toList()
         : [];
-    lista=listaT as List<T>;
-    return listaT;
+    if (metodoRespuesta != null)
+      metodoRespuesta(lista);
+    else if (controlEstadoUI != null) controlEstadoUI!.actualizar();
+    return lista;
   }
 
-
-  Future<List<dynamic>> consultar(T e) async {
-    List<dynamic> listaMapa = [];
-   _abd!.configuracion = this.configuracion!;
-    listaMapa = await _abd!.consultar(e.nombreTabla!, e.toMap(), e.campoLLave!, e.id!);
-    List<dynamic> listaT = [];
-    listaT = listaMapa != null && listaMapa.isNotEmpty
-        ? listaMapa.map((c) => e.fromMap(c)).toList()
+  Future<List<dynamic>> filtrarTabla(T e, String campo, dynamic valor,
+      [Function? metodoRespuesta = null]) async {
+    List<dynamic> respuesta = [];
+    _abd!.configuracion = this.configuracion!;
+    respuesta =
+        await _abd!.filtrarTabla(e.nombreTabla!, e.toMap(), campo, valor);
+    List<dynamic> lista = [];
+    lista = respuesta != null && respuesta.isNotEmpty
+        ? respuesta.map((c) => e.iniciar().fromMap(c)).toList()
         : [];
-    lista=listaT as List<T>;
-    return listaT;
+    if (metodoRespuesta != null)
+      metodoRespuesta(lista);
+    else if (controlEstadoUI != null) controlEstadoUI!.actualizar();
+    return lista;
   }
 
   Future<T> obtener(T e) async {
     _abd!.configuracion = this.configuracion!;
-    dynamic res = await _abd!.obtener(e.nombreTabla! , e.toMap(), e.campoLLave!, e.id!);
-    if ( res != null )
-       entidad=e.fromMap(res) as T ;
+    dynamic respuesta = await _abd!.obtener(
+        e.nombreTabla!, e.toMap(), e.campoLLave!, e.toMap()[e.campoLLave!]);
+    if (respuesta != null) {
+      entidad = e.fromMap(respuesta) as T;
+      registro.datos = e.toMap();
+    }
+
     return entidad;
   }
 
-  Future<dynamic> insertar(T e, [bool mapa = true]) async {
+  Future<Map<String, dynamic>> incrementarConsecutivo(T e) async {
+    await consultarTabla(e);
+
+    Map<String, dynamic> mapRegistro = e.toMap();
+    // if (configuracion!.contadorRegistros == true) {
+    //   registros = tabla.datos == null || tabla.datos.length == 0 ? 0 : lista.last.id??0;
+    //   e.id = registros! + 1;
+    // }
+    // print ( 'incrementarConsecutivo' );
+    // print ( e.campoLLave );
     if (configuracion!.contadorRegistros == true) {
-      registros = tabla.datos == null || tabla.datos.length == 0 ? 0 : lista.last.id??0;
-      e.id = registros! + 1;
+      consecutivo = resultado.datos == null || resultado.datos.length == 0
+          ? 0
+          : resultado.datos.last[e.campoLLave!] ?? 0;
+      consecutivo++;
+      mapRegistro[e.campoLLave!] = consecutivo;
+      e.id == consecutivo;
     }
-    dynamic res = await _abd!.insertar(e.nombreTabla! , e.toMap());
-    if ( res != null )
-       entidad=e.fromMap(res) as T ;
-      return entidad;
+    return mapRegistro;
+  }
+
+  Future<dynamic> insertar(T e) async {
+    Map<String, dynamic> map = e.toMap();
+    if (configuracion!.contadorRegistros == true) {
+      map = await incrementarConsecutivo(e);
+    }
+    dynamic respuesta = await _abd!.insertar(e.nombreTabla!, map);
+    if (respuesta != null) {
+      entidad = e.fromMap(respuesta) as T;
+      registro.datos = e.toMap();
+    }
+    return entidad;
   }
 
   Future<T> actualizar(T e) async {
-    dynamic res = await _abd!.actualizar(e.nombreTabla! , e.toMap(), e.campoLLave!, e.id!);
-    if ( res != null )
-       entidad=e.fromMap(res) as T ;
+    dynamic respuesta = await _abd!.actualizar(
+        e.nombreTabla!, e.toMap(), e.campoLLave!, e.toMap()[e.campoLLave!]);
+    if (respuesta != null) {
+      entidad = e.fromMap(respuesta) as T;
+      registro.datos = e.toMap();
+    }
     return entidad;
   }
 
   Future<dynamic> eliminar(T e) async {
-    dynamic res = await _abd!.eliminar(e.nombreTabla! , e.toMap(), e.campoLLave!, e.id!);
-    if ( res != null )
-       entidad=e.fromMap(res) as T ;
+    dynamic respuesta = await _abd!.eliminar(
+        e.nombreTabla!, e.toMap(), e.campoLLave!, e.toMap()[e.campoLLave!]);
+    if (respuesta != null) {
+      entidad = e.fromMap(respuesta) as T;
+      registro.datos = e.toMap();
+    }
     return entidad;
   }
 
@@ -222,15 +255,12 @@ class AccesoTabla<T extends EntidadBase> {
         return  aEntidad;
   } */
 
- 
-
   // Future<T> actualizarCentral(T aEntidad) async {
   //   String url = generarUrl(aEntidad, "A");
   //   dynamic respuesta = await ServicioRest.put(url, aEntidad.toJson());
   //   return aEntidad;
   // }
 
- 
   // Future<T> eliminarCentral(T aEntidad) async {
   //   String url = generarUrl(aEntidad, "E");
   //   dynamic respuesta = await ServicioRest.delete(url, aEntidad.toJson());
@@ -267,7 +297,4 @@ class AccesoTabla<T extends EntidadBase> {
   //   return sincronizacion;
   // }
 
-
-
- 
 }

@@ -7,12 +7,10 @@ import 'package:flutter/material.dart';
 import '../nucleo/nucleo.dart';
 import '../aplicacion/aplicacion.dart';
 
-
 //  librerias externas  flutter
 
-
-// Descripcion de funcionalidad 
-//  generar  rutas para opciones de menus 
+// Descripcion de funcionalidad
+//  generar  rutas para opciones de menus
 //
 
 //  Variables
@@ -21,25 +19,26 @@ import '../aplicacion/aplicacion.dart';
 
 //  Métodos
 
-List<ElementoLista> definirPaginas ()
-{
-    List<ElementoLista> paginas=[];
+List<ElementoLista> definirPaginas() {
+  List<ElementoLista> paginas = [];
 
+  paginas.add(ElementoLista(
+      pagina: menu_principal_pagina(), ruta: 'menu_principal_pagina'));
+  paginas.add(ElementoLista(pagina: tema_pagina(), ruta: 'tema_pagina'));
+  paginas.add(ElementoLista(
+      pagina: preferencias_pagina(), ruta: 'preferencias_pagina'));
 
-    
-    paginas.add( ElementoLista( pagina: menu_principal_pagina() , ruta: 'menu_principal_pagina' ) );
-    paginas.add( ElementoLista( pagina: tema_pagina() , ruta: 'tema_pagina') ); 
-    paginas.add( ElementoLista( pagina: preferencias_pagina() , ruta: 'preferencias_pagina') ); 
+  paginas.add(ElementoLista(
+      pagina: Modelo_pagina_lista(), ruta: 'Modelo_pagina_lista'));
+  paginas.add(ElementoLista(
+      pagina: Modelo_pagina_captura(), ruta: 'Modelo_pagina_captura'));
 
-    paginas.add( ElementoLista( pagina: Modelo_pagina_lista() , ruta: 'Modelo_pagina_lista') );  
-    paginas.add( ElementoLista( pagina: Modelo_pagina_captura() , ruta: 'Modelo_pagina_captura') );  
-
-    paginas.add( ElementoLista( pagina: botones_pagina() , ruta: 'botones_pagina') ); 
-    paginas.add( ElementoLista( pagina: prueba_pagina() , ruta: 'prueba_pagina') );
-   
-   return paginas;
+  paginas.add(ElementoLista(pagina: botones_pagina(), ruta: 'botones_pagina'));
+  paginas.add(ElementoLista(pagina: prueba_pagina(), ruta: 'prueba_pagina'));
+  paginas.add(ElementoLista(pagina: Venta_lista(), ruta: 'Venta_lista'));
+  paginas.add(ElementoLista(pagina: Venta_captura(), ruta: 'Venta_captura'));
+  return paginas;
 }
-
 
 generarRuta(BuildContext context, dynamic settings) {
   final arguments = settings.arguments;
@@ -85,9 +84,5 @@ Map<String, WidgetBuilder> ObtenerRutas() {
     //     paginaSiguiente: 'pagina_Usuario_captura', accionPagina: "avanzar"),
     // 'pagina_Usuario_captura': (BuildContext context) => pagina_Usuario_captura(
     //     paginaSiguiente: 'pagina_Usuario_lista', accionPagina: 'avanzar'),
-
   };
 }
-
-
-
